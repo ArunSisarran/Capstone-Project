@@ -1,8 +1,15 @@
 """
-    python lab.py inspect                      # module tree, params, head shape
-    python lab.py surgery --nc-from data.yaml  # swap the 80-class head for yours
-    python lab.py train --epochs 50            # hand-rolled training loop
-    python lab.py selfcheck                    # asserts the surgery is correct
+model.py - yolo11s as a plain nn.Module: inspect it, do surgery on it, train it
+with your own loop.
+
+Ultralytics' YOLO(...).train() is a wrapper. Underneath, `yolo11s.pt` is a
+pickled `DetectionModel` - an `nn.Sequential` of 24 blocks. Everything below
+touches that directly, so every knob is visible instead of hidden in a config.
+
+    python model.py inspect      # module tree, params, head shape
+    python model.py selfcheck    # asserts the head surgery is correct
+    python model.py surgery      # write a re-headed checkpoint, no training
+    python model.py train --freeze 10 --epochs 30
 """
 
 import argparse
@@ -337,13 +344,13 @@ def main():
     sub.add_parser("selfcheck")
 
     s = sub.add_parser("surgery")
-    s.add_argument("--data", default="ingredients-remapped/data.yaml")
+    s.add_argument("--data", default="ingredients-top/data.yaml")
     s.add_argument("--out", default="yolo11s-ingredients.pt")
     s.add_argument("--cold", action="store_true", help="skip COCO warm start")
 
     t = sub.add_parser("train")
-    t.add_argument("--data", default="ingredients-remapped/data.yaml")
-    t.add_argument("--out", default="runs/lab")
+    t.add_argument("--data", default="ingredients-top/data.yaml")
+    t.add_argument("--out", default="runs/train")
     t.add_argument("--epochs", type=int, default=50)
     t.add_argument("--batch", type=int, default=16)
     t.add_argument("--nbs", type=int, default=64, help="nominal batch to accumulate to")

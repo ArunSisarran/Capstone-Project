@@ -1,0 +1,130 @@
+source_class,target_class,status,instances
+tomato,Tomato,auto,2007
+beef,Beef,AMBIGUOUS: Steak / Ground Beef?,1716
+potato,Potato,auto,1678
+cheese,Cheese,AMBIGUOUS: Cheese Block / Sliced / Shredded?,1604
+apple,Apple,auto,1529
+mushroom,Mushroom,auto,1453
+banana,Banana,auto,1422
+carrot,Carrot,auto,1408
+cream,Cream,UNMAPPED,1382
+spinach,Spinach (bagged/loose),auto,1369
+strawberry,Berries (strawberries/blueberries),auto,1303
+orange,Orange,auto,1272
+chicken,Chicken,AMBIGUOUS: Chicken Breast / Thigh / Drumstick?,1254
+sugar,Sugar,auto,1147
+cucumber,Cucumber,auto,1104
+sweet potato,Sweet Potato,auto,1099
+corn,Corn (ear),auto,1085
+flour,Flour,auto,1024
+onion,Onion,auto,924
+milk,Milk (carton/jug),auto,904
+garlic,Garlic (bulb),auto,888
+pork,Pork,AMBIGUOUS: Pork Chop?,857
+butter,Butter (stick/block),auto,824
+avocado,Avocado,auto,754
+cashew,Cashew,UNMAPPED,745
+chocolate,Chocolate,UNMAPPED,729
+meatball,Meatball,UNMAPPED,721
+lime,Lime,auto,710
+shrimp,Shrimp,auto,675
+ham,Ham,UNMAPPED,634
+blueberry,Berries (strawberries/blueberries),auto,600
+beans,Beans,AMBIGUOUS: Green Beans / Canned Beans?,509
+asparagus,Asparagus (spear),auto,453
+broccoli,Broccoli (head),auto,442
+tofu,Tofu Block,auto,432
+yogurt,Yogurt (cup),auto,427
+lemon,Lemon,auto,397
+pea,Peas,auto,397
+eggplant,Eggplant,auto,376
+oil,Oil,AMBIGUOUS: Olive Oil / Vegetable Oil?,350
+chilli,Chilli,AMBIGUOUS: Jalapeño?,343
+bok choy,Bok Choy,UNMAPPED,338
+lettuce,Lettuce (head),auto,312
+mango,Mango,auto,311
+pineapple,Pineapple,UNMAPPED,267
+egg,Egg,auto,230
+coconut,Coconut,UNMAPPED,226
+chicken breast,Chicken Breast,auto,219
+bacon,Bacon Slice,auto,218
+chicken wing,Chicken Wing,UNMAPPED,205
+rice,Rice,auto,202
+chicken thigh,Chicken Thigh,auto,197
+melon,Melon,UNMAPPED,196
+pumpkin,Pumpkin,UNMAPPED,195
+ginger,Ginger,UNMAPPED,182
+bread,Bread (loaf),auto,176
+cabbage,Cabbage (head),auto,169
+chili,Chili,AMBIGUOUS: Jalapeño?,163
+celery,Celery (stalk),auto,154
+cauliflower,Cauliflower (head),auto,139
+peach,Peach,auto,139
+oysters,Oysters,UNMAPPED,138
+pear,Pear,auto,134
+humus,Humus,UNMAPPED,123
+leek,Leek,UNMAPPED,119
+bitter melon,Bitter Melon,UNMAPPED,116
+noodle,Noodle,UNMAPPED,110
+pepper,Pepper,AMBIGUOUS: Bell Pepper / Jalapeño / Black Pepper?,102
+eggs,Egg,auto,90
+salad,Salad,UNMAPPED,90
+raddish,Radish,auto,89
+sausage,Sausage/Hot Dog Link,auto,72
+mayonaise,Mayo Jar,auto,63
+quark,Quark,UNMAPPED,50
+coffee,Coffee,UNMAPPED,43
+rib,Rib,UNMAPPED,42
+sour cream,Sour Cream,auto,32
+lobster tail,Lobster Tail,UNMAPPED,27
+marmelade,Marmelade,UNMAPPED,25
+guacamole,Guacamole,UNMAPPED,16
+pork belly,Pork Belly,UNMAPPED,14
+kiwi,Kiwi,auto,13
+fennel,Fennel,UNMAPPED,12
+spring onion,Spring Onion,UNMAPPED,11
+yogurt-occluded,Yogurt-occluded,UNMAPPED,9
+tempeh,Tempeh,UNMAPPED,8
+hash brown,Hash Brown,UNMAPPED,7
+peanut,Peanut,UNMAPPED,7
+bean,Bean,AMBIGUOUS: Green Beans / Canned Beans?,6
+cookie,Cookie,UNMAPPED,6
+apricot,Apricot,UNMAPPED,4
+cake roll,Cake Roll,UNMAPPED,3
+grape,Grape,UNMAPPED,3
+greenapple,Green Apple,UNMAPPED,3
+liquor,Liquor,UNMAPPED,3
+pawpaw,Pawpaw,UNMAPPED,3
+-,,UNMAPPED,2
+cherry,Cherry,UNMAPPED,2
+dates,Date,UNMAPPED,2
+fish,Fish,AMBIGUOUS: Salmon Fillet?,2
+grapefruit,Grapefruit,UNMAPPED,2
+jam,Jar of Jam,auto,2
+juice,,UNMAPPED,2
+parsley,Fresh Cilantro/Parsley,auto,2
+pickles,,UNMAPPED,2
+pomegrante,,UNMAPPED,2
+radish,Radish,auto,2
+salami,,UNMAPPED,2
+salt,Salt,auto,2
+tortillas,Tortillas (stack),auto,2
+tuna,,UNMAPPED,2
+watermelon,,UNMAPPED,2
+biscuit,,UNMAPPED,1
+cake,,UNMAPPED,1
+candy,,UNMAPPED,1
+dairy,,UNMAPPED,1
+green-salad,,UNMAPPED,1
+ketchup,Ketchup Bottle,auto,1
+mint,,UNMAPPED,1
+mustard,Mustard Bottle,auto,1
+nuts,,UNMAPPED,1
+olive,,UNMAPPED,1
+pot,,UNMAPPED,1
+pudding,,UNMAPPED,1
+rice_ball,,UNMAPPED,1
+smoothie,,UNMAPPED,1
+tangerine,,UNMAPPED,1
+tea,,UNMAPPED,1
+turkey,,UNMAPPED,1
