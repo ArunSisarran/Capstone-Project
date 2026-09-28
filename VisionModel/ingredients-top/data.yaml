@@ -1,0 +1,23 @@
+path: /home/arun/Projects/Capstone-Project/VisionModel/ingredients-top
+train: train/images
+val: valid/images
+names:
+  0: Apple
+  1: Banana
+  2: Orange
+  3: Tomato
+  4: Potato
+  5: Sweet Potato
+  6: Carrot
+  7: Cucumber
+  8: Corn (ear)
+  9: Mushroom
+  10: Spinach (bagged/loose)
+  11: Berries (strawberries/blueberries)
+  12: Flour
+  13: Sugar
+  14: Beef
+  15: Cheese
+  16: Cream
+  17: Chicken
+test: test/images

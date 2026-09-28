@@ -1,0 +1,109 @@
+path: /home/arun/Projects/Capstone-Project/VisionModel/ingredients-remapped
+train: train/images
+val: valid/images
+names:
+  0: Apple
+  1: Banana
+  2: Orange
+  3: Lemon
+  4: Lime
+  5: Avocado
+  6: Tomato
+  7: Onion
+  8: Garlic (bulb)
+  9: Potato
+  10: Sweet Potato
+  11: Carrot
+  12: Cucumber
+  13: Eggplant
+  14: Broccoli (head)
+  15: Cauliflower (head)
+  16: Corn (ear)
+  17: Mushroom
+  18: Lettuce (head)
+  19: Cabbage (head)
+  20: Pear
+  21: Peach
+  22: Kiwi
+  23: Mango
+  24: Celery (stalk)
+  25: Asparagus (spear)
+  26: Radish
+  27: Spinach (bagged/loose)
+  28: Peas
+  29: Berries (strawberries/blueberries)
+  30: Fresh Cilantro/Parsley
+  31: Egg
+  32: Chicken Breast
+  33: Chicken Thigh
+  34: Sausage/Hot Dog Link
+  35: Bacon Slice
+  36: Shrimp
+  37: Tofu Block
+  38: Milk (carton/jug)
+  39: Butter (stick/block)
+  40: Yogurt (cup)
+  41: Sour Cream
+  42: Rice
+  43: Flour
+  44: Bread (loaf)
+  45: Tortillas (stack)
+  46: Jar of Jam
+  47: Ketchup Bottle
+  48: Mustard Bottle
+  49: Mayo Jar
+  50: Sugar
+  51: Salt
+  52: Beef
+  53: Cheese
+  54: Cream
+  55: Chicken
+  56: Pork
+  57: Cashew
+  58: Chocolate
+  59: Meatball
+  60: Ham
+  61: Beans
+  62: Oil
+  63: Chilli
+  64: Bok Choy
+  65: Pineapple
+  66: Coconut
+  67: Chicken Wing
+  68: Melon
+  69: Pumpkin
+  70: Ginger
+  71: Chili
+  72: Oysters
+  73: Humus
+  74: Leek
+  75: Bitter Melon
+  76: Noodle
+  77: Pepper
+  78: Salad
+  79: Quark
+  80: Coffee
+  81: Rib
+  82: Lobster Tail
+  83: Marmelade
+  84: Guacamole
+  85: Pork Belly
+  86: Fennel
+  87: Spring Onion
+  88: Yogurt-occluded
+  89: Tempeh
+  90: Hash Brown
+  91: Peanut
+  92: Bean
+  93: Cookie
+  94: Apricot
+  95: Cake Roll
+  96: Grape
+  97: Green Apple
+  98: Liquor
+  99: Pawpaw
+  100: Cherry
+  101: Date
+  102: Fish
+  103: Grapefruit
+test: test/images
