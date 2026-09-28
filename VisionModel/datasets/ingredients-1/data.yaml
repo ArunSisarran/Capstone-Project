@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 129
+names: ['-', 'apple', 'apricot', 'asparagus', 'avocado', 'bacon', 'banana', 'bean', 'beans', 'beef', 'biscuit', 'bitter melon', 'blueberry', 'bok choy', 'bread', 'broccoli', 'butter', 'cabbage', 'cake', 'cake roll', 'candy', 'carrot', 'cashew', 'cauliflower', 'celery', 'cheese', 'cherry', 'chicken', 'chicken breast', 'chicken thigh', 'chicken wing', 'chili', 'chilli', 'chocolate', 'coconut', 'coffee', 'cookie', 'corn', 'cream', 'cucumber', 'dairy', 'dates', 'egg', 'eggplant', 'eggs', 'fennel', 'fish', 'flour', 'garlic', 'ginger', 'grape', 'grapefruit', 'green-salad', 'greenapple', 'guacamole', 'ham', 'hash brown', 'humus', 'jam', 'juice', 'ketchup', 'kiwi', 'leek', 'lemon', 'lettuce', 'lime', 'liquor', 'lobster tail', 'mango', 'marmelade', 'mayonaise', 'meatball', 'melon', 'milk', 'mint', 'mushroom', 'mustard', 'noodle', 'nuts', 'oil', 'olive', 'onion', 'orange', 'oysters', 'parsley', 'pawpaw', 'pea', 'peach', 'peanut', 'pear', 'pepper', 'pickles', 'pineapple', 'pomegrante', 'pork', 'pork belly', 'pot', 'potato', 'pudding', 'pumpkin', 'quark', 'raddish', 'radish', 'rib', 'rice', 'rice_ball', 'salad', 'salami', 'salt', 'sausage', 'shrimp', 'smoothie', 'sour cream', 'spinach', 'spring onion', 'strawberry', 'sugar', 'sweet potato', 'tangerine', 'tea', 'tempeh', 'tofu', 'tomato', 'tortillas', 'tuna', 'turkey', 'watermelon', 'yogurt', 'yogurt-occluded']
+
+roboflow:
+  workspace: wonkeun-jung-vfcwn
+  project: ingredients-agbcq
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/wonkeun-jung-vfcwn/ingredients-agbcq/dataset/1
