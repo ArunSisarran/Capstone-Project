@@ -1,0 +1,119 @@
+#,Ingredient,Category,Type (Discrete/Bulk),In Roboflow Dataset?,Notes,Roboflow Sources,Instances
+1,Apple,Produce,Discrete,Yes,,food-ingredients:Apple(1); ingredients:apple(1529),1530
+2,Banana,Produce,Discrete,Yes,,food-ingredients:Banana(201); ingredients:banana(1422),1623
+3,Orange,Produce,Discrete,Yes,,food-ingredients:Orange(3); ingredients:orange(1272),1275
+4,Lemon,Produce,Discrete,Yes,,ingredients:lemon(397),397
+5,Lime,Produce,Discrete,Yes,,ingredients:lime(710),710
+6,Avocado,Produce,Discrete,Yes,,food-ingredients:Avocado(180); ingredients:avocado(754),934
+7,Tomato,Produce,Discrete,Yes,,food-ingredients:Tomato(335); ingredients:tomato(2007),2342
+8,Onion,Produce,Discrete,Yes,,food-ingredients:Onion(161); ingredients:onion(924); ingredients:spring onion(11),1096
+9,Garlic (bulb),Produce,Discrete,Yes,,food-ingredients:Garlic(277); ingredients:garlic(888),1165
+10,Potato,Produce,Discrete,Yes,,food-ingredients:Potato(586); ingredients:potato(1678),2264
+11,Sweet Potato,Produce,Discrete,Yes,,ingredients:sweet potato(1099),1099
+12,Carrot,Produce,Discrete,Yes,,food-ingredients:Carrot(207); ingredients:carrot(1408),1615
+13,Bell Pepper,Produce,Discrete,Yes,,food-ingredients:Capsicum(454),454
+14,Jalapeño,Produce,Discrete,No,,,
+15,Cucumber,Produce,Discrete,Yes,,food-ingredients:Cucumber(193); ingredients:cucumber(1104),1297
+16,Zucchini,Produce,Discrete,No,,,
+17,Eggplant,Produce,Discrete,Yes,,food-ingredients:Brinjal(312); ingredients:eggplant(376),688
+18,Broccoli (head),Produce,Discrete,Yes,,food-ingredients:Broccoli(99); ingredients:broccoli(442),541
+19,Cauliflower (head),Produce,Discrete,Yes,,food-ingredients:Cauliflower(61); ingredients:cauliflower(139),200
+20,Corn (ear),Produce,Discrete,Yes,,food-ingredients:Corn(169); ingredients:corn(1085),1254
+21,Mushroom,Produce,Discrete,Yes,,food-ingredients:Mushroom(1003); ingredients:mushroom(1453),2456
+22,Lettuce (head),Produce,Discrete,Yes,,ingredients:lettuce(312),312
+23,Cabbage (head),Produce,Discrete,Yes,,food-ingredients:Cabbage(345); ingredients:cabbage(169),514
+24,Pear,Produce,Discrete,Yes,,food-ingredients:Pear(1); ingredients:pear(134),135
+25,Peach,Produce,Discrete,Yes,,ingredients:peach(139),139
+26,Plum,Produce,Discrete,No,,,
+27,Kiwi,Produce,Discrete,Yes,,ingredients:kiwi(13),13
+28,Mango,Produce,Discrete,Yes,,ingredients:mango(311),311
+29,Celery (stalk),Produce,Discrete,Yes,,ingredients:celery(154),154
+30,Asparagus (spear),Produce,Discrete,Yes,,ingredients:asparagus(453),453
+31,Beet,Produce,Discrete,Yes,,food-ingredients:Beetroot(472),472
+32,Radish,Produce,Discrete,Yes,,food-ingredients:Radish(348); ingredients:radish(2),350
+33,Squash (butternut/acorn),Produce,Discrete,No,,,
+34,Spinach (bagged/loose),Produce,Bulk,Yes,,ingredients:spinach(1369),1369
+35,Kale,Produce,Bulk,No,,,
+36,Green Beans,Produce,Bulk,Review,,food-ingredients:Beans(236); ingredients:bean(6); ingredients:beans(509),
+37,Peas,Produce,Bulk,Yes,,food-ingredients:Garden Peas(260); food-ingredients:Green Peas(14); food-ingredients:Pea(4); ingredients:pea(397),675
+38,Shredded Carrots,Produce,Bulk,No,,,
+39,Cherry Tomatoes,Produce,Bulk,Review,Could also be counted if individually separated,ingredients:cherry(2),
+40,Berries (strawberries/blueberries),Produce,Bulk,Yes,As a container/clamshell,food-ingredients:Strawberry(10); ingredients:blueberry(600); ingredients:strawberry(1303),1913
+41,Fresh Basil,Produce,Bulk,No,Small/visually similar to other herbs - may need extra labeled examples,,
+42,Fresh Cilantro/Parsley,Produce,Bulk,Yes,Small/visually similar to other herbs - may need extra labeled examples,ingredients:parsley(2),2
+43,Egg,Protein,Discrete,Yes,,food-ingredients:Egg(831); ingredients:egg(230); ingredients:eggs(90),1151
+44,Chicken Breast,Protein,Discrete,Yes,,ingredients:chicken breast(1254),1254
+45,Chicken Thigh,Protein,Discrete,Yes,,ingredients:chicken thigh(219),219
+46,Chicken Drumstick,Protein,Discrete,Review,,food-ingredients:Chicken(26); ingredients:chicken(205),
+47,Sausage/Hot Dog Link,Protein,Discrete,Yes,,food-ingredients:Sausage(47); ingredients:sausage(72),119
+48,Bacon Slice,Protein,Discrete,Review,,food-ingredients:Bacon(149); ingredients:bacon(218),
+49,Shrimp,Protein,Discrete,Yes,,ingredients:shrimp(675),675
+50,Salmon Fillet,Protein,Discrete,No,,,
+51,Steak,Protein,Discrete,No,,,
+52,Pork Chop,Protein,Discrete,Review,,food-ingredients:Pork(151); ingredients:pork(14),
+53,Ground Beef,Protein,Bulk,Yes,,food-ingredients:Minced Meat(19),19
+54,Ground Turkey,Protein,Bulk,Review,,ingredients:turkey(1),
+55,Tofu Block,Protein,Bulk,Review,,food-ingredients:Tofu(18); ingredients:tofu(432),
+56,"Deli Meat (sliced, stacked)",Protein,Bulk,No,,,
+57,Canned Tuna,Protein,Bulk,Review,,ingredients:tuna(2),
+58,Canned Beans,Protein,Bulk,Review,,food-ingredients:Beans(236); ingredients:bean(6); ingredients:beans(509),
+59,Milk (carton/jug),Dairy,Discrete,Yes,,food-ingredients:Milk(25); ingredients:milk(904),929
+60,Butter (stick/block),Dairy,Discrete,Yes,,food-ingredients:Butter(95); ingredients:butter(824),919
+61,Egg Carton,Dairy,Discrete,No,,,
+62,Cheese Block,Dairy,Discrete,Review,,food-ingredients:Cheese(212); ingredients:cheese(1604),
+63,Shredded Cheese,Dairy,Bulk,No,,,
+64,Sliced Cheese,Dairy,Discrete,Review,,food-ingredients:Cheese(212); ingredients:cheese(1604),
+65,Yogurt (cup),Dairy,Discrete,Yes,,ingredients:yogurt(427),427
+66,Sour Cream,Dairy,Bulk,Yes,,ingredients:sour cream(32),32
+67,Cream Cheese,Dairy,Bulk,Review,,food-ingredients:Cheese(212); ingredients:cheese(1604); ingredients:cream(1382),
+68,Heavy Cream,Dairy,Bulk,Review,,ingredients:cream(1382),
+69,Cottage Cheese,Dairy,Bulk,No,,,
+70,Parmesan (grated),Dairy,Bulk,No,,,
+71,String Cheese,Dairy,Discrete,Review,,food-ingredients:Cheese(212); ingredients:cheese(1604),
+72,Half & Half,Dairy,Bulk,No,,,
+73,Rice,Grains / Starches,Bulk,Yes,,ingredients:rice(202),202
+74,Pasta (dry),Grains / Starches,Bulk,No,,,
+75,Flour,Grains / Starches,Bulk,Yes,,ingredients:flour(1024),1024
+76,Oats,Grains / Starches,Bulk,No,,,
+77,Bread (loaf),Grains / Starches,Bulk,Yes,,food-ingredients:Bread(179); ingredients:bread(176),355
+78,Tortillas (stack),Grains / Starches,Bulk,Yes,,ingredients:tortillas(2),2
+79,Cereal,Grains / Starches,Bulk,No,,,
+80,Quinoa,Grains / Starches,Bulk,No,,,
+81,Couscous,Grains / Starches,Bulk,No,,,
+82,Bread Crumbs,Grains / Starches,Bulk,No,,,
+83,Canned Tomatoes,Canned / Jarred / Packaged,Discrete,No,,,
+84,Canned Corn,Canned / Jarred / Packaged,Discrete,No,,,
+85,Canned Soup,Canned / Jarred / Packaged,Discrete,No,,,
+86,Jar of Pasta Sauce,Canned / Jarred / Packaged,Discrete,No,,,
+87,Jar of Salsa,Canned / Jarred / Packaged,Discrete,No,,,
+88,Jar of Peanut Butter,Canned / Jarred / Packaged,Discrete,Review,,ingredients:peanut(7),
+89,Jar of Jam,Canned / Jarred / Packaged,Discrete,Review,,ingredients:jam(2),
+90,Ketchup Bottle,Canned / Jarred / Packaged,Discrete,Review,,food-ingredients:Ketchup(58); ingredients:ketchup(1),
+91,Mustard Bottle,Canned / Jarred / Packaged,Discrete,Review,,ingredients:mustard(1),
+92,Mayo Jar,Canned / Jarred / Packaged,Discrete,No,,,
+93,Soy Sauce,Condiments / Sauces,Bulk,Yes,,food-ingredients:Soy Sauce(26),26
+94,Olive Oil,Condiments / Sauces,Bulk,Yes,,food-ingredients:Olive Oil(18),18
+95,Vegetable Oil,Condiments / Sauces,Bulk,Review,,ingredients:oil(350),
+96,Vinegar,Condiments / Sauces,Bulk,No,,,
+97,Hot Sauce,Condiments / Sauces,Bulk,No,,,
+98,BBQ Sauce,Condiments / Sauces,Bulk,No,,,
+99,Honey,Condiments / Sauces,Bulk,No,,,
+100,Maple Syrup,Condiments / Sauces,Bulk,No,,,
+101,Sugar,Baking / Pantry,Bulk,Yes,,food-ingredients:Sugar(66); ingredients:sugar(1147),1213
+102,Brown Sugar,Baking / Pantry,Bulk,No,,,
+103,Baking Powder,Baking / Pantry,Bulk,No,,,
+104,Baking Soda,Baking / Pantry,Bulk,No,,,
+105,Salt,Baking / Pantry,Bulk,Yes,,food-ingredients:Salt(39); ingredients:salt(2),41
+106,Black Pepper,Baking / Pantry,Bulk,Review,,ingredients:pepper(102),
+107,Vanilla Extract,Baking / Pantry,Bulk,No,,,
+108,Chocolate Chips,Baking / Pantry,Bulk,Review,,ingredients:chocolate(729),
+109,,,,,,,
+110,,,,,,,
+111,,,,,,,
+112,,,,,,,
+113,,,,,,,
+114,,,,,,,
+115,,,,,,,
+116,,,,,,,
+117,,,,,,,
+118,,,,,,,

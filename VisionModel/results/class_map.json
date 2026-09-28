@@ -1,0 +1,517 @@
+{
+  "food-ingredients": {
+    "confirmed": {
+      "Apple": [
+        "Apple"
+      ],
+      "Avocado": [
+        "Avocado"
+      ],
+      "Banana": [
+        "Banana"
+      ],
+      "Beetroot": [
+        "Beet"
+      ],
+      "Bread": [
+        "Bread (loaf)"
+      ],
+      "Brinjal": [
+        "Eggplant"
+      ],
+      "Broccoli": [
+        "Broccoli (head)"
+      ],
+      "Butter": [
+        "Butter (stick/block)"
+      ],
+      "Cabbage": [
+        "Cabbage (head)"
+      ],
+      "Capsicum": [
+        "Bell Pepper"
+      ],
+      "Carrot": [
+        "Carrot"
+      ],
+      "Cauliflower": [
+        "Cauliflower (head)"
+      ],
+      "Corn": [
+        "Corn (ear)"
+      ],
+      "Cucumber": [
+        "Cucumber"
+      ],
+      "Egg": [
+        "Egg"
+      ],
+      "Garden Peas": [
+        "Peas"
+      ],
+      "Garlic": [
+        "Garlic (bulb)"
+      ],
+      "Green Peas": [
+        "Peas"
+      ],
+      "Milk": [
+        "Milk (carton/jug)"
+      ],
+      "Minced Meat": [
+        "Ground Beef"
+      ],
+      "Mushroom": [
+        "Mushroom"
+      ],
+      "Olive Oil": [
+        "Olive Oil"
+      ],
+      "Onion": [
+        "Onion"
+      ],
+      "Orange": [
+        "Orange"
+      ],
+      "Pea": [
+        "Peas"
+      ],
+      "Pear": [
+        "Pear"
+      ],
+      "Potato": [
+        "Potato"
+      ],
+      "Radish": [
+        "Radish"
+      ],
+      "Salt": [
+        "Salt"
+      ],
+      "Sausage": [
+        "Sausage/Hot Dog Link"
+      ],
+      "Soy Sauce": [
+        "Soy Sauce"
+      ],
+      "Strawberry": [
+        "Berries (strawberries/blueberries)"
+      ],
+      "Sugar": [
+        "Sugar"
+      ],
+      "Tomato": [
+        "Tomato"
+      ]
+    },
+    "review": {
+      "Bacon": [
+        "Bacon Slice"
+      ],
+      "Beans": [
+        "Green Beans",
+        "Canned Beans"
+      ],
+      "Beef": [
+        "Ground Beef"
+      ],
+      "Cheese": [
+        "Cream Cheese",
+        "Cheese Block",
+        "String Cheese",
+        "Sliced Cheese"
+      ],
+      "Chicken": [
+        "Chicken Thigh",
+        "Chicken Breast",
+        "Chicken Drumstick"
+      ],
+      "Ketchup": [
+        "Ketchup Bottle"
+      ],
+      "Pork": [
+        "Pork Chop"
+      ],
+      "Sweet Potato -Suthuni-": [
+        "Sweet Potato"
+      ],
+      "Tofu": [
+        "Tofu Block"
+      ]
+    },
+    "unmapped": [
+      "Akabare Khursani",
+      "Artichoke",
+      "Ash Gourd -Kubhindo-",
+      "Asparagus -Kurilo-",
+      "Bamboo Shoots -Tama-",
+      "Beaten Rice -Chiura-",
+      "Bethu ko Saag",
+      "Bitter Gourd",
+      "Black Lentils",
+      "Black beans",
+      "Bottle Gourd -Lauka-",
+      "Broad Beans -Bakullo-",
+      "Buff Meat",
+      "Cassava -Ghar Tarul-",
+      "Chayote-iskus-",
+      "Chicken Gizzards",
+      "Chickpeas",
+      "Chili Pepper -Khursani-",
+      "Chili Powder",
+      "Chowmein Noodles",
+      "Cinnamon",
+      "Coriander -Dhaniya-",
+      "Cornflakec",
+      "Crab Meat",
+      "Farsi ko Munta",
+      "Fiddlehead Ferns -Niguro-",
+      "Fish",
+      "Garden cress-Chamsur ko saag-",
+      "Ginger",
+      "Green Brinjal",
+      "Green Lentils",
+      "Green Mint -Pudina-",
+      "Green Soyabean -Hariyo Bhatmas-",
+      "Gundruk",
+      "Ham",
+      "Ice",
+      "Jack Fruit",
+      "Lapsi -Nepali Hog Plum-",
+      "Lemon -Nimbu-",
+      "Lime -Kagati-",
+      "Long Beans -Bodi-",
+      "Masyaura",
+      "Moringa Leaves -Sajyun ko Munta-",
+      "Mutton",
+      "Nutrela -Soya Chunks-",
+      "Okra -Bhindi-",
+      "Onion Leaves",
+      "Palak -Indian Spinach-",
+      "Palungo -Nepali Spinach-",
+      "Paneer",
+      "Papaya",
+      "Pointed Gourd -Chuche Karela-",
+      "Pumpkin -Farsi-",
+      "Rahar ko Daal",
+      "Rayo ko Saag",
+      "Red Beans",
+      "Red Lentils",
+      "Rice -Chamal-",
+      "Sajjyun -Moringa Drumsticks-",
+      "Snake Gourd -Chichindo-",
+      "Soyabean -Bhatmas-",
+      "Sponge Gourd -Ghiraula-",
+      "Stinging Nettle -Sisnu-",
+      "Taro Leaves -Karkalo-",
+      "Taro Root-Pidalu-",
+      "Thukpa Noodles",
+      "Tori ko Saag",
+      "Tree Tomato -Rukh Tamatar-",
+      "Turnip",
+      "Wallnut",
+      "Water Melon",
+      "Wheat",
+      "Yellow Lentils",
+      "kimchi",
+      "mayonnaise",
+      "noodle",
+      "seaweed"
+    ]
+  },
+  "fvd": {
+    "confirmed": {},
+    "review": {},
+    "unmapped": [
+      "0"
+    ]
+  },
+  "ingredients": {
+    "confirmed": {
+      "apple": [
+        "Apple"
+      ],
+      "asparagus": [
+        "Asparagus (spear)"
+      ],
+      "avocado": [
+        "Avocado"
+      ],
+      "banana": [
+        "Banana"
+      ],
+      "blueberry": [
+        "Berries (strawberries/blueberries)"
+      ],
+      "bread": [
+        "Bread (loaf)"
+      ],
+      "broccoli": [
+        "Broccoli (head)"
+      ],
+      "butter": [
+        "Butter (stick/block)"
+      ],
+      "cabbage": [
+        "Cabbage (head)"
+      ],
+      "carrot": [
+        "Carrot"
+      ],
+      "cauliflower": [
+        "Cauliflower (head)"
+      ],
+      "celery": [
+        "Celery (stalk)"
+      ],
+      "chicken breast": [
+        "Chicken Breast"
+      ],
+      "chicken thigh": [
+        "Chicken Thigh"
+      ],
+      "corn": [
+        "Corn (ear)"
+      ],
+      "cucumber": [
+        "Cucumber"
+      ],
+      "egg": [
+        "Egg"
+      ],
+      "eggplant": [
+        "Eggplant"
+      ],
+      "eggs": [
+        "Egg"
+      ],
+      "flour": [
+        "Flour"
+      ],
+      "garlic": [
+        "Garlic (bulb)"
+      ],
+      "kiwi": [
+        "Kiwi"
+      ],
+      "lemon": [
+        "Lemon"
+      ],
+      "lettuce": [
+        "Lettuce (head)"
+      ],
+      "lime": [
+        "Lime"
+      ],
+      "mango": [
+        "Mango"
+      ],
+      "milk": [
+        "Milk (carton/jug)"
+      ],
+      "mushroom": [
+        "Mushroom"
+      ],
+      "onion": [
+        "Onion"
+      ],
+      "orange": [
+        "Orange"
+      ],
+      "parsley": [
+        "Fresh Cilantro/Parsley"
+      ],
+      "pea": [
+        "Peas"
+      ],
+      "peach": [
+        "Peach"
+      ],
+      "pear": [
+        "Pear"
+      ],
+      "potato": [
+        "Potato"
+      ],
+      "radish": [
+        "Radish"
+      ],
+      "rice": [
+        "Rice"
+      ],
+      "salt": [
+        "Salt"
+      ],
+      "sausage": [
+        "Sausage/Hot Dog Link"
+      ],
+      "shrimp": [
+        "Shrimp"
+      ],
+      "sour cream": [
+        "Sour Cream"
+      ],
+      "spinach": [
+        "Spinach (bagged/loose)"
+      ],
+      "spring onion": [
+        "Onion"
+      ],
+      "strawberry": [
+        "Berries (strawberries/blueberries)"
+      ],
+      "sugar": [
+        "Sugar"
+      ],
+      "sweet potato": [
+        "Sweet Potato"
+      ],
+      "tomato": [
+        "Tomato"
+      ],
+      "tortillas": [
+        "Tortillas (stack)"
+      ],
+      "yogurt": [
+        "Yogurt (cup)"
+      ]
+    },
+    "review": {
+      "bacon": [
+        "Bacon Slice"
+      ],
+      "bean": [
+        "Green Beans",
+        "Canned Beans"
+      ],
+      "beans": [
+        "Green Beans",
+        "Canned Beans"
+      ],
+      "beef": [
+        "Ground Beef"
+      ],
+      "cheese": [
+        "Cream Cheese",
+        "Cheese Block",
+        "String Cheese",
+        "Sliced Cheese"
+      ],
+      "cherry": [
+        "Cherry Tomatoes"
+      ],
+      "chicken": [
+        "Chicken Thigh",
+        "Chicken Breast",
+        "Chicken Drumstick"
+      ],
+      "chocolate": [
+        "Chocolate Chips"
+      ],
+      "cream": [
+        "Sour Cream",
+        "Heavy Cream",
+        "Cream Cheese"
+      ],
+      "jam": [
+        "Jar of Jam"
+      ],
+      "ketchup": [
+        "Ketchup Bottle"
+      ],
+      "mustard": [
+        "Mustard Bottle"
+      ],
+      "oil": [
+        "Olive Oil",
+        "Vegetable Oil"
+      ],
+      "olive": [
+        "Olive Oil"
+      ],
+      "peanut": [
+        "Jar of Peanut Butter"
+      ],
+      "pepper": [
+        "Bell Pepper",
+        "Black Pepper"
+      ],
+      "pork": [
+        "Pork Chop"
+      ],
+      "raddish": [
+        "Radish"
+      ],
+      "tofu": [
+        "Tofu Block"
+      ],
+      "tuna": [
+        "Canned Tuna"
+      ],
+      "turkey": [
+        "Ground Turkey"
+      ]
+    },
+    "unmapped": [
+      "-",
+      "apricot",
+      "biscuit",
+      "bitter melon",
+      "bok choy",
+      "cake roll",
+      "cake",
+      "candy",
+      "cashew",
+      "chicken wing",
+      "chili",
+      "chilli",
+      "coconut",
+      "coffee",
+      "cookie",
+      "dairy",
+      "dates",
+      "fennel",
+      "fish",
+      "ginger",
+      "grape",
+      "grapefruit",
+      "green-salad",
+      "greenapple",
+      "guacamole",
+      "ham",
+      "hash brown",
+      "humus",
+      "juice",
+      "leek",
+      "liquor",
+      "lobster tail",
+      "marmelade",
+      "mayonaise",
+      "meatball",
+      "melon",
+      "mint",
+      "noodle",
+      "nuts",
+      "oysters",
+      "pawpaw",
+      "pickles",
+      "pineapple",
+      "pomegrante",
+      "pork belly",
+      "pot",
+      "pudding",
+      "pumpkin",
+      "quark",
+      "rib",
+      "rice_ball",
+      "salad",
+      "salami",
+      "smoothie",
+      "tangerine",
+      "tea",
+      "tempeh",
+      "watermelon",
+      "yogurt-occluded"
+    ]
+  }
+}
