@@ -1,0 +1,761 @@
+head: 80 -> 32 classes; warm-started 4: Apple, Banana, Carrot, Orange
+frozen 0 params, training 9,440,176
+[34m[1mtrain: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 173.4±92.3 MB/s, size: 45.0 KB)
+[K[34m[1mtrain: [0mScanning /home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/train/labels.cache... 4166 images, 0 backgrounds, 5 corrupt: 100% ━━━━━━━━━━━━ 4166/4166 1.3Git/s 0.0s
+[34m[1mtrain: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/train/images/-2023-01-12-175132_jpg.rf.76d4c1fe573363633c4915562985af8b.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+[34m[1mtrain: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/train/images/-205_jpg.rf.8b5a20ca3569ec4baeaa1ab2c116892b.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+[34m[1mtrain: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/train/images/-92_jpg.rf.a92f4f0679434086e9cb00a00f4010a0.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+[34m[1mtrain: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/train/images/-94_jpg.rf.35e9009bf0568327afb19338bc8ab01f.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+[34m[1mtrain: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/train/images/pork_jpg.rf.00c94b1d2e39f8867c29fa93fe6e73ed.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+WARNING ⚠️ Box and segment counts should be equal, but got len(segments) = 1359, len(boxes) = 24303. To resolve this only boxes will be used and all segments will be removed. To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.
+[34m[1mval: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 254.6±73.1 MB/s, size: 83.6 KB)
+[K[34m[1mval: [0mScanning /home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/valid/labels.cache... 1035 images, 0 backgrounds, 2 corrupt: 100% ━━━━━━━━━━━━ 1035/1035 394.6Mit/s 0.0s
+[34m[1mval: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/valid/images/11_jpg.rf.14547659e9239cead1ecd3c9945f7516.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+[34m[1mval: [0m/home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid/valid/images/41_jpg.rf.83876517de1a782dcb27ee6aa6a3bcc7.jpg: ignoring corrupt image/label: labels mix segment and detection rows
+WARNING ⚠️ Box and segment counts should be equal, but got len(segments) = 367, len(boxes) = 6712. To resolve this only boxes will be used and all segments will be removed. To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.
+e0 0/261  box 1.420  cls 4.750  dfl 1.418  lr 0.00e+00
+e0 50/261  box 1.396  cls 4.229  dfl 1.445  lr 6.39e-05
+e0 100/261  box 1.395  cls 3.787  dfl 1.409  lr 1.28e-04
+e0 150/261  box 1.406  cls 3.373  dfl 1.405  lr 1.92e-04
+e0 200/261  box 1.412  cls 3.054  dfl 1.401  lr 2.55e-04
+e0 250/261  box 1.423  cls 2.860  dfl 1.408  lr 3.19e-04
+epoch 0: train 5.654  val 6.3379
+  new best 6.3379
+e1 0/261  box 1.424  cls 1.845  dfl 1.411  lr 3.30e-04
+e1 50/261  box 1.419  cls 1.885  dfl 1.404  lr 3.93e-04
+e1 100/261  box 1.419  cls 1.881  dfl 1.418  lr 4.56e-04
+e1 150/261  box 1.406  cls 1.850  dfl 1.410  lr 5.20e-04
+e1 200/261  box 1.399  cls 1.840  dfl 1.406  lr 5.83e-04
+e1 250/261  box 1.402  cls 1.822  dfl 1.409  lr 6.46e-04
+epoch 1: train 4.628  val 5.8008
+  new best 5.8008
+e2 0/261  box 1.341  cls 1.821  dfl 1.539  lr 6.53e-04
+e2 50/261  box 1.358  cls 1.681  dfl 1.395  lr 7.16e-04
+e2 100/261  box 1.351  cls 1.637  dfl 1.376  lr 7.79e-04
+e2 150/261  box 1.354  cls 1.652  dfl 1.383  lr 8.41e-04
+e2 200/261  box 1.364  cls 1.680  dfl 1.396  lr 9.04e-04
+e2 250/261  box 1.360  cls 1.659  dfl 1.390  lr 9.66e-04
+epoch 2: train 4.407  val 5.4961
+  new best 5.4961
+e3 0/261  box 1.356  cls 1.689  dfl 1.411  lr 9.70e-04
+e3 50/261  box 1.351  cls 1.614  dfl 1.387  lr 9.70e-04
+e3 100/261  box 1.345  cls 1.611  dfl 1.384  lr 9.70e-04
+e3 150/261  box 1.339  cls 1.592  dfl 1.382  lr 9.70e-04
+e3 200/261  box 1.345  cls 1.596  dfl 1.383  lr 9.70e-04
+e3 250/261  box 1.344  cls 1.592  dfl 1.386  lr 9.70e-04
+epoch 3: train 4.339  val 5.2889
+  new best 5.2889
+e4 0/261  box 1.274  cls 1.181  dfl 1.264  lr 9.60e-04
+e4 50/261  box 1.333  cls 1.512  dfl 1.391  lr 9.60e-04
+e4 100/261  box 1.312  cls 1.482  dfl 1.370  lr 9.60e-04
+e4 150/261  box 1.316  cls 1.478  dfl 1.373  lr 9.60e-04
+e4 200/261  box 1.312  cls 1.467  dfl 1.367  lr 9.60e-04
+e4 250/261  box 1.305  cls 1.449  dfl 1.358  lr 9.60e-04
+epoch 4: train 4.112  val 5.2487
+  new best 5.2487
+e5 0/261  box 1.232  cls 1.282  dfl 1.246  lr 9.51e-04
+e5 50/261  box 1.311  cls 1.450  dfl 1.350  lr 9.51e-04
+e5 100/261  box 1.303  cls 1.435  dfl 1.352  lr 9.51e-04
+e5 150/261  box 1.292  cls 1.420  dfl 1.348  lr 9.51e-04
+e5 200/261  box 1.290  cls 1.419  dfl 1.348  lr 9.51e-04
+e5 250/261  box 1.284  cls 1.406  dfl 1.345  lr 9.51e-04
+epoch 5: train 4.032  val 5.1603
+  new best 5.1603
+e6 0/261  box 1.433  cls 1.767  dfl 1.585  lr 9.41e-04
+e6 50/261  box 1.281  cls 1.400  dfl 1.345  lr 9.41e-04
+e6 100/261  box 1.260  cls 1.387  dfl 1.334  lr 9.41e-04
+e6 150/261  box 1.259  cls 1.365  dfl 1.328  lr 9.41e-04
+e6 200/261  box 1.254  cls 1.354  dfl 1.323  lr 9.41e-04
+e6 250/261  box 1.252  cls 1.346  dfl 1.323  lr 9.41e-04
+epoch 6: train 3.936  val 4.6611
+  new best 4.6611
+e7 0/261  box 1.254  cls 1.261  dfl 1.301  lr 9.31e-04
+e7 50/261  box 1.233  cls 1.320  dfl 1.327  lr 9.31e-04
+e7 100/261  box 1.245  cls 1.325  dfl 1.330  lr 9.31e-04
+e7 150/261  box 1.247  cls 1.308  dfl 1.327  lr 9.31e-04
+e7 200/261  box 1.244  cls 1.300  dfl 1.324  lr 9.31e-04
+e7 250/261  box 1.241  cls 1.285  dfl 1.318  lr 9.31e-04
+epoch 7: train 3.868  val 4.6715
+e8 0/261  box 1.176  cls 1.152  dfl 1.262  lr 9.21e-04
+e8 50/261  box 1.213  cls 1.251  dfl 1.303  lr 9.21e-04
+e8 100/261  box 1.213  cls 1.246  dfl 1.303  lr 9.21e-04
+e8 150/261  box 1.226  cls 1.261  dfl 1.315  lr 9.21e-04
+e8 200/261  box 1.223  cls 1.247  dfl 1.312  lr 9.21e-04
+e8 250/261  box 1.218  cls 1.238  dfl 1.309  lr 9.21e-04
+epoch 8: train 3.779  val 4.7155
+e9 0/261  box 1.146  cls 1.021  dfl 1.201  lr 9.11e-04
+e9 50/261  box 1.224  cls 1.227  dfl 1.305  lr 9.11e-04
+e9 100/261  box 1.220  cls 1.211  dfl 1.302  lr 9.11e-04
+e9 150/261  box 1.214  cls 1.205  dfl 1.303  lr 9.11e-04
+e9 200/261  box 1.206  cls 1.212  dfl 1.300  lr 9.11e-04
+e9 250/261  box 1.204  cls 1.213  dfl 1.297  lr 9.11e-04
+epoch 9: train 3.727  val 4.5663
+  new best 4.5663
+e10 0/261  box 1.209  cls 1.082  dfl 1.296  lr 9.01e-04
+e10 50/261  box 1.223  cls 1.219  dfl 1.303  lr 9.01e-04
+e10 100/261  box 1.201  cls 1.169  dfl 1.281  lr 9.01e-04
+e10 150/261  box 1.204  cls 1.166  dfl 1.286  lr 9.01e-04
+e10 200/261  box 1.206  cls 1.170  dfl 1.288  lr 9.01e-04
+e10 250/261  box 1.206  cls 1.165  dfl 1.289  lr 9.01e-04
+epoch 10: train 3.662  val 4.4158
+  new best 4.4158
+e11 0/261  box 1.011  cls 1.015  dfl 1.265  lr 8.91e-04
+e11 50/261  box 1.186  cls 1.170  dfl 1.293  lr 8.91e-04
+e11 100/261  box 1.188  cls 1.162  dfl 1.292  lr 8.91e-04
+e11 150/261  box 1.175  cls 1.140  dfl 1.276  lr 8.91e-04
+e11 200/261  box 1.179  cls 1.138  dfl 1.275  lr 8.91e-04
+e11 250/261  box 1.178  cls 1.140  dfl 1.275  lr 8.91e-04
+epoch 11: train 3.586  val 4.4270
+e12 0/261  box 1.085  cls 1.158  dfl 1.220  lr 8.81e-04
+e12 50/261  box 1.161  cls 1.108  dfl 1.265  lr 8.81e-04
+e12 100/261  box 1.160  cls 1.104  dfl 1.265  lr 8.81e-04
+e12 150/261  box 1.167  cls 1.113  dfl 1.268  lr 8.81e-04
+e12 200/261  box 1.175  cls 1.114  dfl 1.271  lr 8.81e-04
+e12 250/261  box 1.171  cls 1.112  dfl 1.269  lr 8.81e-04
+epoch 12: train 3.554  val 4.2836
+  new best 4.2836
+e13 0/261  box 1.105  cls 1.187  dfl 1.272  lr 8.71e-04
+e13 50/261  box 1.180  cls 1.090  dfl 1.280  lr 8.71e-04
+e13 100/261  box 1.162  cls 1.078  dfl 1.259  lr 8.71e-04
+e13 150/261  box 1.158  cls 1.072  dfl 1.261  lr 8.71e-04
+e13 200/261  box 1.159  cls 1.070  dfl 1.259  lr 8.71e-04
+e13 250/261  box 1.158  cls 1.066  dfl 1.257  lr 8.71e-04
+epoch 13: train 3.489  val 4.2431
+  new best 4.2431
+e14 0/261  box 1.159  cls 1.016  dfl 1.219  lr 8.61e-04
+e14 50/261  box 1.149  cls 1.091  dfl 1.258  lr 8.61e-04
+e14 100/261  box 1.145  cls 1.071  dfl 1.254  lr 8.61e-04
+e14 150/261  box 1.145  cls 1.058  dfl 1.251  lr 8.61e-04
+e14 200/261  box 1.141  cls 1.042  dfl 1.246  lr 8.61e-04
+e14 250/261  box 1.142  cls 1.045  dfl 1.249  lr 8.61e-04
+epoch 14: train 3.441  val 4.1166
+  new best 4.1166
+e15 0/261  box 1.091  cls 0.913  dfl 1.231  lr 8.52e-04
+e15 50/261  box 1.141  cls 1.071  dfl 1.262  lr 8.52e-04
+e15 100/261  box 1.143  cls 1.048  dfl 1.258  lr 8.52e-04
+e15 150/261  box 1.145  cls 1.054  dfl 1.258  lr 8.52e-04
+e15 200/261  box 1.144  cls 1.055  dfl 1.256  lr 8.52e-04
+e15 250/261  box 1.142  cls 1.049  dfl 1.254  lr 8.52e-04
+epoch 15: train 3.457  val 4.2063
+e16 0/261  box 1.215  cls 1.145  dfl 1.422  lr 8.42e-04
+e16 50/261  box 1.166  cls 1.056  dfl 1.274  lr 8.42e-04
+e16 100/261  box 1.136  cls 1.024  dfl 1.254  lr 8.42e-04
+e16 150/261  box 1.137  cls 1.022  dfl 1.251  lr 8.42e-04
+e16 200/261  box 1.131  cls 1.016  dfl 1.249  lr 8.42e-04
+e16 250/261  box 1.130  cls 1.017  dfl 1.248  lr 8.42e-04
+epoch 16: train 3.404  val 4.1517
+e17 0/261  box 1.180  cls 0.839  dfl 1.215  lr 8.32e-04
+e17 50/261  box 1.117  cls 0.986  dfl 1.225  lr 8.32e-04
+e17 100/261  box 1.127  cls 0.978  dfl 1.234  lr 8.32e-04
+e17 150/261  box 1.117  cls 0.971  dfl 1.235  lr 8.32e-04
+e17 200/261  box 1.115  cls 0.977  dfl 1.231  lr 8.32e-04
+e17 250/261  box 1.112  cls 0.974  dfl 1.230  lr 8.32e-04
+epoch 17: train 3.320  val 4.0473
+  new best 4.0473
+e18 0/261  box 1.271  cls 1.084  dfl 1.390  lr 8.22e-04
+e18 50/261  box 1.111  cls 0.979  dfl 1.233  lr 8.22e-04
+e18 100/261  box 1.128  cls 0.987  dfl 1.241  lr 8.22e-04
+e18 150/261  box 1.129  cls 0.986  dfl 1.242  lr 8.22e-04
+e18 200/261  box 1.126  cls 0.981  dfl 1.241  lr 8.22e-04
+e18 250/261  box 1.126  cls 0.979  dfl 1.240  lr 8.22e-04
+epoch 18: train 3.358  val 4.0843
+e19 0/261  box 1.012  cls 0.885  dfl 1.113  lr 8.12e-04
+e19 50/261  box 1.072  cls 0.922  dfl 1.210  lr 8.12e-04
+e19 100/261  box 1.082  cls 0.934  dfl 1.225  lr 8.12e-04
+e19 150/261  box 1.102  cls 0.954  dfl 1.236  lr 8.12e-04
+e19 200/261  box 1.105  cls 0.959  dfl 1.235  lr 8.12e-04
+e19 250/261  box 1.106  cls 0.961  dfl 1.236  lr 8.12e-04
+epoch 19: train 3.301  val 4.0472
+  new best 4.0472
+e20 0/261  box 1.074  cls 0.904  dfl 1.162  lr 8.02e-04
+e20 50/261  box 1.070  cls 0.924  dfl 1.204  lr 8.02e-04
+e20 100/261  box 1.071  cls 0.917  dfl 1.206  lr 8.02e-04
+e20 150/261  box 1.085  cls 0.931  dfl 1.215  lr 8.02e-04
+e20 200/261  box 1.086  cls 0.935  dfl 1.217  lr 8.02e-04
+e20 250/261  box 1.086  cls 0.934  dfl 1.217  lr 8.02e-04
+epoch 20: train 3.228  val 4.0089
+  new best 4.0089
+e21 0/261  box 1.069  cls 0.869  dfl 1.161  lr 7.92e-04
+e21 50/261  box 1.084  cls 0.922  dfl 1.208  lr 7.92e-04
+e21 100/261  box 1.089  cls 0.925  dfl 1.216  lr 7.92e-04
+e21 150/261  box 1.078  cls 0.918  dfl 1.215  lr 7.92e-04
+e21 200/261  box 1.082  cls 0.921  dfl 1.215  lr 7.92e-04
+e21 250/261  box 1.086  cls 0.924  dfl 1.217  lr 7.92e-04
+epoch 21: train 3.238  val 4.0201
+e22 0/261  box 1.046  cls 0.814  dfl 1.169  lr 7.82e-04
+e22 50/261  box 1.079  cls 0.918  dfl 1.207  lr 7.82e-04
+e22 100/261  box 1.077  cls 0.926  dfl 1.216  lr 7.82e-04
+e22 150/261  box 1.080  cls 0.920  dfl 1.221  lr 7.82e-04
+e22 200/261  box 1.090  cls 0.922  dfl 1.221  lr 7.82e-04
+e22 250/261  box 1.090  cls 0.916  dfl 1.220  lr 7.82e-04
+epoch 22: train 3.240  val 4.0065
+  new best 4.0065
+e23 0/261  box 0.901  cls 0.737  dfl 1.098  lr 7.72e-04
+e23 50/261  box 1.062  cls 0.872  dfl 1.187  lr 7.72e-04
+e23 100/261  box 1.045  cls 0.867  dfl 1.184  lr 7.72e-04
+e23 150/261  box 1.056  cls 0.880  dfl 1.196  lr 7.72e-04
+e23 200/261  box 1.059  cls 0.880  dfl 1.196  lr 7.72e-04
+e23 250/261  box 1.062  cls 0.886  dfl 1.200  lr 7.72e-04
+epoch 23: train 3.183  val 3.8520
+  new best 3.8520
+e24 0/261  box 1.063  cls 0.950  dfl 1.279  lr 7.62e-04
+e24 50/261  box 1.080  cls 0.892  dfl 1.203  lr 7.62e-04
+e24 100/261  box 1.083  cls 0.891  dfl 1.207  lr 7.62e-04
+e24 150/261  box 1.081  cls 0.890  dfl 1.210  lr 7.62e-04
+e24 200/261  box 1.075  cls 0.888  dfl 1.209  lr 7.62e-04
+e24 250/261  box 1.074  cls 0.882  dfl 1.205  lr 7.62e-04
+epoch 24: train 3.162  val 3.8010
+  new best 3.8010
+e25 0/261  box 1.051  cls 0.797  dfl 1.194  lr 7.52e-04
+e25 50/261  box 1.061  cls 0.870  dfl 1.195  lr 7.52e-04
+e25 100/261  box 1.050  cls 0.864  dfl 1.195  lr 7.52e-04
+e25 150/261  box 1.046  cls 0.854  dfl 1.193  lr 7.52e-04
+e25 200/261  box 1.049  cls 0.857  dfl 1.195  lr 7.52e-04
+e25 250/261  box 1.051  cls 0.857  dfl 1.195  lr 7.52e-04
+epoch 25: train 3.115  val 3.8117
+e26 0/261  box 1.012  cls 0.714  dfl 1.130  lr 7.43e-04
+e26 50/261  box 1.061  cls 0.901  dfl 1.207  lr 7.43e-04
+e26 100/261  box 1.052  cls 0.863  dfl 1.190  lr 7.43e-04
+e26 150/261  box 1.054  cls 0.863  dfl 1.192  lr 7.43e-04
+e26 200/261  box 1.050  cls 0.856  dfl 1.190  lr 7.43e-04
+e26 250/261  box 1.048  cls 0.857  dfl 1.192  lr 7.43e-04
+epoch 26: train 3.092  val 3.8261
+e27 0/261  box 1.029  cls 0.985  dfl 1.248  lr 7.33e-04
+e27 50/261  box 1.050  cls 0.863  dfl 1.204  lr 7.33e-04
+e27 100/261  box 1.049  cls 0.843  dfl 1.195  lr 7.33e-04
+e27 150/261  box 1.051  cls 0.846  dfl 1.194  lr 7.33e-04
+e27 200/261  box 1.059  cls 0.856  dfl 1.201  lr 7.33e-04
+e27 250/261  box 1.055  cls 0.851  dfl 1.199  lr 7.33e-04
+epoch 27: train 3.102  val 3.8706
+e28 0/261  box 0.914  cls 0.736  dfl 1.132  lr 7.23e-04
+e28 50/261  box 1.032  cls 0.814  dfl 1.184  lr 7.23e-04
+e28 100/261  box 1.027  cls 0.820  dfl 1.181  lr 7.23e-04
+e28 150/261  box 1.031  cls 0.819  dfl 1.179  lr 7.23e-04
+e28 200/261  box 1.037  cls 0.827  dfl 1.184  lr 7.23e-04
+e28 250/261  box 1.041  cls 0.831  dfl 1.186  lr 7.23e-04
+epoch 28: train 3.091  val 3.7734
+  new best 3.7734
+e29 0/261  box 1.159  cls 1.126  dfl 1.346  lr 7.13e-04
+e29 50/261  box 1.048  cls 0.840  dfl 1.194  lr 7.13e-04
+e29 100/261  box 1.045  cls 0.828  dfl 1.180  lr 7.13e-04
+e29 150/261  box 1.034  cls 0.816  dfl 1.180  lr 7.13e-04
+e29 200/261  box 1.028  cls 0.818  dfl 1.183  lr 7.13e-04
+e29 250/261  box 1.033  cls 0.824  dfl 1.186  lr 7.13e-04
+epoch 29: train 3.065  val 3.7752
+e30 0/261  box 1.063  cls 0.714  dfl 1.106  lr 7.03e-04
+e30 50/261  box 1.031  cls 0.801  dfl 1.170  lr 7.03e-04
+e30 100/261  box 1.023  cls 0.813  dfl 1.179  lr 7.03e-04
+e30 150/261  box 1.022  cls 0.815  dfl 1.181  lr 7.03e-04
+e30 200/261  box 1.025  cls 0.819  dfl 1.183  lr 7.03e-04
+e30 250/261  box 1.025  cls 0.818  dfl 1.183  lr 7.03e-04
+epoch 30: train 3.025  val 3.7713
+  new best 3.7713
+e31 0/261  box 0.979  cls 0.694  dfl 1.085  lr 6.93e-04
+e31 50/261  box 1.032  cls 0.813  dfl 1.188  lr 6.93e-04
+e31 100/261  box 1.030  cls 0.815  dfl 1.189  lr 6.93e-04
+e31 150/261  box 1.019  cls 0.806  dfl 1.179  lr 6.93e-04
+e31 200/261  box 1.020  cls 0.804  dfl 1.178  lr 6.93e-04
+e31 250/261  box 1.020  cls 0.808  dfl 1.177  lr 6.93e-04
+epoch 31: train 3.006  val 3.7452
+  new best 3.7452
+e32 0/261  box 0.965  cls 0.751  dfl 1.065  lr 6.83e-04
+e32 50/261  box 1.031  cls 0.796  dfl 1.176  lr 6.83e-04
+e32 100/261  box 1.019  cls 0.784  dfl 1.175  lr 6.83e-04
+e32 150/261  box 1.013  cls 0.779  dfl 1.170  lr 6.83e-04
+e32 200/261  box 1.012  cls 0.782  dfl 1.169  lr 6.83e-04
+e32 250/261  box 1.016  cls 0.793  dfl 1.174  lr 6.83e-04
+epoch 32: train 2.986  val 3.7139
+  new best 3.7139
+e33 0/261  box 1.052  cls 0.818  dfl 1.194  lr 6.73e-04
+e33 50/261  box 1.008  cls 0.810  dfl 1.170  lr 6.73e-04
+e33 100/261  box 1.001  cls 0.792  dfl 1.166  lr 6.73e-04
+e33 150/261  box 1.000  cls 0.779  dfl 1.165  lr 6.73e-04
+e33 200/261  box 1.003  cls 0.778  dfl 1.169  lr 6.73e-04
+e33 250/261  box 1.004  cls 0.786  dfl 1.171  lr 6.73e-04
+epoch 33: train 2.960  val 3.6702
+  new best 3.6702
+e34 0/261  box 0.868  cls 0.586  dfl 1.081  lr 6.63e-04
+e34 50/261  box 1.026  cls 0.781  dfl 1.175  lr 6.63e-04
+e34 100/261  box 0.998  cls 0.768  dfl 1.162  lr 6.63e-04
+e34 150/261  box 0.994  cls 0.764  dfl 1.157  lr 6.63e-04
+e34 200/261  box 0.999  cls 0.770  dfl 1.162  lr 6.63e-04
+e34 250/261  box 1.000  cls 0.776  dfl 1.164  lr 6.63e-04
+epoch 34: train 2.953  val 3.6468
+  new best 3.6468
+e35 0/261  box 1.027  cls 0.825  dfl 1.145  lr 6.54e-04
+e35 50/261  box 1.022  cls 0.777  dfl 1.172  lr 6.54e-04
+e35 100/261  box 1.012  cls 0.781  dfl 1.175  lr 6.54e-04
+e35 150/261  box 1.010  cls 0.779  dfl 1.172  lr 6.54e-04
+e35 200/261  box 1.003  cls 0.770  dfl 1.164  lr 6.54e-04
+e35 250/261  box 1.001  cls 0.768  dfl 1.164  lr 6.54e-04
+epoch 35: train 2.934  val 3.6833
+e36 0/261  box 0.993  cls 0.645  dfl 1.115  lr 6.44e-04
+e36 50/261  box 0.975  cls 0.757  dfl 1.153  lr 6.44e-04
+e36 100/261  box 0.981  cls 0.745  dfl 1.150  lr 6.44e-04
+e36 150/261  box 0.984  cls 0.744  dfl 1.150  lr 6.44e-04
+e36 200/261  box 0.988  cls 0.744  dfl 1.152  lr 6.44e-04
+e36 250/261  box 0.992  cls 0.745  dfl 1.153  lr 6.44e-04
+epoch 36: train 2.888  val 3.6218
+  new best 3.6218
+e37 0/261  box 1.034  cls 0.815  dfl 1.155  lr 6.34e-04
+e37 50/261  box 1.011  cls 0.769  dfl 1.159  lr 6.34e-04
+e37 100/261  box 0.994  cls 0.752  dfl 1.152  lr 6.34e-04
+e37 150/261  box 0.995  cls 0.751  dfl 1.157  lr 6.34e-04
+e37 200/261  box 0.998  cls 0.754  dfl 1.158  lr 6.34e-04
+e37 250/261  box 1.000  cls 0.757  dfl 1.159  lr 6.34e-04
+epoch 37: train 2.924  val 3.6382
+e38 0/261  box 1.011  cls 0.874  dfl 1.176  lr 6.24e-04
+e38 50/261  box 0.991  cls 0.761  dfl 1.142  lr 6.24e-04
+e38 100/261  box 0.989  cls 0.749  dfl 1.146  lr 6.24e-04
+e38 150/261  box 0.988  cls 0.749  dfl 1.147  lr 6.24e-04
+e38 200/261  box 0.989  cls 0.754  dfl 1.151  lr 6.24e-04
+e38 250/261  box 0.987  cls 0.748  dfl 1.150  lr 6.24e-04
+epoch 38: train 2.888  val 3.6113
+  new best 3.6113
+e39 0/261  box 0.930  cls 0.673  dfl 1.137  lr 6.14e-04
+e39 50/261  box 0.961  cls 0.723  dfl 1.132  lr 6.14e-04
+e39 100/261  box 0.959  cls 0.712  dfl 1.128  lr 6.14e-04
+e39 150/261  box 0.972  cls 0.726  dfl 1.138  lr 6.14e-04
+e39 200/261  box 0.972  cls 0.726  dfl 1.141  lr 6.14e-04
+e39 250/261  box 0.972  cls 0.726  dfl 1.140  lr 6.14e-04
+epoch 39: train 2.834  val 3.5786
+  new best 3.5786
+e40 0/261  box 1.072  cls 0.778  dfl 1.180  lr 6.04e-04
+e40 50/261  box 0.951  cls 0.706  dfl 1.126  lr 6.04e-04
+e40 100/261  box 0.947  cls 0.704  dfl 1.128  lr 6.04e-04
+e40 150/261  box 0.949  cls 0.699  dfl 1.130  lr 6.04e-04
+e40 200/261  box 0.951  cls 0.705  dfl 1.134  lr 6.04e-04
+e40 250/261  box 0.957  cls 0.714  dfl 1.138  lr 6.04e-04
+epoch 40: train 2.818  val 3.5712
+  new best 3.5712
+e41 0/261  box 1.202  cls 0.866  dfl 1.337  lr 5.94e-04
+e41 50/261  box 0.957  cls 0.704  dfl 1.138  lr 5.94e-04
+e41 100/261  box 0.948  cls 0.695  dfl 1.132  lr 5.94e-04
+e41 150/261  box 0.948  cls 0.700  dfl 1.133  lr 5.94e-04
+e41 200/261  box 0.951  cls 0.706  dfl 1.135  lr 5.94e-04
+e41 250/261  box 0.956  cls 0.711  dfl 1.138  lr 5.94e-04
+epoch 41: train 2.828  val 3.5028
+  new best 3.5028
+e42 0/261  box 0.997  cls 0.689  dfl 1.165  lr 5.84e-04
+e42 50/261  box 0.985  cls 0.709  dfl 1.152  lr 5.84e-04
+e42 100/261  box 0.971  cls 0.705  dfl 1.145  lr 5.84e-04
+e42 150/261  box 0.968  cls 0.713  dfl 1.149  lr 5.84e-04
+e42 200/261  box 0.969  cls 0.713  dfl 1.146  lr 5.84e-04
+e42 250/261  box 0.967  cls 0.714  dfl 1.144  lr 5.84e-04
+epoch 42: train 2.827  val 3.5675
+e43 0/261  box 1.076  cls 0.786  dfl 1.182  lr 5.74e-04
+e43 50/261  box 0.955  cls 0.710  dfl 1.135  lr 5.74e-04
+e43 100/261  box 0.959  cls 0.705  dfl 1.129  lr 5.74e-04
+e43 150/261  box 0.954  cls 0.694  dfl 1.127  lr 5.74e-04
+e43 200/261  box 0.945  cls 0.687  dfl 1.126  lr 5.74e-04
+e43 250/261  box 0.943  cls 0.686  dfl 1.126  lr 5.74e-04
+epoch 43: train 2.767  val 3.5642
+e44 0/261  box 1.001  cls 0.713  dfl 1.167  lr 5.64e-04
+e44 50/261  box 0.936  cls 0.679  dfl 1.137  lr 5.64e-04
+e44 100/261  box 0.947  cls 0.684  dfl 1.138  lr 5.64e-04
+e44 150/261  box 0.950  cls 0.688  dfl 1.136  lr 5.64e-04
+e44 200/261  box 0.952  cls 0.687  dfl 1.134  lr 5.64e-04
+e44 250/261  box 0.951  cls 0.686  dfl 1.133  lr 5.64e-04
+epoch 44: train 2.778  val 3.5365
+e45 0/261  box 0.769  cls 0.577  dfl 1.072  lr 5.54e-04
+e45 50/261  box 0.947  cls 0.698  dfl 1.136  lr 5.54e-04
+e45 100/261  box 0.932  cls 0.686  dfl 1.131  lr 5.54e-04
+e45 150/261  box 0.941  cls 0.684  dfl 1.132  lr 5.54e-04
+e45 200/261  box 0.940  cls 0.684  dfl 1.129  lr 5.54e-04
+e45 250/261  box 0.942  cls 0.689  dfl 1.130  lr 5.54e-04
+epoch 45: train 2.770  val 3.4962
+  new best 3.4962
+e46 0/261  box 0.947  cls 0.770  dfl 1.126  lr 5.45e-04
+e46 50/261  box 0.927  cls 0.661  dfl 1.113  lr 5.45e-04
+e46 100/261  box 0.938  cls 0.663  dfl 1.122  lr 5.45e-04
+e46 150/261  box 0.937  cls 0.667  dfl 1.121  lr 5.45e-04
+e46 200/261  box 0.941  cls 0.675  dfl 1.126  lr 5.45e-04
+e46 250/261  box 0.946  cls 0.682  dfl 1.130  lr 5.45e-04
+epoch 46: train 2.765  val 3.4791
+  new best 3.4791
+e47 0/261  box 1.045  cls 0.737  dfl 1.167  lr 5.35e-04
+e47 50/261  box 0.913  cls 0.650  dfl 1.099  lr 5.35e-04
+e47 100/261  box 0.915  cls 0.653  dfl 1.105  lr 5.35e-04
+e47 150/261  box 0.922  cls 0.657  dfl 1.107  lr 5.35e-04
+e47 200/261  box 0.923  cls 0.659  dfl 1.109  lr 5.35e-04
+e47 250/261  box 0.925  cls 0.662  dfl 1.112  lr 5.35e-04
+epoch 47: train 2.719  val 3.5133
+e48 0/261  box 0.834  cls 0.537  dfl 1.024  lr 5.25e-04
+e48 50/261  box 0.923  cls 0.649  dfl 1.104  lr 5.25e-04
+e48 100/261  box 0.915  cls 0.655  dfl 1.109  lr 5.25e-04
+e48 150/261  box 0.918  cls 0.660  dfl 1.114  lr 5.25e-04
+e48 200/261  box 0.927  cls 0.664  dfl 1.118  lr 5.25e-04
+e48 250/261  box 0.930  cls 0.667  dfl 1.119  lr 5.25e-04
+epoch 48: train 2.717  val 3.5083
+e49 0/261  box 0.891  cls 0.528  dfl 1.103  lr 5.15e-04
+e49 50/261  box 0.913  cls 0.644  dfl 1.108  lr 5.15e-04
+e49 100/261  box 0.915  cls 0.660  dfl 1.119  lr 5.15e-04
+e49 150/261  box 0.920  cls 0.665  dfl 1.118  lr 5.15e-04
+e49 200/261  box 0.927  cls 0.666  dfl 1.120  lr 5.15e-04
+e49 250/261  box 0.928  cls 0.664  dfl 1.120  lr 5.15e-04
+epoch 49: train 2.720  val 3.4937
+e50 0/261  box 0.894  cls 0.601  dfl 1.083  lr 5.05e-04
+e50 50/261  box 0.931  cls 0.658  dfl 1.120  lr 5.05e-04
+e50 100/261  box 0.914  cls 0.652  dfl 1.112  lr 5.05e-04
+e50 150/261  box 0.913  cls 0.641  dfl 1.108  lr 5.05e-04
+e50 200/261  box 0.913  cls 0.641  dfl 1.108  lr 5.05e-04
+e50 250/261  box 0.915  cls 0.645  dfl 1.112  lr 5.05e-04
+epoch 50: train 2.681  val 3.4827
+e51 0/261  box 0.832  cls 0.649  dfl 1.125  lr 4.95e-04
+e51 50/261  box 0.930  cls 0.669  dfl 1.134  lr 4.95e-04
+e51 100/261  box 0.912  cls 0.654  dfl 1.117  lr 4.95e-04
+e51 150/261  box 0.916  cls 0.650  dfl 1.117  lr 4.95e-04
+e51 200/261  box 0.915  cls 0.650  dfl 1.114  lr 4.95e-04
+e51 250/261  box 0.918  cls 0.648  dfl 1.113  lr 4.95e-04
+epoch 51: train 2.676  val 3.4961
+e52 0/261  box 0.903  cls 0.655  dfl 1.148  lr 4.85e-04
+e52 50/261  box 0.912  cls 0.656  dfl 1.117  lr 4.85e-04
+e52 100/261  box 0.907  cls 0.648  dfl 1.117  lr 4.85e-04
+e52 150/261  box 0.899  cls 0.641  dfl 1.109  lr 4.85e-04
+e52 200/261  box 0.901  cls 0.645  dfl 1.110  lr 4.85e-04
+e52 250/261  box 0.903  cls 0.643  dfl 1.109  lr 4.85e-04
+epoch 52: train 2.681  val 3.4742
+  new best 3.4742
+e53 0/261  box 1.055  cls 0.779  dfl 1.203  lr 4.75e-04
+e53 50/261  box 0.900  cls 0.614  dfl 1.099  lr 4.75e-04
+e53 100/261  box 0.904  cls 0.622  dfl 1.101  lr 4.75e-04
+e53 150/261  box 0.904  cls 0.625  dfl 1.102  lr 4.75e-04
+e53 200/261  box 0.908  cls 0.626  dfl 1.104  lr 4.75e-04
+e53 250/261  box 0.912  cls 0.632  dfl 1.105  lr 4.75e-04
+epoch 53: train 2.654  val 3.4583
+  new best 3.4583
+e54 0/261  box 0.870  cls 0.686  dfl 1.116  lr 4.65e-04
+e54 50/261  box 0.930  cls 0.644  dfl 1.113  lr 4.65e-04
+e54 100/261  box 0.921  cls 0.642  dfl 1.113  lr 4.65e-04
+e54 150/261  box 0.911  cls 0.639  dfl 1.107  lr 4.65e-04
+e54 200/261  box 0.910  cls 0.634  dfl 1.107  lr 4.65e-04
+e54 250/261  box 0.909  cls 0.636  dfl 1.108  lr 4.65e-04
+epoch 54: train 2.651  val 3.4485
+  new best 3.4485
+e55 0/261  box 0.890  cls 0.583  dfl 1.080  lr 4.55e-04
+e55 50/261  box 0.898  cls 0.636  dfl 1.105  lr 4.55e-04
+e55 100/261  box 0.897  cls 0.635  dfl 1.105  lr 4.55e-04
+e55 150/261  box 0.899  cls 0.632  dfl 1.102  lr 4.55e-04
+e55 200/261  box 0.898  cls 0.630  dfl 1.100  lr 4.55e-04
+e55 250/261  box 0.899  cls 0.629  dfl 1.099  lr 4.55e-04
+epoch 55: train 2.639  val 3.4308
+  new best 3.4308
+e56 0/261  box 0.871  cls 0.556  dfl 1.117  lr 4.46e-04
+e56 50/261  box 0.855  cls 0.601  dfl 1.087  lr 4.46e-04
+e56 100/261  box 0.871  cls 0.605  dfl 1.089  lr 4.46e-04
+e56 150/261  box 0.878  cls 0.605  dfl 1.090  lr 4.46e-04
+e56 200/261  box 0.883  cls 0.610  dfl 1.093  lr 4.46e-04
+e56 250/261  box 0.889  cls 0.615  dfl 1.094  lr 4.46e-04
+epoch 56: train 2.609  val 3.4064
+  new best 3.4064
+e57 0/261  box 0.740  cls 0.512  dfl 1.115  lr 4.36e-04
+e57 50/261  box 0.880  cls 0.601  dfl 1.088  lr 4.36e-04
+e57 100/261  box 0.888  cls 0.614  dfl 1.100  lr 4.36e-04
+e57 150/261  box 0.886  cls 0.616  dfl 1.099  lr 4.36e-04
+e57 200/261  box 0.890  cls 0.614  dfl 1.099  lr 4.36e-04
+e57 250/261  box 0.894  cls 0.617  dfl 1.101  lr 4.36e-04
+epoch 57: train 2.612  val 3.4284
+e58 0/261  box 0.996  cls 0.643  dfl 1.149  lr 4.26e-04
+e58 50/261  box 0.873  cls 0.609  dfl 1.091  lr 4.26e-04
+e58 100/261  box 0.874  cls 0.605  dfl 1.089  lr 4.26e-04
+e58 150/261  box 0.872  cls 0.602  dfl 1.083  lr 4.26e-04
+e58 200/261  box 0.876  cls 0.610  dfl 1.087  lr 4.26e-04
+e58 250/261  box 0.882  cls 0.613  dfl 1.091  lr 4.26e-04
+epoch 58: train 2.593  val 3.4294
+e59 0/261  box 0.977  cls 0.571  dfl 1.101  lr 4.16e-04
+e59 50/261  box 0.892  cls 0.620  dfl 1.094  lr 4.16e-04
+e59 100/261  box 0.886  cls 0.611  dfl 1.086  lr 4.16e-04
+e59 150/261  box 0.885  cls 0.607  dfl 1.088  lr 4.16e-04
+e59 200/261  box 0.879  cls 0.602  dfl 1.085  lr 4.16e-04
+e59 250/261  box 0.879  cls 0.605  dfl 1.086  lr 4.16e-04
+epoch 59: train 2.573  val 3.4466
+e60 0/261  box 0.769  cls 0.596  dfl 1.043  lr 4.06e-04
+e60 50/261  box 0.868  cls 0.595  dfl 1.092  lr 4.06e-04
+e60 100/261  box 0.863  cls 0.590  dfl 1.087  lr 4.06e-04
+e60 150/261  box 0.863  cls 0.590  dfl 1.087  lr 4.06e-04
+e60 200/261  box 0.868  cls 0.597  dfl 1.091  lr 4.06e-04
+e60 250/261  box 0.871  cls 0.597  dfl 1.090  lr 4.06e-04
+epoch 60: train 2.557  val 3.4481
+e61 0/261  box 0.846  cls 0.636  dfl 1.103  lr 3.96e-04
+e61 50/261  box 0.864  cls 0.595  dfl 1.087  lr 3.96e-04
+e61 100/261  box 0.869  cls 0.590  dfl 1.083  lr 3.96e-04
+e61 150/261  box 0.868  cls 0.587  dfl 1.083  lr 3.96e-04
+e61 200/261  box 0.873  cls 0.591  dfl 1.085  lr 3.96e-04
+e61 250/261  box 0.876  cls 0.594  dfl 1.086  lr 3.96e-04
+epoch 61: train 2.564  val 3.3977
+  new best 3.3977
+e62 0/261  box 0.666  cls 0.549  dfl 1.036  lr 3.86e-04
+e62 50/261  box 0.850  cls 0.597  dfl 1.087  lr 3.86e-04
+e62 100/261  box 0.858  cls 0.586  dfl 1.084  lr 3.86e-04
+e62 150/261  box 0.858  cls 0.584  dfl 1.083  lr 3.86e-04
+e62 200/261  box 0.858  cls 0.585  dfl 1.083  lr 3.86e-04
+e62 250/261  box 0.859  cls 0.586  dfl 1.085  lr 3.86e-04
+epoch 62: train 2.544  val 3.4403
+e63 0/261  box 0.771  cls 0.530  dfl 1.051  lr 3.76e-04
+e63 50/261  box 0.883  cls 0.597  dfl 1.083  lr 3.76e-04
+e63 100/261  box 0.886  cls 0.602  dfl 1.090  lr 3.76e-04
+e63 150/261  box 0.877  cls 0.597  dfl 1.089  lr 3.76e-04
+e63 200/261  box 0.872  cls 0.591  dfl 1.084  lr 3.76e-04
+e63 250/261  box 0.871  cls 0.590  dfl 1.085  lr 3.76e-04
+epoch 63: train 2.545  val 3.4431
+e64 0/261  box 0.852  cls 0.546  dfl 1.057  lr 3.66e-04
+e64 50/261  box 0.875  cls 0.600  dfl 1.103  lr 3.66e-04
+e64 100/261  box 0.862  cls 0.588  dfl 1.085  lr 3.66e-04
+e64 150/261  box 0.854  cls 0.581  dfl 1.079  lr 3.66e-04
+e64 200/261  box 0.853  cls 0.579  dfl 1.076  lr 3.66e-04
+e64 250/261  box 0.853  cls 0.580  dfl 1.078  lr 3.66e-04
+epoch 64: train 2.516  val 3.4213
+e65 0/261  box 0.802  cls 0.581  dfl 1.050  lr 3.56e-04
+e65 50/261  box 0.846  cls 0.564  dfl 1.072  lr 3.56e-04
+e65 100/261  box 0.847  cls 0.569  dfl 1.067  lr 3.56e-04
+e65 150/261  box 0.846  cls 0.568  dfl 1.071  lr 3.56e-04
+e65 200/261  box 0.847  cls 0.570  dfl 1.074  lr 3.56e-04
+e65 250/261  box 0.848  cls 0.573  dfl 1.074  lr 3.56e-04
+epoch 65: train 2.504  val 3.4115
+e66 0/261  box 0.843  cls 0.523  dfl 1.044  lr 3.47e-04
+e66 50/261  box 0.853  cls 0.562  dfl 1.068  lr 3.47e-04
+e66 100/261  box 0.845  cls 0.559  dfl 1.067  lr 3.47e-04
+e66 150/261  box 0.846  cls 0.564  dfl 1.068  lr 3.47e-04
+e66 200/261  box 0.847  cls 0.570  dfl 1.071  lr 3.47e-04
+e66 250/261  box 0.849  cls 0.571  dfl 1.070  lr 3.47e-04
+epoch 66: train 2.501  val 3.3865
+  new best 3.3865
+e67 0/261  box 0.887  cls 0.622  dfl 1.053  lr 3.37e-04
+e67 50/261  box 0.841  cls 0.550  dfl 1.058  lr 3.37e-04
+e67 100/261  box 0.852  cls 0.570  dfl 1.072  lr 3.37e-04
+e67 150/261  box 0.854  cls 0.573  dfl 1.072  lr 3.37e-04
+e67 200/261  box 0.855  cls 0.567  dfl 1.072  lr 3.37e-04
+e67 250/261  box 0.851  cls 0.567  dfl 1.073  lr 3.37e-04
+epoch 67: train 2.497  val 3.3810
+  new best 3.3810
+e68 0/261  box 0.903  cls 0.690  dfl 1.134  lr 3.27e-04
+e68 50/261  box 0.820  cls 0.543  dfl 1.051  lr 3.27e-04
+e68 100/261  box 0.823  cls 0.547  dfl 1.057  lr 3.27e-04
+e68 150/261  box 0.832  cls 0.556  dfl 1.067  lr 3.27e-04
+e68 200/261  box 0.831  cls 0.557  dfl 1.065  lr 3.27e-04
+e68 250/261  box 0.833  cls 0.557  dfl 1.065  lr 3.27e-04
+epoch 68: train 2.470  val 3.3804
+  new best 3.3804
+e69 0/261  box 0.874  cls 0.625  dfl 1.070  lr 3.17e-04
+e69 50/261  box 0.860  cls 0.573  dfl 1.082  lr 3.17e-04
+e69 100/261  box 0.849  cls 0.566  dfl 1.077  lr 3.17e-04
+e69 150/261  box 0.845  cls 0.566  dfl 1.075  lr 3.17e-04
+e69 200/261  box 0.847  cls 0.567  dfl 1.077  lr 3.17e-04
+e69 250/261  box 0.849  cls 0.568  dfl 1.080  lr 3.17e-04
+epoch 69: train 2.516  val 3.3737
+  new best 3.3737
+e70 0/261  box 1.061  cls 0.682  dfl 1.199  lr 3.07e-04
+e70 50/261  box 0.820  cls 0.539  dfl 1.055  lr 3.07e-04
+e70 100/261  box 0.838  cls 0.546  dfl 1.067  lr 3.07e-04
+e70 150/261  box 0.839  cls 0.549  dfl 1.068  lr 3.07e-04
+e70 200/261  box 0.844  cls 0.555  dfl 1.071  lr 3.07e-04
+e70 250/261  box 0.842  cls 0.554  dfl 1.069  lr 3.07e-04
+epoch 70: train 2.494  val 3.3889
+e71 0/261  box 0.788  cls 0.532  dfl 1.042  lr 2.97e-04
+e71 50/261  box 0.806  cls 0.546  dfl 1.054  lr 2.97e-04
+e71 100/261  box 0.823  cls 0.551  dfl 1.056  lr 2.97e-04
+e71 150/261  box 0.827  cls 0.553  dfl 1.061  lr 2.97e-04
+e71 200/261  box 0.823  cls 0.553  dfl 1.061  lr 2.97e-04
+e71 250/261  box 0.824  cls 0.554  dfl 1.062  lr 2.97e-04
+epoch 71: train 2.470  val 3.3690
+  new best 3.3690
+e72 0/261  box 0.766  cls 0.528  dfl 1.007  lr 2.87e-04
+e72 50/261  box 0.830  cls 0.546  dfl 1.064  lr 2.87e-04
+e72 100/261  box 0.814  cls 0.535  dfl 1.053  lr 2.87e-04
+e72 150/261  box 0.811  cls 0.533  dfl 1.051  lr 2.87e-04
+e72 200/261  box 0.810  cls 0.537  dfl 1.052  lr 2.87e-04
+e72 250/261  box 0.814  cls 0.539  dfl 1.054  lr 2.87e-04
+epoch 72: train 2.422  val 3.3853
+e73 0/261  box 0.704  cls 0.400  dfl 1.028  lr 2.77e-04
+e73 50/261  box 0.790  cls 0.512  dfl 1.036  lr 2.77e-04
+e73 100/261  box 0.791  cls 0.515  dfl 1.039  lr 2.77e-04
+e73 150/261  box 0.803  cls 0.524  dfl 1.047  lr 2.77e-04
+e73 200/261  box 0.812  cls 0.534  dfl 1.052  lr 2.77e-04
+e73 250/261  box 0.814  cls 0.537  dfl 1.054  lr 2.77e-04
+epoch 73: train 2.406  val 3.3833
+e74 0/261  box 0.827  cls 0.509  dfl 1.082  lr 2.67e-04
+e74 50/261  box 0.819  cls 0.540  dfl 1.053  lr 2.67e-04
+e74 100/261  box 0.801  cls 0.521  dfl 1.041  lr 2.67e-04
+e74 150/261  box 0.805  cls 0.524  dfl 1.045  lr 2.67e-04
+e74 200/261  box 0.808  cls 0.525  dfl 1.047  lr 2.67e-04
+e74 250/261  box 0.806  cls 0.526  dfl 1.048  lr 2.67e-04
+epoch 74: train 2.386  val 3.3812
+e75 0/261  box 0.858  cls 0.700  dfl 1.117  lr 2.58e-04
+e75 50/261  box 0.800  cls 0.536  dfl 1.053  lr 2.58e-04
+e75 100/261  box 0.802  cls 0.528  dfl 1.049  lr 2.58e-04
+e75 150/261  box 0.806  cls 0.530  dfl 1.054  lr 2.58e-04
+e75 200/261  box 0.815  cls 0.536  dfl 1.058  lr 2.58e-04
+e75 250/261  box 0.817  cls 0.533  dfl 1.057  lr 2.58e-04
+epoch 75: train 2.411  val 3.3486
+  new best 3.3486
+e76 0/261  box 0.919  cls 0.656  dfl 1.145  lr 2.48e-04
+e76 50/261  box 0.807  cls 0.528  dfl 1.058  lr 2.48e-04
+e76 100/261  box 0.813  cls 0.529  dfl 1.056  lr 2.48e-04
+e76 150/261  box 0.816  cls 0.528  dfl 1.052  lr 2.48e-04
+e76 200/261  box 0.809  cls 0.528  dfl 1.047  lr 2.48e-04
+e76 250/261  box 0.811  cls 0.533  dfl 1.050  lr 2.48e-04
+epoch 76: train 2.389  val 3.3581
+e77 0/261  box 0.890  cls 0.598  dfl 1.118  lr 2.38e-04
+e77 50/261  box 0.797  cls 0.519  dfl 1.038  lr 2.38e-04
+e77 100/261  box 0.805  cls 0.519  dfl 1.042  lr 2.38e-04
+e77 150/261  box 0.808  cls 0.518  dfl 1.045  lr 2.38e-04
+e77 200/261  box 0.808  cls 0.522  dfl 1.047  lr 2.38e-04
+e77 250/261  box 0.809  cls 0.525  dfl 1.050  lr 2.38e-04
+epoch 77: train 2.394  val 3.3525
+e78 0/261  box 0.834  cls 0.537  dfl 1.029  lr 2.28e-04
+e78 50/261  box 0.794  cls 0.523  dfl 1.047  lr 2.28e-04
+e78 100/261  box 0.788  cls 0.518  dfl 1.042  lr 2.28e-04
+e78 150/261  box 0.789  cls 0.520  dfl 1.041  lr 2.28e-04
+e78 200/261  box 0.786  cls 0.517  dfl 1.040  lr 2.28e-04
+e78 250/261  box 0.787  cls 0.517  dfl 1.042  lr 2.28e-04
+epoch 78: train 2.352  val 3.3443
+  new best 3.3443
+e79 0/261  box 0.890  cls 0.540  dfl 1.106  lr 2.18e-04
+e79 50/261  box 0.797  cls 0.513  dfl 1.046  lr 2.18e-04
+e79 100/261  box 0.797  cls 0.519  dfl 1.050  lr 2.18e-04
+e79 150/261  box 0.792  cls 0.513  dfl 1.046  lr 2.18e-04
+e79 200/261  box 0.793  cls 0.515  dfl 1.045  lr 2.18e-04
+e79 250/261  box 0.796  cls 0.516  dfl 1.046  lr 2.18e-04
+epoch 79: train 2.361  val 3.3579
+e80 0/261  box 0.731  cls 0.479  dfl 1.090  lr 2.08e-04
+e80 50/261  box 0.784  cls 0.520  dfl 1.042  lr 2.08e-04
+e80 100/261  box 0.782  cls 0.514  dfl 1.036  lr 2.08e-04
+e80 150/261  box 0.779  cls 0.513  dfl 1.035  lr 2.08e-04
+e80 200/261  box 0.781  cls 0.513  dfl 1.037  lr 2.08e-04
+e80 250/261  box 0.784  cls 0.515  dfl 1.040  lr 2.08e-04
+epoch 80: train 2.352  val 3.3558
+e81 0/261  box 0.743  cls 0.472  dfl 1.008  lr 1.98e-04
+e81 50/261  box 0.805  cls 0.523  dfl 1.060  lr 1.98e-04
+e81 100/261  box 0.798  cls 0.517  dfl 1.052  lr 1.98e-04
+e81 150/261  box 0.797  cls 0.516  dfl 1.049  lr 1.98e-04
+e81 200/261  box 0.798  cls 0.517  dfl 1.049  lr 1.98e-04
+e81 250/261  box 0.796  cls 0.516  dfl 1.048  lr 1.98e-04
+epoch 81: train 2.366  val 3.3715
+e82 0/261  box 0.644  cls 0.434  dfl 0.966  lr 1.88e-04
+e82 50/261  box 0.785  cls 0.502  dfl 1.035  lr 1.88e-04
+e82 100/261  box 0.777  cls 0.496  dfl 1.030  lr 1.88e-04
+e82 150/261  box 0.782  cls 0.505  dfl 1.038  lr 1.88e-04
+e82 200/261  box 0.782  cls 0.507  dfl 1.040  lr 1.88e-04
+e82 250/261  box 0.780  cls 0.507  dfl 1.039  lr 1.88e-04
+epoch 82: train 2.332  val 3.3543
+e83 0/261  box 0.726  cls 0.483  dfl 0.979  lr 1.78e-04
+e83 50/261  box 0.787  cls 0.511  dfl 1.039  lr 1.78e-04
+e83 100/261  box 0.793  cls 0.514  dfl 1.044  lr 1.78e-04
+e83 150/261  box 0.790  cls 0.509  dfl 1.042  lr 1.78e-04
+e83 200/261  box 0.782  cls 0.503  dfl 1.038  lr 1.78e-04
+e83 250/261  box 0.783  cls 0.505  dfl 1.039  lr 1.78e-04
+epoch 83: train 2.354  val 3.3602
+e84 0/261  box 0.738  cls 0.475  dfl 1.009  lr 1.68e-04
+e84 50/261  box 0.773  cls 0.502  dfl 1.041  lr 1.68e-04
+e84 100/261  box 0.775  cls 0.500  dfl 1.038  lr 1.68e-04
+e84 150/261  box 0.773  cls 0.500  dfl 1.038  lr 1.68e-04
+e84 200/261  box 0.774  cls 0.498  dfl 1.037  lr 1.68e-04
+e84 250/261  box 0.777  cls 0.499  dfl 1.036  lr 1.68e-04
+epoch 84: train 2.310  val 3.3472
+e85 0/261  box 0.695  cls 0.508  dfl 1.132  lr 1.59e-04
+e85 50/261  box 0.776  cls 0.490  dfl 1.031  lr 1.59e-04
+e85 100/261  box 0.775  cls 0.498  dfl 1.038  lr 1.59e-04
+e85 150/261  box 0.770  cls 0.495  dfl 1.033  lr 1.59e-04
+e85 200/261  box 0.771  cls 0.493  dfl 1.033  lr 1.59e-04
+e85 250/261  box 0.773  cls 0.492  dfl 1.032  lr 1.59e-04
+epoch 85: train 2.300  val 3.3525
+e86 0/261  box 0.839  cls 0.534  dfl 1.054  lr 1.49e-04
+e86 50/261  box 0.767  cls 0.481  dfl 1.030  lr 1.49e-04
+e86 100/261  box 0.771  cls 0.483  dfl 1.030  lr 1.49e-04
+e86 150/261  box 0.770  cls 0.485  dfl 1.029  lr 1.49e-04
+e86 200/261  box 0.767  cls 0.486  dfl 1.030  lr 1.49e-04
+e86 250/261  box 0.768  cls 0.488  dfl 1.031  lr 1.49e-04
+epoch 86: train 2.324  val 3.3596
+e87 0/261  box 0.871  cls 0.522  dfl 1.061  lr 1.39e-04
+e87 50/261  box 0.768  cls 0.484  dfl 1.035  lr 1.39e-04
+e87 100/261  box 0.769  cls 0.485  dfl 1.030  lr 1.39e-04
+e87 150/261  box 0.760  cls 0.481  dfl 1.024  lr 1.39e-04
+e87 200/261  box 0.762  cls 0.484  dfl 1.025  lr 1.39e-04
+e87 250/261  box 0.766  cls 0.486  dfl 1.027  lr 1.39e-04
+epoch 87: train 2.285  val 3.3515
+e88 0/261  box 0.964  cls 0.663  dfl 1.199  lr 1.29e-04
+e88 50/261  box 0.778  cls 0.494  dfl 1.037  lr 1.29e-04
+e88 100/261  box 0.773  cls 0.489  dfl 1.034  lr 1.29e-04
+e88 150/261  box 0.767  cls 0.488  dfl 1.033  lr 1.29e-04
+e88 200/261  box 0.765  cls 0.485  dfl 1.033  lr 1.29e-04
+e88 250/261  box 0.760  cls 0.483  dfl 1.029  lr 1.29e-04
+epoch 88: train 2.269  val 3.3590
+e89 0/261  box 0.936  cls 0.484  dfl 1.056  lr 1.19e-04
+e89 50/261  box 0.773  cls 0.489  dfl 1.031  lr 1.19e-04
+e89 100/261  box 0.760  cls 0.476  dfl 1.023  lr 1.19e-04
+e89 150/261  box 0.757  cls 0.480  dfl 1.025  lr 1.19e-04
+e89 200/261  box 0.756  cls 0.477  dfl 1.022  lr 1.19e-04
+e89 250/261  box 0.757  cls 0.477  dfl 1.023  lr 1.19e-04
+epoch 89: train 2.261  val 3.3607
+e90 0/261  box 0.692  cls 0.427  dfl 0.953  lr 1.09e-04
+e90 50/261  box 0.741  cls 0.456  dfl 1.012  lr 1.09e-04
+e90 100/261  box 0.754  cls 0.470  dfl 1.021  lr 1.09e-04
+e90 150/261  box 0.755  cls 0.473  dfl 1.025  lr 1.09e-04
+e90 200/261  box 0.753  cls 0.472  dfl 1.022  lr 1.09e-04
+e90 250/261  box 0.754  cls 0.473  dfl 1.023  lr 1.09e-04
+epoch 90: train 2.255  val 3.3527
+e91 0/261  box 0.936  cls 0.590  dfl 1.104  lr 9.91e-05
+e91 50/261  box 0.754  cls 0.479  dfl 1.028  lr 9.91e-05
+e91 100/261  box 0.752  cls 0.479  dfl 1.030  lr 9.91e-05
+e91 150/261  box 0.755  cls 0.479  dfl 1.031  lr 9.91e-05
+e91 200/261  box 0.750  cls 0.478  dfl 1.027  lr 9.91e-05
+e91 250/261  box 0.749  cls 0.476  dfl 1.029  lr 9.91e-05
+epoch 91: train 2.255  val 3.3469
+e92 0/261  box 0.941  cls 0.537  dfl 1.168  lr 8.92e-05
+e92 50/261  box 0.758  cls 0.479  dfl 1.032  lr 8.92e-05
+e92 100/261  box 0.760  cls 0.477  dfl 1.033  lr 8.92e-05
+e92 150/261  box 0.760  cls 0.474  dfl 1.030  lr 8.92e-05
+e92 200/261  box 0.756  cls 0.472  dfl 1.026  lr 8.92e-05
+e92 250/261  box 0.756  cls 0.473  dfl 1.027  lr 8.92e-05
+epoch 92: train 2.255  val 3.3552
+e93 0/261  box 0.785  cls 0.448  dfl 1.069  lr 7.93e-05
+e93 50/261  box 0.731  cls 0.467  dfl 1.014  lr 7.93e-05
+e93 100/261  box 0.736  cls 0.467  dfl 1.016  lr 7.93e-05
+e93 150/261  box 0.742  cls 0.468  dfl 1.020  lr 7.93e-05
+e93 200/261  box 0.740  cls 0.466  dfl 1.017  lr 7.93e-05
+e93 250/261  box 0.740  cls 0.466  dfl 1.018  lr 7.93e-05
+epoch 93: train 2.227  val 3.3503
+e94 0/261  box 0.824  cls 0.577  dfl 1.090  lr 6.94e-05
+e94 50/261  box 0.727  cls 0.456  dfl 1.008  lr 6.94e-05
+e94 100/261  box 0.733  cls 0.458  dfl 1.009  lr 6.94e-05
+e94 150/261  box 0.738  cls 0.462  dfl 1.012  lr 6.94e-05
+e94 200/261  box 0.740  cls 0.462  dfl 1.015  lr 6.94e-05
+e94 250/261  box 0.738  cls 0.463  dfl 1.016  lr 6.94e-05
+epoch 94: train 2.217  val 3.3481
+e95 0/261  box 0.603  cls 0.377  dfl 0.950  lr 5.95e-05
+e95 50/261  box 0.747  cls 0.467  dfl 1.020  lr 5.95e-05
+e95 100/261  box 0.748  cls 0.469  dfl 1.019  lr 5.95e-05
+e95 150/261  box 0.741  cls 0.467  dfl 1.018  lr 5.95e-05
+e95 200/261  box 0.741  cls 0.466  dfl 1.017  lr 5.95e-05
+e95 250/261  box 0.742  cls 0.468  dfl 1.019  lr 5.95e-05
+epoch 95: train 2.227  val 3.3558
+e96 0/261  box 0.759  cls 0.466  dfl 0.999  lr 4.96e-05
+e96 50/261  box 0.730  cls 0.453  dfl 1.006  lr 4.96e-05
+e96 100/261  box 0.720  cls 0.455  dfl 1.009  lr 4.96e-05
+e96 150/261  box 0.735  cls 0.461  dfl 1.014  lr 4.96e-05
+e96 200/261  box 0.736  cls 0.463  dfl 1.017  lr 4.96e-05
+e96 250/261  box 0.734  cls 0.462  dfl 1.017  lr 4.96e-05
+epoch 96: train 2.258  val 3.3597
+e97 0/261  box 0.781  cls 0.469  dfl 1.012  lr 3.97e-05
+e97 50/261  box 0.742  cls 0.459  dfl 1.017  lr 3.97e-05
+e97 100/261  box 0.727  cls 0.451  dfl 1.011  lr 3.97e-05
+e97 150/261  box 0.723  cls 0.448  dfl 1.006  lr 3.97e-05
+e97 200/261  box 0.728  cls 0.451  dfl 1.010  lr 3.97e-05
+e97 250/261  box 0.731  cls 0.454  dfl 1.011  lr 3.97e-05
+epoch 97: train 2.204  val 3.3574
+e98 0/261  box 0.812  cls 0.504  dfl 1.079  lr 2.98e-05
+e98 50/261  box 0.725  cls 0.468  dfl 1.019  lr 2.98e-05
+e98 100/261  box 0.730  cls 0.466  dfl 1.018  lr 2.98e-05
+e98 150/261  box 0.723  cls 0.459  dfl 1.011  lr 2.98e-05
+e98 200/261  box 0.723  cls 0.459  dfl 1.011  lr 2.98e-05
+e98 250/261  box 0.724  cls 0.457  dfl 1.012  lr 2.98e-05
+epoch 98: train 2.194  val 3.3635
+e99 0/261  box 0.804  cls 0.459  dfl 1.041  lr 1.99e-05
+e99 50/261  box 0.726  cls 0.444  dfl 1.011  lr 1.99e-05
+e99 100/261  box 0.723  cls 0.443  dfl 1.009  lr 1.99e-05
+e99 150/261  box 0.726  cls 0.449  dfl 1.013  lr 1.99e-05
+e99 200/261  box 0.728  cls 0.453  dfl 1.017  lr 1.99e-05
+e99 250/261  box 0.728  cls 0.453  dfl 1.015  lr 1.99e-05
+epoch 99: train 2.210  val 3.3568
+
+done. mAP:  yolo val model=runs/mid/best.pt data=ingredients-mid/data.yaml

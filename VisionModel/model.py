@@ -13,7 +13,11 @@ touches that directly, so every knob is visible instead of hidden in a config.
 """
 
 import argparse
+import csv
+import json
 import math
+import re
+import time
 from copy import deepcopy
 from pathlib import Path
 
@@ -24,8 +28,6 @@ from ultralytics.data.build import build_dataloader, build_yolo_dataset
 from ultralytics.data.utils import check_det_dataset
 from ultralytics.utils.loss import v8DetectionLoss
 from ultralytics.utils.torch_utils import ModelEMA
-
-from remap_dataset import normalize
 
 HERE = Path(__file__).parent
 BACKBONE_END = 10  # yolo11 yaml: layers 0-10 are backbone, 11-23 are head/neck
@@ -71,6 +73,14 @@ def cmd_inspect(args):
 # --------------------------------------------------------------------------
 # surgery: replace the 80-class head, warm-starting the classes COCO already knows
 # --------------------------------------------------------------------------
+def normalize(name):
+    """Matching key for class names: 'Hot-Dog!' -> 'hot dog'."""
+    s = name.strip().lower()
+    s = re.sub(r"[_\-]+", " ", s)
+    s = re.sub(r"[^\w\s&]", "", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
 COCO_ALIASES = {  # coco name -> your canonical name, where normalize() won't match
     "hot dog": "Sausage/Hot Dog Link",
     "broccoli": "Broccoli (head)",
@@ -177,6 +187,9 @@ def to_device(batch, device):
 
 
 def cmd_train(args):
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "args.json").write_text(json.dumps(vars(args), indent=2))
     device = torch.device(args.device)
     data = check_det_dataset(args.data)
     names = [data["names"][i] for i in sorted(data["names"])]
@@ -219,6 +232,10 @@ def cmd_train(args):
     nw = max(3 * nb, 100)  # warmup iterations
     best = float("inf")
     last_opt = -1
+    log = out / "results.csv"  # one row per epoch, restarted each run (like last.pt/best.pt)
+    with open(log, "w", newline="") as f:
+        csv.writer(f).writerow(["epoch", "train_box", "train_cls", "train_dfl", "val_loss", "lr", "elapsed_s"])
+    t0 = time.time()
 
     for epoch in range(args.epochs):
         model.train()
@@ -258,14 +275,19 @@ def cmd_train(args):
             steps = i + 1
             if args.max_steps and steps >= args.max_steps:
                 break
+        lr = opt.param_groups[0]["lr"]  # the lr this epoch ended on, before the scheduler moves it
         sched.step()
 
         vl = validate(ema.ema, crit, val_dl, device, args.max_steps)
         print(f"epoch {epoch}: train {(running / steps).sum():.3f}  val {vl:.4f}")
-        save(ema.ema, cfg, Path(args.out) / "last.pt")
+        b, c, d = (running / steps).tolist()
+        with open(log, "a", newline="") as f:
+            csv.writer(f).writerow([epoch, round(b, 4), round(c, 4), round(d, 4), round(vl, 4),
+                                    f"{lr:.3e}", round(time.time() - t0)])
+        save(ema.ema, cfg, out / "last.pt")
         if vl < best:
             best = vl
-            save(ema.ema, cfg, Path(args.out) / "best.pt")
+            save(ema.ema, cfg, out / "best.pt")
             print(f"  new best {best:.4f}")
 
     print(f"\ndone. mAP:  yolo val model={args.out}/best.pt data={args.data}")

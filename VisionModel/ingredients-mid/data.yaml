@@ -1,0 +1,37 @@
+path: /home/arun/Projects/Capstone-Project/VisionModel/ingredients-mid
+train: train/images
+val: valid/images
+names:
+  0: Apple
+  1: Banana
+  2: Orange
+  3: Lime
+  4: Avocado
+  5: Tomato
+  6: Onion
+  7: Garlic (bulb)
+  8: Potato
+  9: Sweet Potato
+  10: Carrot
+  11: Cucumber
+  12: Corn (ear)
+  13: Mushroom
+  14: Spinach (bagged/loose)
+  15: Berries (strawberries/blueberries)
+  16: Shrimp
+  17: Milk (carton/jug)
+  18: Butter (stick/block)
+  19: Flour
+  20: Sugar
+  21: Beef
+  22: Cheese
+  23: Cream
+  24: Chicken
+  25: Pork
+  26: Cashew
+  27: Chocolate
+  28: Meatball
+  29: Ham
+  30: Beans
+  31: Chili
+test: test/images
