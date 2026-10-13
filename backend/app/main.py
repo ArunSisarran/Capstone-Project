@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth
+from app.routers import auth, recipes, saved_recipes, dietary_tags, ingredients
 
 app = FastAPI(title="Recipe Recommender API")
 
@@ -16,7 +16,9 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"]
 )
-app.include_router(auth.router)
+for router in (auth.router, recipes.router, saved_recipes.router, dietary_tags.router, ingredients.router):
+    app.include_router(router)
+
 
 @app.get("/health")
 def health_check():

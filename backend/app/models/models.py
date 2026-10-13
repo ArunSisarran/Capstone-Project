@@ -32,7 +32,7 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     saved_recipes = relationship("SavedRecipe", back_populates="user")
-
+    recipes = relationship("Recipe", back_populates="owner")
 
 class Ingredient(Base):
     __tablename__ = "ingredients"
@@ -61,7 +61,9 @@ class Recipe(Base):
     prep_time_minutes = Column(Integer, nullable=True)
     image_url = Column(String, nullable=True)
     source_url = Column(String, nullable=True)
+    owner_id = Column(PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
 
+    owner = relationship("User", back_populates="recipes")
     ingredients = relationship("Ingredient", secondary=recipe_ingredients, back_populates="recipes")
     dietary_tags = relationship("DietaryTag", secondary=recipe_dietary_tags, back_populates="recipes")
     saved_by = relationship("SavedRecipe", back_populates="recipe")
