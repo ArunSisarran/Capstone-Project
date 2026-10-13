@@ -1,0 +1,32 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    gap:20px;
+    background-color: rgb(243, 227, 210);
+    padding: 20px;
+    border-radius: 1px solid brown;
+}
+
+.cook-icon{
+    color: brown;
+}
+
+.logo-icon{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.links{
+    color: brown;
+    text-decoration: none;
+    font-size: larger;
+}
+
+.links:hover{
+    color: white;
+}
+
+.login-signup{
+    margin-left: auto;
+}
