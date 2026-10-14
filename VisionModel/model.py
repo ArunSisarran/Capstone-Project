@@ -9,7 +9,7 @@ touches that directly, so every knob is visible instead of hidden in a config.
     python model.py inspect      # module tree, params, head shape
     python model.py selfcheck    # asserts the head surgery is correct
     python model.py surgery      # write a re-headed checkpoint, no training
-    python model.py train --freeze 10 --epochs 30
+    python model.py train --data datasets/X/data.yaml --out runs/X --epochs 30
 """
 
 import argparse
@@ -36,7 +36,7 @@ BACKBONE_END = 10  # yolo11 yaml: layers 0-10 are backbone, 11-23 are head/neck
 # --------------------------------------------------------------------------
 # loading
 # --------------------------------------------------------------------------
-def load(path="yolo11s.pt"):
+def load(path="weights/yolo11s.pt"):
     """The checkpoint is a dict; ckpt['model'] is a live nn.Module, not a state_dict."""
     ckpt = torch.load(HERE / path, map_location="cpu", weights_only=False)
     model = ckpt["model"].float()  # ships as fp16
@@ -359,20 +359,20 @@ def cmd_selfcheck(args):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--weights", default="yolo11s.pt")
+    p.add_argument("--weights", default="weights/yolo11s.pt")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("inspect")
     sub.add_parser("selfcheck")
 
     s = sub.add_parser("surgery")
-    s.add_argument("--data", default="ingredients-top/data.yaml")
+    s.add_argument("--data", required=True)
     s.add_argument("--out", default="yolo11s-ingredients.pt")
     s.add_argument("--cold", action="store_true", help="skip COCO warm start")
 
     t = sub.add_parser("train")
-    t.add_argument("--data", default="ingredients-top/data.yaml")
-    t.add_argument("--out", default="runs/train")
+    t.add_argument("--data", required=True)
+    t.add_argument("--out", required=True, help="new dir under runs/")
     t.add_argument("--epochs", type=int, default=50)
     t.add_argument("--batch", type=int, default=16)
     t.add_argument("--nbs", type=int, default=64, help="nominal batch to accumulate to")
