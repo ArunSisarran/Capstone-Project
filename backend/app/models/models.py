@@ -66,7 +66,9 @@ class Recipe(Base):
     owner = relationship("User", back_populates="recipes")
     ingredients = relationship("Ingredient", secondary=recipe_ingredients, back_populates="recipes")
     dietary_tags = relationship("DietaryTag", secondary=recipe_dietary_tags, back_populates="recipes")
-    saved_by = relationship("SavedRecipe", back_populates="recipe")
+    saved_by = relationship("SavedRecipe", 
+                            back_populates="recipe", 
+                            cascade="all, delete-orphan")
 
 
 class SavedRecipe(Base):
