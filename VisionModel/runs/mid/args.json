@@ -1,0 +1,21 @@
+{
+  "weights": "yolo11s.pt",
+  "cmd": "train",
+  "data": "ingredients-mid/data.yaml",
+  "out": "runs/mid",
+  "epochs": 100,
+  "batch": 16,
+  "nbs": 64,
+  "imgsz": 640,
+  "workers": 8,
+  "device": "cuda",
+  "optimizer": "adamw",
+  "lr0": 0.001,
+  "lrf": 0.01,
+  "weight_decay": 0.0005,
+  "warmup_bias_lr": null,
+  "mosaic": 1.0,
+  "freeze": -1,
+  "cold": false,
+  "max_steps": 0
+}
