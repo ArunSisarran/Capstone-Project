@@ -95,5 +95,8 @@ class PasswordChange(BaseModel):
    current_password: str
    new_password: str = Field(min_length=12)
 
-
-              
+class RecipeMatchOut(RecipeOut):
+   matched_count: int = 0
+   match_score: float = 0.0
+   total_ingredients: int = 0
+   missing_ingredients: List[IngredientOut] = []

@@ -1,11 +1,12 @@
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import case, func
 
 from app.core.database import get_db
-from app.models.models import Recipe, Ingredient, DietaryTag, User
-from app.schemas.schemas import RecipeCreate, RecipeOut, RecipeUpdate
+from app.models.models import Recipe, Ingredient, DietaryTag, User, recipe_ingredients
+from app.schemas.schemas import RecipeCreate, RecipeOut, RecipeUpdate, RecipeMatchOut, IngredientOut
 from app.core.security import get_current_user
 
 router = APIRouter(prefix="/recipes", tags=["recipes"])
@@ -30,6 +31,75 @@ def list_recipes(
 
   recipes = query.offset(skip).limit(limit).all()
   return recipes
+
+@router.get("/match", response_model=List[RecipeMatchOut])
+def match_recipes(
+    ingredient_ids: List[int] = Query(...),
+    dietary_tag_ids: List[int] = Query(default=[]),
+    skip: int = 0,
+    limit: int = 20,
+    db: Session = Depends(get_db),
+):
+    user_ids = set(ingredient_ids)
+
+    # per-recipe counts: how many of its ingredients the user has, and how many it has in total
+    matched = func.sum(case((recipe_ingredients.c.ingredient_id.in_(user_ids), 1), else_=0))
+    total = func.count(recipe_ingredients.c.ingredient_id)
+
+    scores = (
+        db.query(
+            recipe_ingredients.c.recipe_id.label("recipe_id"),
+            matched.label("matched"),
+            total.label("total"),
+        )
+        .group_by(recipe_ingredients.c.recipe_id)
+        .having(matched > 0)
+    )
+
+    # dietary tags: a recipe must carry every requested tag
+    if dietary_tag_ids:
+        tagged = db.query(Recipe.id)
+        for tag_id in set(dietary_tag_ids):
+            tagged = tagged.filter(Recipe.dietary_tags.any(DietaryTag.id == tag_id))
+        scores = scores.filter(recipe_ingredients.c.recipe_id.in_(tagged))
+
+    ranked = (
+        scores.order_by(
+            (matched * 1.0 / total).desc(),   # best coverage first
+            (total - matched).asc(),          # then fewest missing
+            matched.desc(),                   # then most matched
+            recipe_ingredients.c.recipe_id.asc(),  # stable final tiebreak
+        )
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+
+    if not ranked:
+        return []
+
+    recipes = (
+        db.query(Recipe)
+        .options(joinedload(Recipe.ingredients), joinedload(Recipe.dietary_tags))
+        .filter(Recipe.id.in_([row.recipe_id for row in ranked]))
+        .all()
+    )
+    by_id = {r.id: r for r in recipes}
+
+    results = []
+    for row in ranked:  # iterate `ranked` so the SQL ordering is preserved
+        recipe = by_id[row.recipe_id]
+        item = RecipeMatchOut.model_validate(recipe)
+        item.matched_count = int(row.matched)
+        item.total_ingredients = int(row.total)
+        item.missing_ingredients = [
+            IngredientOut.model_validate(i)
+            for i in recipe.ingredients
+            if i.id not in user_ids
+        ]
+        results.append(item)
+    return results
+
 
 @router.get("/{recipe_id}", response_model=RecipeOut)
 def get_recipe(recipe_id: int, db: Session = Depends(get_db)):
@@ -136,3 +206,5 @@ def delete_recipe(
     db.delete(recipe)
     db.commit()
     return None
+
+
