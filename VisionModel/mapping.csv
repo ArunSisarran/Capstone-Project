@@ -1,0 +1,318 @@
+dataset,source_class,target_class,status,instances
+Fridge Object v3,tomato,Tomato,auto,6012
+Fridge Object v3,banana,Banana,auto,5528
+Fridge Object v3,apple,Apple,auto,5063
+Fridge Object v3,cheese,Cheese,auto,3784
+Fridge Object v3,strawberry,Berries,auto,3237
+Fridge Object v3,orange,Orange,auto,3213
+Fridge Object v3,carrot,Carrot,auto,3069
+Fridge Object v3,milk,Milk,auto,2946
+Fridge Object v3,onion,Onion,auto,2837
+Fridge Object v3,flour,Flour,auto,2787
+Fridge Object v3,potato,Potato,auto,2779
+Fridge Object v3,bean,Green Beans,auto,2720
+Fridge Object v3,corn,Corn,auto,2419
+Fridge Object v3,spinach,Spinach,auto,2368
+Fridge Object v3,chicken,Chicken,auto,2365
+Fridge Object v3,blueberry,Berries,auto,2341
+Fridge Object v3,butter,Butter,auto,2209
+Fridge Object v3,lime,Lime,auto,2170
+Fridge Object v3,mushroom,Mushroom,auto,2155
+Fridge Object v3,sweet potato,Sweet Potato,auto,1943
+Fridge Object v3,beef,Meat,auto,1772
+Fridge Object v3,egg,Egg,auto,1755
+Fridge Object v3,cucumber,Cucumber,auto,1740
+Fridge Object v3,bread,Bread,auto,1475
+Fridge Object v3,ham,Ham,auto,1192
+Fridge Object v3,kiwi,Kiwi,auto,1169
+Fridge Object v3,yogurt,Yogurt,auto,1007
+Fridge Object v3,watermelon,Melon,auto,971
+Fridge Object v3,lettuce,Lettuce,auto,845
+Fridge Object v3,pepper,Bell Pepper,auto,810
+Fridge Object v3,chicken breast,Chicken,auto,783
+Fridge Object v3,grape,Grape,auto,613
+Fridge Object v3,chocolate,Chocolate,auto,581
+Fridge Object v3,garlic,Garlic,auto,481
+Fridge Object v3,lemon,Lemon,auto,475
+Fridge Object v3,avocado,Avocado,auto,409
+Fridge Object v3,broccoli,Broccoli,auto,346
+Fridge Object v3,peach,Peach,auto,328
+Fridge Object v3,pear,Pear,auto,321
+Fridge Object v3,pineapple,Pineapple,auto,319
+Fridge Object v3,cabbage,Cabbage,auto,305
+Fridge Object v3,ginger,Ginger,auto,207
+Fridge Object v3,sausage,Sausage,auto,205
+Fridge Object v3,asparagus,Asparagus,auto,201
+Fridge Object v3,leek,Spring Onion,auto,190
+Fridge Object v3,radish,Radish,auto,168
+Fridge Object v3,mango,Mango,auto,165
+Fridge Object v3,cauliflower,Cauliflower,auto,147
+Fridge Object v3,zucchini,Zucchini,auto,120
+Fridge Object v3,eggplant,Eggplant,auto,91
+Fridge Object v3,pea,Peas,auto,91
+Fridge Object v3,chilli,Chili,auto,22
+Fridge Object v3,fish,Fish,auto,2
+Ingredients detection,kumquat,Lime,auto,23474
+Ingredients detection,onion,Onion,auto,21348
+Ingredients detection,tomato,Tomato,auto,16304
+Ingredients detection,pork,Meat,auto,7752
+Ingredients detection,chicken,Chicken,auto,7449
+Ingredients detection,ginger,Ginger,auto,6806
+Ingredients detection,garlic,Garlic,auto,6777
+Ingredients detection,potato,Potato,auto,5301
+Ingredients detection,Food are annotated in COCO format-,Carrot,fix,5124
+Ingredients detection,bell_pepper,Bell Pepper,auto,4951
+Ingredients detection,lemon,Lemon,auto,4247
+Ingredients detection,undefined,,drop,4243
+Ingredients detection,rice,Rice,auto,3510
+Ingredients detection,carrot,Carrot,auto,3150
+Ingredients detection,The following pre-processing was applied to each image-,Egg,fix,2865
+Ingredients detection,5,Chili,fix,2758
+Ingredients detection,cucumber,Cucumber,auto,2129
+Ingredients detection,egg,Egg,auto,1995
+Ingredients detection,- understand unstructured image data,Onion,fix,1977
+Ingredients detection,banana,Banana,auto,1742
+Ingredients detection,- collaborate with your team on computer vision projects,Chicken,fix,1662
+Ingredients detection,eggplant,Eggplant,auto,1652
+Ingredients detection,16,Mushroom,fix,1614
+Ingredients detection,cabbage,Cabbage,auto,1593
+Ingredients detection,21,Nuts,fix,1375
+Ingredients detection,apple,Apple,auto,1270
+Ingredients detection,-,Tomato,fix,1146
+Ingredients detection,22,Meat,fix,1136
+Ingredients detection,cauliflower,Cauliflower,auto,1129
+Ingredients detection,11 0 0 0 1 1 1 1 0 0 0,Apple,fix,1074
+Ingredients detection,19,Orange,fix,1072
+Ingredients detection,pear,Pear,auto,1059
+Ingredients detection,8,Egg,fix,1035
+Ingredients detection,24,Shrimp,fix,1018
+Ingredients detection,4,Chicken,fix,865
+Ingredients detection,Roboflow is an end-to-end computer vision platform that helps you,Meat,fix,819
+Ingredients detection,pitaya,Dragon Fruit,auto,812
+Ingredients detection,small_pepper,Chili,auto,783
+Ingredients detection,15,Milk,fix,728
+Ingredients detection,pineapple,Pineapple,auto,726
+Ingredients detection,long_pepper,Chili,auto,716
+Ingredients detection,zucchini,Zucchini,auto,686
+Ingredients detection,7,Cucumber,fix,675
+Ingredients detection,beet,Beet,auto,664
+Ingredients detection,annona,Custard Apple,auto,648
+Ingredients detection,palm fruit,Palm Fruit,auto,592
+Ingredients detection,28,Tomato,fix,591
+Ingredients detection,3,Carrot,fix,588
+Ingredients detection,14,Lime,fix,571
+Ingredients detection,- use active learning to improve your dataset over time,Spring Onion,fix,567
+Ingredients detection,coriander,Herbs,auto,561
+Ingredients detection,guava,Guava,auto,546
+Ingredients detection,1,Meat,fix,520
+Ingredients detection,9,Fish,fix,520
+Ingredients detection,18,Onion,fix,513
+Ingredients detection,11,Ginger,fix,489
+Ingredients detection,17,Pasta,fix,448
+Ingredients detection,23,Potato,fix,446
+Ingredients detection,papaya,Papaya,auto,445
+Ingredients detection,2,Cabbage,fix,440
+Ingredients detection,29,,drop,426
+Ingredients detection,orange,Orange,auto,421
+Ingredients detection,10,Garlic,fix,419
+Ingredients detection,13,Lemon,fix,384
+Ingredients detection,avocado,Avocado,auto,375
+Ingredients detection,tofu,Tofu,auto,365
+Ingredients detection,26,Spring Onion,fix,362
+Ingredients detection,Verde,Banana,fix,349
+Ingredients detection,Papa,Potato,fix,343
+Ingredients detection,Cebolla,Onion,fix,331
+Ingredients detection,25,Rice,fix,316
+Ingredients detection,Carne,Meat,fix,315
+Ingredients detection,Pollo,Chicken,fix,312
+Ingredients detection,Tomate,Tomato,fix,310
+Ingredients detection,frytol,Oil,auto,290
+Ingredients detection,green chilli pepper,Chili,auto,273
+Ingredients detection,20,Herbs,fix,261
+Ingredients detection,broccoli,Broccoli,auto,254
+Ingredients detection,strawberry,Berries,auto,249
+Ingredients detection,chicken breast,Chicken,auto,236
+Ingredients detection,white button mushroom,Mushroom,auto,233
+Ingredients detection,okra,Okra,auto,225
+Ingredients detection,mulberry,Berries,auto,220
+Ingredients detection,red meat,Meat,auto,213
+Ingredients detection,12,Honey,fix,206
+Ingredients detection,cherry,Cherry,auto,197
+Ingredients detection,anchovy,Fish,auto,196
+Ingredients detection,pumpkin,Squash,auto,188
+Ingredients detection,Mango,Mango,auto,184
+Ingredients detection,blueberry,Berries,auto,174
+Ingredients detection,lettuce,Lettuce,auto,172
+Ingredients detection,artichoke,Artichoke,auto,167
+Ingredients detection,mutton,Meat,auto,165
+Ingredients detection,raspberry,Berries,auto,165
+Ingredients detection,parsley,Herbs,auto,154
+Ingredients detection,27,,drop,147
+Ingredients detection,bell pepper,Bell Pepper,auto,143
+Ingredients detection,mince,Meat,auto,142
+Ingredients detection,gooseberry,Berries,auto,139
+Ingredients detection,grape,Grape,auto,136
+Ingredients detection,white beans,Beans,auto,126
+Ingredients detection,leek,Spring Onion,auto,115
+Ingredients detection,radish,Radish,auto,110
+Ingredients detection,fish,Fish,auto,107
+Ingredients detection,cranberry,Berries,auto,99
+Ingredients detection,shrimp,Shrimp,auto,99
+Ingredients detection,salt,Salt,auto,65
+Ingredients detection,turmeric,Turmeric,auto,65
+Ingredients detection,6,Herbs,fix,36
+Ingredients detection,chickpeas,Beans,auto,24
+Ingredients detection,bay_leaf,Herbs,auto,14
+Ingredients detection,spring_onion,Spring Onion,auto,1
+LVIS_Fruits_And_Vegetables,banana,Banana,auto,50628
+LVIS_Fruits_And_Vegetables,carrot,Carrot,auto,18133
+LVIS_Fruits_And_Vegetables,apple,Apple,auto,17476
+LVIS_Fruits_And_Vegetables,orange/orange fruit,Orange,auto,13061
+LVIS_Fruits_And_Vegetables,tomato,Tomato,auto,12460
+LVIS_Fruits_And_Vegetables,broccoli,Broccoli,auto,12196
+LVIS_Fruits_And_Vegetables,onion,Onion,auto,9815
+LVIS_Fruits_And_Vegetables,grape,Grape,auto,6474
+LVIS_Fruits_And_Vegetables,mushroom,Mushroom,auto,6261
+LVIS_Fruits_And_Vegetables,lettuce,Lettuce,auto,5698
+LVIS_Fruits_And_Vegetables,bell pepper/capsicum,Bell Pepper,auto,4479
+LVIS_Fruits_And_Vegetables,strawberry,Berries,auto,4441
+LVIS_Fruits_And_Vegetables,potato,Potato,auto,4393
+LVIS_Fruits_And_Vegetables,blueberry,Berries,auto,3163
+LVIS_Fruits_And_Vegetables,green bean,Green Beans,auto,2609
+LVIS_Fruits_And_Vegetables,lemon,Lemon,auto,2172
+LVIS_Fruits_And_Vegetables,edible corn/corn/maize,Corn,auto,1916
+LVIS_Fruits_And_Vegetables,pea/pea food,Peas,auto,1870
+LVIS_Fruits_And_Vegetables,almond,Nuts,auto,1705
+LVIS_Fruits_And_Vegetables,pineapple,Pineapple,auto,1638
+LVIS_Fruits_And_Vegetables,green onion/spring onion/scallion,Spring Onion,auto,1619
+LVIS_Fruits_And_Vegetables,cucumber/cuke,Cucumber,auto,1606
+LVIS_Fruits_And_Vegetables,pumpkin,Squash,auto,1196
+LVIS_Fruits_And_Vegetables,lime,Lime,auto,1134
+LVIS_Fruits_And_Vegetables,pear,Pear,auto,1076
+LVIS_Fruits_And_Vegetables,avocado,Avocado,auto,1064
+LVIS_Fruits_And_Vegetables,cauliflower,Cauliflower,auto,1051
+LVIS_Fruits_And_Vegetables,peach,Peach,auto,1049
+LVIS_Fruits_And_Vegetables,asparagus,Asparagus,auto,977
+LVIS_Fruits_And_Vegetables,raspberry,Berries,auto,929
+LVIS_Fruits_And_Vegetables,celery,Celery,auto,911
+LVIS_Fruits_And_Vegetables,cherry,Cherry,auto,903
+LVIS_Fruits_And_Vegetables,zucchini/courgette,Zucchini,auto,830
+LVIS_Fruits_And_Vegetables,watermelon,Melon,auto,814
+LVIS_Fruits_And_Vegetables,kiwi fruit,Kiwi,auto,722
+LVIS_Fruits_And_Vegetables,pickle,Pickle,auto,632
+LVIS_Fruits_And_Vegetables,brussels sprouts,Cabbage,auto,590
+LVIS_Fruits_And_Vegetables,radish/daikon,Radish,auto,549
+LVIS_Fruits_And_Vegetables,garlic/ail,Garlic,auto,493
+LVIS_Fruits_And_Vegetables,chickpea/garbanzo,Beans,auto,460
+LVIS_Fruits_And_Vegetables,blackberry,Berries,auto,429
+LVIS_Fruits_And_Vegetables,mandarin orange,Orange,auto,408
+LVIS_Fruits_And_Vegetables,chili/chili vegetable/chili pepper/chili pepper vegetable/chilli/chilli vegetable/chilly/chilly,Chili,auto,354
+LVIS_Fruits_And_Vegetables,eggplant/aubergine,Eggplant,auto,351
+LVIS_Fruits_And_Vegetables,artichoke,Artichoke,auto,293
+LVIS_Fruits_And_Vegetables,coconut/cocoanut,Coconut,auto,273
+LVIS_Fruits_And_Vegetables,bean curd/tofu,Tofu,auto,236
+LVIS_Fruits_And_Vegetables,melon,Melon,auto,211
+LVIS_Fruits_And_Vegetables,papaya,Papaya,auto,206
+LVIS_Fruits_And_Vegetables,cantaloup/cantaloupe,Melon,auto,193
+LVIS_Fruits_And_Vegetables,fig/fig fruit,Fig,auto,169
+LVIS_Fruits_And_Vegetables,sweet potato,Sweet Potato,auto,148
+LVIS_Fruits_And_Vegetables,date/date fruit,Date,auto,112
+LVIS_Fruits_And_Vegetables,clementine,Orange,auto,109
+LVIS_Fruits_And_Vegetables,turnip,Turnip,auto,109
+LVIS_Fruits_And_Vegetables,gourd,Squash,auto,101
+LVIS_Fruits_And_Vegetables,ginger/gingerroot,Ginger,auto,94
+LVIS_Fruits_And_Vegetables,apricot,Peach,auto,62
+LVIS_Fruits_And_Vegetables,Strawberry,Berries,auto,56
+LVIS_Fruits_And_Vegetables,cayenne/cayenne spice/cayenne pepper/cayenne pepper spice/red pepper/red pepper,Chili,auto,49
+LVIS_Fruits_And_Vegetables,prune,Plum,auto,33
+LVIS_Fruits_And_Vegetables,persimmon,Persimmon,auto,22
+LVIS_Fruits_And_Vegetables,Tomato,Tomato,auto,5
+object-fridge,milk,Milk,auto,4452
+object-fridge,yoghurt,Yogurt,auto,3794
+object-fridge,cheese,Cheese,auto,3556
+object-fridge,lemon,Lemon,auto,2995
+object-fridge,eggs,Egg,auto,2528
+object-fridge,tomato paste,Sauce,auto,2181
+object-fridge,apple,Apple,auto,1871
+object-fridge,butter,Butter,auto,1742
+object-fridge,strawberries,Berries,auto,1703
+object-fridge,carrot,Carrot,auto,1610
+object-fridge,tomatoes,Tomato,auto,1390
+object-fridge,Tomato,Tomato,auto,1361
+object-fridge,bread,Bread,auto,1282
+object-fridge,meat,Meat,auto,1230
+object-fridge,chicken,Chicken,auto,1134
+object-fridge,green chilies,Chili,auto,1134
+object-fridge,banana,Banana,auto,1130
+object-fridge,sugar,Sugar,auto,1039
+object-fridge,carrots,Carrot,auto,1009
+object-fridge,tomato,Tomato,auto,990
+object-fridge,onion,Onion,auto,984
+object-fridge,potato,Potato,auto,961
+object-fridge,flour,Flour,auto,947
+object-fridge,lime,Lime,auto,886
+object-fridge,Broccoli,Broccoli,auto,860
+object-fridge,spinach,Spinach,auto,858
+object-fridge,sauce,Sauce,auto,804
+object-fridge,shrimp,Shrimp,auto,756
+object-fridge,blueberries,Berries,auto,747
+object-fridge,mushrooms,Mushroom,auto,734
+object-fridge,corn,Corn,auto,710
+object-fridge,green_beans,Green Beans,auto,707
+object-fridge,broccoli,Broccoli,auto,645
+object-fridge,sweet_potato,Sweet Potato,auto,622
+object-fridge,heavy_cream,Cream,auto,619
+object-fridge,ham,Ham,auto,616
+object-fridge,orange,Orange,auto,573
+object-fridge,beef,Meat,auto,521
+object-fridge,Cauliflower,Cauliflower,auto,478
+object-fridge,juice,,drop,449
+object-fridge,ground_beef,Meat,auto,413
+object-fridge,goat_cheese,Cheese,auto,370
+object-fridge,cream,Cream,auto,358
+object-fridge,chicken_breast,Chicken,auto,346
+object-fridge,lettuce,Lettuce,auto,336
+object-fridge,olive,Olive,auto,325
+object-fridge,green beans,Green Beans,auto,291
+object-fridge,potatoes,Potato,auto,265
+object-fridge,mineral water,,drop,260
+object-fridge,bacon,Bacon,auto,226
+object-fridge,mushroom,Mushroom,auto,216
+object-fridge,chocolate,Chocolate,auto,215
+object-fridge,sausage,Sausage,auto,202
+object-fridge,salami,Sausage,auto,193
+object-fridge,peach,Peach,auto,178
+object-fridge,peppers,Bell Pepper,auto,174
+object-fridge,Peas,Peas,auto,169
+object-fridge,cream cheese,Cheese,auto,169
+object-fridge,yellow bell pepper,Bell Pepper,auto,164
+object-fridge,Potato,Potato,auto,152
+object-fridge,Strawberry,Berries,auto,149
+object-fridge,Banana,Banana,auto,128
+object-fridge,olives,Olive,auto,119
+object-fridge,parsley,Herbs,auto,114
+object-fridge,Lemon,Lemon,auto,110
+object-fridge,apples,Apple,auto,106
+object-fridge,strawberry,Berries,auto,104
+object-fridge,green bell pepper,Bell Pepper,auto,99
+object-fridge,Orange,Orange,auto,93
+object-fridge,Beetroot,Beet,auto,90
+object-fridge,red bell pepper,Bell Pepper,auto,90
+object-fridge,chocolate chips,Chocolate,auto,86
+object-fridge,ginger,Ginger,auto,80
+object-fridge,Sweetcorn,Corn,auto,75
+object-fridge,asparagus,Asparagus,auto,75
+object-fridge,labneh,Cheese,auto,71
+object-fridge,aubergine,Eggplant,auto,68
+object-fridge,lemons,Lemon,auto,66
+object-fridge,courgettes,Zucchini,auto,64
+object-fridge,red onion,Onion,auto,60
+object-fridge,Onion,Onion,auto,46
+object-fridge,bananas,Banana,auto,42
+object-fridge,bazlama,Bread,auto,42
+object-fridge,mango,Mango,auto,27
+object-fridge,spring onion,Spring Onion,auto,27
+object-fridge,Shallot,Onion,auto,18
+object-fridge,red grapes,Grape,auto,18
+object-fridge,dates,Date,auto,9
+object-fridge,creme fraiche,Cream,auto,1
