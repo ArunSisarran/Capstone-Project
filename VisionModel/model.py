@@ -20,12 +20,14 @@ import re
 import time
 from copy import deepcopy
 from pathlib import Path
+from types import SimpleNamespace
 
 import torch
 import torch.nn as nn
 from ultralytics.cfg import get_cfg
 from ultralytics.data.build import build_dataloader, build_yolo_dataset
 from ultralytics.data.utils import check_det_dataset
+from ultralytics.models.yolo.detect import DetectionValidator
 from ultralytics.utils.loss import v8DetectionLoss
 from ultralytics.utils.torch_utils import ModelEMA
 
@@ -214,6 +216,8 @@ def cmd_train(args):
     val_dl = build_dataloader(val_ds, args.batch, args.workers, shuffle=False)
 
     crit = v8DetectionLoss(model)
+    validator = DetectionValidator(val_dl, save_dir=out / "val", args={
+        "data": args.data, "imgsz": args.imgsz, "batch": args.batch, "plots": False, "mode": "val"})
     groups = param_groups(model, args.weight_decay)
     if args.optimizer == "sgd":
         opt = torch.optim.SGD(groups, lr=args.lr0, momentum=0.937, nesterov=True)
@@ -228,18 +232,27 @@ def cmd_train(args):
         opt, lambda e: (1 - e / args.epochs) * (1 - args.lrf) + args.lrf)
     scaler = torch.amp.GradScaler("cuda", enabled=device.type == "cuda")
     ema = ModelEMA(model)
+    ema.ema.criterion = crit  # validator calls model.loss(); don't let it build its own
 
     nb = len(train_dl)
     accumulate = max(1, round(args.nbs / args.batch))  # simulate batch=64
     nw = max(3 * nb, 100)  # warmup iterations
-    best = float("inf")
+    best = -1.0
     last_opt = -1
     log = out / "results.csv"  # one row per epoch, restarted each run (like last.pt/best.pt)
     with open(log, "w", newline="") as f:
-        csv.writer(f).writerow(["epoch", "train_box", "train_cls", "train_dfl", "val_loss", "lr", "elapsed_s"])
+        csv.writer(f).writerow(["epoch", "train_box", "train_cls", "train_dfl", "val_loss",
+                                "precision", "recall", "map50", "map50_95", "lr", "elapsed_s"])
     t0 = time.time()
 
     for epoch in range(args.epochs):
+        if args.close_mosaic and epoch == max(0, args.epochs - args.close_mosaic):
+            # Mosaic tiles 4 shrunk images into one; finish on whole, real-scale
+            # photos, which is what the app sends (same as ultralytics' trainer).
+            print("closing mosaic")
+            train_ds.mosaic = False
+            train_ds.close_mosaic(hyp=cfg)
+            train_dl.reset()
         model.train()
         running = torch.zeros(3, device=device)
         for i, batch in enumerate(train_dl):
@@ -280,35 +293,26 @@ def cmd_train(args):
         lr = opt.param_groups[0]["lr"]  # the lr this epoch ended on, before the scheduler moves it
         sched.step()
 
-        vl = validate(ema.ema, crit, val_dl, device, args.max_steps)
-        print(f"epoch {epoch}: train {(running / steps).sum():.3f}  val {vl:.4f}")
+        # Ultralytics' own validator in trainer mode: mAP and val loss in one pass.
+        # The namespace is the handful of trainer attributes it reads.
+        m = validator(trainer=SimpleNamespace(
+            device=device, data=data, amp=device.type == "cuda", loss_items=items, ema=ema,
+            stopper=SimpleNamespace(possible_stop=False), epoch=epoch, epochs=args.epochs, world_size=1,
+            label_loss_items=lambda loss, prefix: {f"{prefix}/{k}": v for k, v in loss.items()}))
+        vl = sum(v for k, v in m.items() if k.startswith("val/"))
+        p_, r_, m50, m5095 = (m[f"metrics/{k}(B)"] for k in ("precision", "recall", "mAP50", "mAP50-95"))
+        print(f"epoch {epoch}: train {(running / steps).sum():.3f}  val {vl:.4f}  mAP50 {m50:.4f}  mAP50-95 {m5095:.4f}")
         b, c, d = (running / steps).tolist()
         with open(log, "a", newline="") as f:
-            csv.writer(f).writerow([epoch, round(b, 4), round(c, 4), round(d, 4), round(vl, 4),
+            csv.writer(f).writerow([epoch, round(b, 4), round(c, 4), round(d, 4), round(vl, 4), p_, r_, m50, m5095,
                                     f"{lr:.3e}", round(time.time() - t0)])
         save(ema.ema, cfg, out / "last.pt")
-        if vl < best:
-            best = vl
+        if m50 > best:  # mAP50 is what an inventory app cares about, not val loss
+            best = m50
             save(ema.ema, cfg, out / "best.pt")
-            print(f"  new best {best:.4f}")
+            print(f"  new best mAP50 {best:.4f}")
 
-    print(f"\ndone. mAP:  yolo val model={args.out}/best.pt data={args.data}")
-
-
-@torch.no_grad()
-def validate(model, crit, dl, device, max_steps=0):
-    model.eval()
-    # eval() makes Detect decode boxes; we want the raw maps the loss expects
-    total, n = torch.zeros(3, device=device), 0
-    for i, batch in enumerate(dl):
-        batch = to_device(batch, device)
-        with torch.amp.autocast("cuda", enabled=device.type == "cuda"):
-            _, items = crit(model(batch["img"]), batch)  # crit unwraps the eval tuple
-        total += torch.stack(list(items.values()))
-        n += 1
-        if max_steps and n >= max_steps:
-            break
-    return (total / max(n, 1)).sum().item()
+    print(f"\ndone. test split:  yolo val model={args.out}/best.pt data={args.data} split=test")
 
 
 def save(model, cfg, path):
@@ -387,6 +391,7 @@ def main():
     t.add_argument("--weight-decay", type=float, default=5e-4)
     t.add_argument("--warmup-bias-lr", type=float, default=None)
     t.add_argument("--mosaic", type=float, default=1.0)
+    t.add_argument("--close-mosaic", type=int, default=10, help="turn mosaic off for the last N epochs")
     t.add_argument("--freeze", type=int, default=-1, help="freeze layers 0..N (10 = backbone)")
     t.add_argument("--cold", action="store_true")
     t.add_argument("--max-steps", type=int, default=0, help="cut epochs short (smoke test)")
