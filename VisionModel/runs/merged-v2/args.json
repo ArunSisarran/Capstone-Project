@@ -1,0 +1,22 @@
+{
+  "weights": "weights/yolo11s.pt",
+  "cmd": "train",
+  "data": "datasets/merged-v2/data.yaml",
+  "out": "runs/merged-v2",
+  "epochs": 50,
+  "batch": 32,
+  "nbs": 64,
+  "imgsz": 640,
+  "workers": 8,
+  "device": "cuda",
+  "optimizer": "adamw",
+  "lr0": 0.001,
+  "lrf": 0.01,
+  "weight_decay": 0.0005,
+  "warmup_bias_lr": null,
+  "mosaic": 1.0,
+  "close_mosaic": 10,
+  "freeze": -1,
+  "cold": false,
+  "max_steps": 0
+}
