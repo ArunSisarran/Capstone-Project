@@ -2,11 +2,11 @@ from datetime import datetime
 import uuid
 from typing import Optional, List
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 class UserCreate(BaseModel):
   email: EmailStr
-  password: str
+  password: str = Field(min_length=12)
 
 class UserOut(BaseModel):
     id: uuid.UUID
@@ -87,4 +87,16 @@ class IngredientCreate(BaseModel):
 
 class DietaryTagCreate(BaseModel):
    name: str            
-              
+
+class UserUpdate(BaseModel):
+   email: Optional[EmailStr] = None
+
+class PasswordChange(BaseModel): 
+   current_password: str
+   new_password: str = Field(min_length=12)
+
+class RecipeMatchOut(RecipeOut):
+   matched_count: int = 0
+   match_score: float = 0.0
+   total_ingredients: int = 0
+   missing_ingredients: List[IngredientOut] = []
