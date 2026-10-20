@@ -1,0 +1,23 @@
+group,aliases,vegetarian,vegan,dairy_free,notes
+water,water;boiling water;cold water;warm water;ice;ice cubes,yes,yes,yes,
+black pepper,pepper;black pepper;ground black pepper;white pepper;peppercorns;black peppercorns;freshly ground black pepper,yes,yes,yes,plain 'pepper' means black pepper in recipes
+spices,cinnamon;ground cinnamon;cumin;ground cumin;cumin seeds;paprika;smoked paprika;chili powder;chilli powder;chili flakes;chilli flakes;red pepper flakes;cayenne pepper;cayenne;nutmeg;cloves;ground cloves;cardamom;coriander seeds;ground coriander;garam masala;curry powder;allspice;mixed spice;mustard seeds;fennel seeds;saffron;garlic powder;onion powder;ground ginger;celery salt;star anise;five spice;za'atar,yes,yes,yes,
+dried herbs,dried herbs;mixed herbs;dried oregano;dried thyme;dried basil;dried rosemary;dried parsley;italian seasoning;herbes de provence;bouquet garni,yes,yes,yes,
+vinegar,vinegar;white vinegar;white wine vinegar;red wine vinegar;balsamic vinegar;apple cider vinegar;cider vinegar;rice vinegar;malt vinegar,yes,yes,yes,
+raising agents,baking powder;baking soda;bicarbonate of soda;bicarb;yeast;dried yeast;instant yeast;cream of tartar,yes,yes,yes,
+thickeners,cornflour;cornstarch;corn starch;arrowroot;potato starch,yes,yes,yes,
+vanilla,vanilla;vanilla extract;vanilla essence;vanilla pod;vanilla bean,yes,yes,yes,
+cocoa,cocoa;cocoa powder;unsweetened cocoa,yes,yes,yes,
+mustard,mustard;dijon mustard;english mustard;wholegrain mustard;mustard powder,yes,yes,yes,
+ketchup,ketchup;tomato ketchup,yes,yes,yes,
+soy sauce,soy sauce;light soy sauce;dark soy sauce;tamari;soya sauce,yes,yes,yes,
+mayonnaise,mayonnaise;mayo,yes,no,yes,contains egg
+vegetable stock,vegetable stock;vegetable broth;vegetable stock cube;veg stock;vegetable bouillon,yes,yes,yes,
+stock (unspecified),stock;stock cube;stock cubes;bouillon;bouillon cube;broth;stock powder,unsure,unsure,unsure,could be meat-based
+meat stock,chicken stock;chicken broth;chicken stock cube;beef stock;beef broth;beef stock cube;lamb stock;fish stock;fish stock cube,no,no,yes,
+worcestershire sauce,worcestershire sauce;worcester sauce,no,no,yes,contains anchovies
+fish sauce,fish sauce;oyster sauce;shrimp paste,no,no,yes,
+wine and beer,wine;red wine;white wine;beer;lager;cider;stout;sherry;marsala;port,unsure,unsure,yes,fining agents may be animal-derived
+spirits,brandy;rum;whisky;whiskey;vodka;gin;cognac;amaretto,yes,yes,yes,
+gelatine,gelatine;gelatin;gelatine leaves,no,no,yes,
+animal fat,lard;suet;dripping;beef dripping;duck fat;goose fat,no,no,yes,

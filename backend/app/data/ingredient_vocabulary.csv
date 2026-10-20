@@ -1,0 +1,87 @@
+canonical,aliases,vegetarian,vegan,dairy_free,ignore_for_matching,notes
+Apple,apple;apples;green apple;red apple,yes,yes,yes,,
+Banana,banana;bananas,yes,yes,yes,,
+Orange,orange;oranges;mandarin;mandarins;clementine;clementines;tangerine;satsuma,yes,yes,yes,,
+Lemon,lemon;lemons;lemon juice;lemon zest,yes,yes,yes,,
+Lime,lime;limes;lime juice;lime zest,yes,yes,yes,,CSV maps 'kumquat' to Lime for the model; not aliased here
+Berries,berries;strawberry;strawberries;blueberry;blueberries;raspberry;raspberries;blackberry;blackberries;cranberry;cranberries;gooseberry;gooseberries;mulberry,yes,yes,yes,,
+Grape,grape;grapes;red grapes;green grapes,yes,yes,yes,,
+Cherry,cherry;cherries,yes,yes,yes,,
+Peach,peach;peaches;apricot;apricots;nectarine;nectarines,yes,yes,yes,,CSV maps apricot to Peach
+Pear,pear;pears,yes,yes,yes,,
+Plum,plum;plums;prune;prunes,yes,yes,yes,,CSV maps prune to Plum
+Pineapple,pineapple,yes,yes,yes,,
+Mango,mango;mangoes;mangos,yes,yes,yes,,
+Kiwi,kiwi;kiwi fruit;kiwifruit,yes,yes,yes,,
+Melon,melon;watermelon;cantaloupe;cantaloup;honeydew,yes,yes,yes,,
+Avocado,avocado;avocados,yes,yes,yes,,
+Fig,fig;figs,yes,yes,yes,,
+Date,date;dates;medjool dates,yes,yes,yes,,
+Persimmon,persimmon;persimmons,yes,yes,yes,,
+Papaya,papaya,yes,yes,yes,,new in your CSV copy
+Guava,guava,yes,yes,yes,,new in your CSV copy
+Dragon Fruit,dragon fruit;pitaya,yes,yes,yes,,new in your CSV copy
+Custard Apple,custard apple;annona;sugar apple,yes,yes,yes,,new in your CSV copy
+Palm Fruit,palm fruit,yes,yes,yes,,new in your CSV copy
+Coconut,coconut;coconut milk;coconut cream;desiccated coconut;shredded coconut;coconut flakes,yes,yes,yes,,"coconut milk must land here, never in Milk"
+Olive,olive;olives;black olives;green olives;kalamata olives,yes,yes,yes,,
+Tomato,tomato;tomatoes;cherry tomato;cherry tomatoes;plum tomato;plum tomatoes;vine tomatoes;chopped tomatoes;canned tomatoes;tinned tomatoes,yes,yes,yes,,
+Onion,onion;onions;red onion;white onion;yellow onion;brown onion;shallot;shallots,yes,yes,yes,,CSV maps shallot to Onion
+Spring Onion,spring onion;spring onions;scallion;scallions;green onion;green onions;leek;leeks,yes,yes,yes,,CSV maps leek to Spring Onion
+Garlic,garlic;garlic clove;garlic cloves;cloves garlic,yes,yes,yes,,"'cloves' alone is the spice, not garlic"
+Ginger,ginger;fresh ginger;root ginger;ginger root,yes,yes,yes,,ground ginger is a staple (spice)
+Carrot,carrot;carrots,yes,yes,yes,,
+Potato,potato;potatoes;new potatoes;baking potato;baby potatoes;waxy potatoes,yes,yes,yes,,
+Sweet Potato,sweet potato;sweet potatoes;yam,yes,yes,yes,,
+Cabbage,cabbage;red cabbage;white cabbage;savoy cabbage;brussels sprouts;brussels sprout,yes,yes,yes,,CSV maps brussels sprouts to Cabbage
+Broccoli,broccoli;broccolini;tenderstem broccoli,yes,yes,yes,,
+Cauliflower,cauliflower,yes,yes,yes,,
+Spinach,spinach;baby spinach,yes,yes,yes,,
+Lettuce,lettuce;iceberg lettuce;romaine lettuce;cos lettuce;little gem;salad leaves,yes,yes,yes,,
+Cucumber,cucumber;cucumbers,yes,yes,yes,,
+Zucchini,zucchini;courgette;courgettes,yes,yes,yes,,
+Eggplant,eggplant;aubergine;aubergines,yes,yes,yes,,not Egg
+Bell Pepper,bell pepper;bell peppers;red pepper;green pepper;yellow pepper;red bell pepper;green bell pepper;yellow bell pepper;orange pepper;sweet pepper;capsicum;peppers,yes,yes,yes,,plain 'pepper' is NOT here (black pepper staple). CSV's 'pepper' -> Bell Pepper is a model-label quirk
+Chili,chili;chilli;chile;chilies;chillies;chili pepper;chilli pepper;red chilli;green chilli;red chili;green chili;jalapeno;jalapeño;birds eye chilli;habanero,yes,yes,yes,,chili powder / flakes / cayenne are staples (spices)
+Mushroom,mushroom;mushrooms;button mushrooms;chestnut mushrooms;cremini mushrooms;portobello mushrooms;shiitake mushrooms;white mushrooms,yes,yes,yes,,
+Corn,corn;sweetcorn;sweet corn;maize;corn on the cob;corn kernels,yes,yes,yes,,cornflour / cornstarch are staples
+Peas,pea;peas;green peas;frozen peas;petits pois,yes,yes,yes,,
+Green Beans,green beans;green bean;french beans;string beans;runner beans,yes,yes,yes,,
+Beans,beans;kidney beans;black beans;white beans;cannellini beans;butter beans;haricot beans;borlotti beans;chickpeas;chickpea;garbanzo beans;lentils;red lentils;green lentils,yes,yes,yes,,lentils are a judgment call (legume group); remove if you'd rather reject them
+Asparagus,asparagus,yes,yes,yes,,
+Celery,celery;celery stalks;celery sticks;celery stick,yes,yes,yes,,celery salt / seed are staples
+Radish,radish;radishes;daikon,yes,yes,yes,,
+Beet,beet;beets;beetroot;beetroots,yes,yes,yes,,
+Turnip,turnip;turnips,yes,yes,yes,,
+Squash,squash;pumpkin;butternut squash;butternut;acorn squash;gourd,yes,yes,yes,,
+Okra,okra,yes,yes,yes,,
+Artichoke,artichoke;artichokes;artichoke hearts,yes,yes,yes,,
+Pickle,pickle;pickles;gherkin;gherkins;cornichons,yes,yes,yes,,
+Herbs,herbs;fresh herbs;parsley;coriander;cilantro;basil;mint;thyme;rosemary;sage;oregano;dill;bay leaf;bay leaves;chives;tarragon,yes,yes,yes,,"dried versions ('dried oregano', 'mixed herbs') are staples"
+Turmeric,turmeric;ground turmeric;turmeric powder,yes,yes,yes,,
+Chicken,chicken;chicken breast;chicken breasts;chicken thigh;chicken thighs;chicken legs;chicken drumsticks;chicken wings;whole chicken;chicken fillets,no,no,yes,,chicken stock / broth are NOT here (see staples)
+Meat,meat;beef;ground beef;minced beef;beef mince;mince;minced meat;steak;beef steak;pork;pork chops;pork mince;minced pork;lamb;lamb chops;minced lamb;mutton;veal;venison;red meat;stewing beef;diced beef,no,no,yes,,"turkey/duck are NOT aliased: out of vocabulary, recipe rejected"
+Ham,ham;gammon;prosciutto,no,no,yes,,
+Bacon,bacon;streaky bacon;back bacon;bacon rashers;pancetta,no,no,yes,,
+Sausage,sausage;sausages;pork sausages;chorizo;salami;pepperoni;hot dog;frankfurters,no,no,yes,,CSV maps salami to Sausage
+Fish,fish;white fish;salmon;cod;haddock;tuna;tilapia;sardines;anchovy;anchovies;mackerel;trout;fish fillets,no,no,yes,,"other shellfish (crab, mussels...) not aliased: recipe rejected"
+Shrimp,shrimp;shrimps;prawn;prawns;king prawns;tiger prawns,no,no,yes,,
+Tofu,tofu;bean curd;firm tofu;silken tofu,yes,yes,yes,,
+Egg,egg;eggs;egg yolk;egg yolks;egg white;egg whites;large eggs;free-range eggs,yes,no,yes,,eggplant is not an egg
+Milk,milk;whole milk;semi-skimmed milk;skimmed milk;skim milk;full-fat milk;buttermilk,yes,no,no,,"plant milks (soy, almond, oat) NOT aliased: recipe rejected unless you add a class"
+Cheese,cheese;cheddar;mozzarella;parmesan;feta;goat cheese;goats cheese;cream cheese;ricotta;halloumi;labneh;paneer;gruyere;brie;mascarpone;cottage cheese;grated cheese,yes,no,no,,DECISION: counts as vegetarian though some (parmesan) use animal rennet
+Yogurt,yogurt;yoghurt;greek yogurt;greek yoghurt;natural yogurt;plain yogurt,yes,no,no,,
+Butter,butter;unsalted butter;salted butter;ghee,yes,no,no,,peanut butter is Nuts; butternut is Squash
+Cream,cream;heavy cream;double cream;single cream;whipping cream;sour cream;soured cream;creme fraiche;crème fraîche,yes,no,no,,coconut cream is Coconut; ice cream not aliased
+Rice,rice;white rice;brown rice;basmati rice;jasmine rice;long grain rice;arborio rice;risotto rice;cooked rice,yes,yes,yes,,
+Pasta,pasta;spaghetti;penne;fusilli;linguine;macaroni;tagliatelle;farfalle;rigatoni;lasagne sheets;lasagna sheets;orzo,yes,unsure,yes,,"egg pasta exists, so vegan is unsure"
+Bread,bread;white bread;wholemeal bread;sourdough;baguette;ciabatta;pitta;pita;pita bread;naan;bread rolls;breadcrumbs;tortilla;tortillas;wraps,yes,unsure,unsure,,bread may contain milk/egg/honey
+Flour,flour;plain flour;all-purpose flour;self-raising flour;self rising flour;wheat flour;bread flour;strong flour;whole wheat flour,yes,yes,yes,,
+Sugar,sugar;caster sugar;granulated sugar;brown sugar;icing sugar;powdered sugar;white sugar;demerara sugar,yes,yes,yes,,DECISION: bone-char refining ignored for vegan
+Honey,honey;runny honey,yes,no,yes,,
+Salt,salt;sea salt;table salt;kosher salt;flaky salt,yes,yes,yes,yes,SUGGEST: ignore for matching (nearly every recipe has it)
+Oil,oil;olive oil;extra virgin olive oil;vegetable oil;sunflower oil;canola oil;rapeseed oil;cooking oil;sesame oil;peanut oil,yes,yes,yes,yes,SUGGEST: ignore for matching
+Chocolate,chocolate;dark chocolate;milk chocolate;white chocolate;chocolate chips;chocolate chunks,yes,unsure,unsure,,milk/white chocolate contains dairy
+Nuts,nuts;almonds;ground almonds;walnuts;cashews;cashew nuts;pecans;hazelnuts;pistachios;peanuts;pine nuts;pine kernels;peanut butter;mixed nuts;chopped nuts,yes,yes,yes,,"peanut butter lives here, not under Butter"
+Sauce,tomato paste;tomato puree;tomato purée;tomato sauce;passata,yes,yes,yes,,tomato-based only. CSV maps tomato paste to Sauce
+Sauce,sauce;pasta sauce;pizza sauce;bbq sauce;barbecue sauce;hot sauce;sweet chilli sauce;sweet chili sauce,unsure,unsure,unsure,,"generic sauce could hide fish, dairy or meat, so it blocks every tag"
