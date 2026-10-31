@@ -1,15 +1,12 @@
-import React from 'react';
-import {useState} from 'react'
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import '../pages/HomePage.css'
+import '../css/HomePage.css'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import AddIcon from '@mui/icons-material/Add';
 
 function HomePage(){
 
     const [preview, setPreview] = useState(null);
-
-    
 
     //create a local url for preview
     const handleFileChange = (e) =>{
@@ -21,6 +18,11 @@ function HomePage(){
     };
 
     const navigate = useNavigate();
+
+    const handleResult = () =>{
+        navigate("/result")
+        };
+
     return(
    
         <div className="homepage">
@@ -83,7 +85,7 @@ function HomePage(){
 
             {/*submit*/} 
             <div className="submit-button">
-                <button className="button-icon" onClick={()=>navigate("/result")}>Generate Recipe</button>
+                <button className="button-icon" onClick={handleResult}>Generate Recipe</button>
             </div>
 
 

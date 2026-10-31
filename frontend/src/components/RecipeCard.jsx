@@ -1,59 +1,95 @@
-import React from 'react'
-import {useState} from 'react'
-import { useNavigate } from "react-router-dom";
+import React, {useState}from 'react'
+import {Link, useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Link} from 'react-router-dom'
 import Divider from '@mui/material/Divider';
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+import FavoriteButton from './FavoriteButton'
+import SavedForLaterButton from './SavedForLaterButton'
 
-function RecipeCard({recipe}){
+function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforlater,setSavedForLater}){
     const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
+    
+   //const  isFavorite = favorites.some((f) => f.id === recipe.id);
+   //const isSaved = savedforlater.some((s) => s.id === recipe.id);
+
+
     const navigate = useNavigate();
 
-    //local storage
-    const handleView = () =>{
-    
-    const history = JSON.parse(localStorage.getItem("clickHistory") || "[]");
-
-    const addNewHistory = [
-        history.filter(item => item.id !== recipe.id)
-    ];
-    
-    localStorage.setItem("clickHistory", JSON.stringify(addNewHistory));
-
-    console.log("History id:", recipe.id);
-    navigate(`/result/${recipe.id}`);
-
-
-    };
-
-    const handleFavorite = () =>{
-    const favorites = JSON.parse(localStorage.getItem("clickFavorite") || "[]");
-
-    const addNewFavorite =[
-        {
-            id:recipe.id,
-            title:recipe.title,
-        },
-    ...favorites.filter(item => item.id !== recipe.id),
-    ]
-
-    localStorage.setItem("clickFavorite", JSON.stringify(addNewFavorite));
-
-    console.log("Favorite id:", recipe.id);
+            const newHistory = {
+                id:recipe.id,
+                title:recipe.title,
+                viewedAt:new Date(). toISOString(),
+            };
+    //local storage for adding on history
+    const handleView = () => {
+        history = JSON.parse(localStorage.getItem("clickHistory") || "[]");
         
+        //add a new history on the top
+        const addNewHistory = [
+            newHistory,
+            ...history.filter(item => item.id !== recipe.id)
+        ].slice(0,10);
+
+        //store on localstorage
+        localStorage.setItem("clickHistory", JSON.stringify(addNewHistory));
+
+
+        console.log("History id:",recipe.id);
+        navigate(`/result/${recipe.id}`);
     };
 
+   /*         const newFavorites = {
+                id:recipe.id,
+                title:recipe.title,
+                viewedAt:new Date(). toISOString(),
+            };
+    const handleFavorites = () =>{
+         favorites = JSON.parse(localStorage.getItem("clickFavorites") || "[]");
 
+         const checked = favorites.some((item) => item.id === recipe.id);
+
+        const addNewFavorites = checked
+            ? favorites.filter((item) => item.id != recipe.id)
+        
+        :[
+            newFavorites,
+            ...favorites
+        ];
+        localStorage.setItem("clickFavorites", JSON.stringify(addNewFavorites));
+
+        //console.log("Favorite id:", addNewFavorites);
+
+        setFavorites(addNewFavorites)
+    };*/
+
+    /*
+                const newSaved = {
+                id:recipe.id,
+                title:recipe.title,
+                viewedAt:new Date(). toISOString(),
+            };
+    const handleSaved = () =>{
+         savedforlater = JSON.parse(localStorage.getItem("clickSaved") || "[]");
+
+        const seen = savedforlater.some((item) => item.id === recipe.id);
+
+        const addNewSaved = seen
+            ? savedforlater.filter(item => item.id !== recipe.id)
+        :[
+            newSaved,
+            ...savedforlater
+        ];
+        localStorage.setItem("clickSaved", JSON.stringify(addNewSaved));
+
+        //console.log("later id:", addNewSaved);
+        setSavedForLater(addNewSaved);
+    };*/
+
+    
 
     return (
         <Card sx={{ width:"100%", 
@@ -77,29 +113,28 @@ function RecipeCard({recipe}){
                 <Divider sx={{backgroundColor:"black"}} />
 
                 <Typography component="div" variant="body2" sx={{ color: "rgb(89,45,59)", mt:1, ml:2 }}>
-                Cooking Time: {recipe.time}
+                Cooking Time: {recipe.prep_time_minutes}
                 <br></br>
                 Cuisine: {recipe.cuisine}
                 <br></br>
-                Dietary-tag: {recipe.dietaryTag}
+                Dietary-tag: {recipe.dietary_tags.map((dietaryTag)=>(
+                   <div key={dietaryTag.id}> {dietaryTag.name} </div>
+                ))}
                 <br></br>
                 Ingredients:
                 <ul style={{marginLeft:"20px"}}>
                     {recipe.ingredients.map((ingredient)=>(
-                        <li key={ingredient}>{ingredient}</li>
+                        <li key={ingredient.id}>{ingredient.name}</li>
                     ))}
                 </ul>
                 </Typography>
             </CardContent>
 
             <CardActions>
+                {/*FAVORITE AND SAVED FOR LATER LIST ICONS */}
+                    <FavoriteButton recipe={recipe} favorites={favorites} setFavorites={setFavorites} />
+                    <SavedForLaterButton recipe={recipe} savedforlater={savedforlater} setSavedForLater={setSavedForLater} />
 
-                <Checkbox {...label} icon={<FavoriteBorder sx={{color:"rgb(89,45,59)", '&:hover':{color:"rgb(89,45,59)"}}}/>} checkedIcon={<Favorite />} onClick={handleFavorite} />
-                <Checkbox
-                {...label}
-                icon={<BookmarkBorderIcon sx={{color:"rgb(89,45,59)"}} />}
-                checkedIcon={<BookmarkIcon xs={{color:"rgb(89,45,59)"}}/>}
-                />
 
                 <Button 
                     size="small" 

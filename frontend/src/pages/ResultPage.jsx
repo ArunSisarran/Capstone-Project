@@ -1,17 +1,18 @@
-import React from 'react'
-import {useState} from 'react'
+import React, {useState,useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 import {mockData} from '../mock/mockdata.js'
 import Grid from '@mui/material/Grid';
 import RecipeCard from '../components/RecipeCard'
-import '../pages/ResultPage.css'
+import '../css/ResultPage.css'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
 
-function ResultPage() {
+function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,setSavedForLater,result,setResult}) {
     {/*Set Up Filters */}
     const [keyword, setKeyword] = useState("");
     const [allergyFood, setAllergyFood] = useState("none");
@@ -22,7 +23,7 @@ function ResultPage() {
 
     const [cuisinePreference, setCuisinePreference] = useState("none");
     
-    const recipes = mockData.recommendations;
+   // const recipes = mockData.recommendations;
 
     const handleKeywordChange = (e) => setKeyword(e.target.value);
     const handleAllergyChange = (e) => setAllergyFood(e.target.value);
@@ -33,32 +34,32 @@ function ResultPage() {
 
     const handleCuisinePreference = (e) => setCuisinePreference(e.target.value);
 
-    const filteredControl = recipes.filter((recipe) => 
-         recipe.dietaryTag.toLowerCase().includes(dietaryTag.toLowerCase())
+ //   const filteredControl = recipes.filter((recipe) => 
+  //       recipe.dietaryTag.toLowerCase().includes(dietaryTag.toLowerCase())
 
         
-    );
+    //);
 
         const handleClick = () => {
         console.info('You clicked the Chip.');
     };
 
+    const ingredientsTag = mockData.ingredientData.detectedTags;
+
+
+    useEffect(()=>{
+        fetch("http://127.0.0.1:8000/recipes?skip=0&limit=20")
+        .then((res)=>res.json())
+        .then((json) => {
+            setResult(json);
+        });
+    },[result])
 
     return(
         <>
         <div className="result">
             <div className="header">
                  Recipe Recommendation Generating...
-            </div>
-            <div className="ingredients-tags">
-                <p>Ingredients Tags:</p>
-                <Stack direction="row" spacing={1}>
-                <Chip label="#Letture" variant="outlined" onChange={handleAllergyChange} />
-                <Chip label="#Chicken" variant="outlined" onClick={handleClick} />
-                <Chip label="#Ham" variant="outlined" onClick={handleClick} />
-                <Chip label="#Egg" variant="outlined" onClick={handleClick} />
-                <Chip label="#Onion" variant="outlined" onClick={handleClick} />
-                </Stack>
             </div>
 
             <div className="result-section">            
@@ -67,7 +68,7 @@ function ResultPage() {
                         <div className="allergy-category"> Allergy:
                             <FormGroup>
                             <FormControlLabel control={<Checkbox defaultChecked sx={{minHeight:0,height:'10px' }} />} label="none" />
-                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="Egg" />
+                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label= "Egg"/>
                             <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="Milk" />
                             <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="Peanut" />
                             <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px'}}/>} label="Soy" />
@@ -110,11 +111,40 @@ function ResultPage() {
                 </div>
 
                 {/*Card-Section*/}
-                <div className="card">     
+                <div className="card">  
+                
+                 <div className="ingredients-tags">
+                
+                <p>Ingredients Tags:  </p>
+                <Stack direction="row" spacing={1}>
+                {ingredientsTag.map((ingredient) => (
+                <Chip 
+                    label={ingredient.ingredient} 
+                    key ={ingredient.id} 
+                    variant="outlined" 
+                    onClick={handleClick} 
+
+                    sx = {{color:'rgb(89,54,45)', border: '1px solid rgb(89,54,45)'}}
+                
+                />
+                        ))}
+                </Stack>
+            </div>   
+
+            <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />
+
                     <Grid container spacing = {3} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
-                        {filteredControl.map((recipe) => (
+                        {result.map((recipe) => (
                             <Grid recipe size={4} key={recipe.id}>
-                                <RecipeCard recipe={recipe} />
+                                <RecipeCard 
+                                    recipe={recipe} 
+                                    history = {history}
+                                    setHistory = {setHistory}
+                                    favorites = {favorites} 
+                                    setFavorites = {setFavorites}
+                                    savedforlater = {savedforlater}
+                                    setSavedForLater = {setSavedForLater}
+                                />
                             </Grid>
                         ))}
                     </Grid>

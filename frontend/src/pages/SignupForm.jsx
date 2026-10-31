@@ -4,26 +4,29 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import {Link, useNavigate} from 'react-router-dom'
-import '../pages/Login-SignupForm.css'
+import '../css/Login-SignupForm.css'
+import {useForm, Form} from 'react-hook-form'
 
 function Signup(){
-    const [form, setForm] = useState({
-        username:"",
-        email:"",
-        password:"",
-    });
+    const {register, handleSubmit,formState: {errors},}
+     = useForm()
 
-    const handleFormChange = (e) =>{
-        setForm({...form, [e.target.name]:e.target.value});
-    }
+    const onSubmit = async(registerData) => {
+        const response = await fetch (
+            "http://127.0.0.1:8000/auth/signup",
+            {
+            method : "POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body: JSON.stringify(registerData),
+        });
 
-    const navigate = useNavigate();
+    const data = await response.json();
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        
-    }
-
+    console.log("Status:", response.status);
+    console.log(data);
+    };
 
     return(
         <>
@@ -32,44 +35,44 @@ function Signup(){
 
                 <h1>Sign Up</h1>
 
-                <form action ="">
-
-                    <div className="inputs">
-                        <input 
-                            type = "text" 
-                            placeholder="Username" 
-                            value = {form.username}
-                            onChange={handleFormChange}
-                            required
-                        />
-                        <PersonIcon className="icons" />
-                    </div>
+                <form 
+                    onSubmit={handleSubmit(onSubmit)}
+                    
+                    
+                >
 
                     <div className="inputs">
                         <input 
                             type = "email" 
-                            placeholder="Email Address"
-                            value = {form.email}
-                            onChange={handleFormChange}
-                            required
+                            placeholder="you@example.com"
+                            {...register("email",{
+                            required:"Email is required",
+                            pattern:{value:/^\S+@\S+\.\S+$/, message:"Invalid email!Please re-enter!"},
+                            })}
                         />
                         <EmailIcon className="icons" />
+
+                        <p>{errors.email?.message}</p>
                     </div>
 
                     <div className="inputs">
                         <input 
                             type = "password" 
-                            placeholder="Password"
-                            value = {form.password}
-                            onChange={handleFormChange}                           
-                            required
+                            placeholder="Password"                          
+                            {...register("password",{
+                                required:"Password is required",
+                                minLength:{value: 8, message:"Must be 8 characters"},
+                                pattern:{message:"Invalid password. Please re-enter"},
+                            })}
                         />
                         <LockIcon className="icons" />
+                        <p>{errors.password?.message}</p>
                     </div>
+                    
 
 
                     <div className="submit-container">
-                        <button className="submit">Sign Up</button>
+                        <button type ="submit" className="submit">Sign Up</button>
                     </div>
 
                     <div className="login-register">

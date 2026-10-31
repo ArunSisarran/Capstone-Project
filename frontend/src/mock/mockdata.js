@@ -1,12 +1,12 @@
 export const mockData ={
-IngredientData:{
+ingredientData:{
     uploadedImageUrl:"https://www.nashifood.com/wp-content/uploads/2023/07/ham-eggs-scramble-ingredients.jpg",
     detectedTags:[
-        {id:"1", ingredient:"butter"},
-        {id:"2", ingredient:"milk"},
-        {id:"3", ingredient:"eggs"},
-        {id:"4", ingredient:"cooked ham"},
-        {id:"5", ingredient:"eggs"},
+        {id:1, ingredient:"butter"},
+        {id:2, ingredient:"milk"},
+        {id:3, ingredient:"eggs"},
+        {id:4, ingredient:"cooked ham"},
+        {id:5, ingredient:"eggs"},
     ]
 },
 

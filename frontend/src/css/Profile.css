@@ -1,0 +1,56 @@
+.profile-page{
+    display: flex;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    min-height: 100vh;
+}
+
+.profile-page h1{
+    color: rgb(89,54,45);
+}
+
+.history,
+.favorites,
+.SavedForLater {
+    margin-left: auto;
+    padding: 5%;
+}
+
+
+
+.user-profile{
+    padding: 5%;
+}
+
+.profile-pic{
+    display: flex;
+    justify-self: center;
+
+}
+
+#portrait-upload {
+    display: none;
+}
+
+
+
+.link{
+    color: rgb(89,54,45);
+}
+
+
+.history-info{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        gap:10px;
+        width: 100%;
+}
+.history-info span{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        gap:10px;
+        padding:1;
+}
+

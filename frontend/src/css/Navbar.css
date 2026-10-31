@@ -8,7 +8,11 @@
 }
 
 .cook-icon{
-    color: brown;
+    color: rgb(89,54,45);
+}
+
+.cook-icon:hover{
+    color: white;
 }
 
 .logo-icon{
@@ -18,9 +22,16 @@
 }
 
 .links{
-    color: brown;
+    color: rgb(89,54,45);
     text-decoration: none;
     font-size: larger;
+}
+
+.links span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .links:hover{

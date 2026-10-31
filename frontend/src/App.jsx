@@ -10,18 +10,56 @@ import Profile from './pages/Profile'
 import Navbar from './components/Navbar'
 
 function App() {
+  ///Uses Prop; Profile Page and ResultCard both needs store state
+  const [history, setHistory] = useState([]);
+  const [favorites,setFavorites] = useState([]);
+  const [savedforlater, setSavedForLater] = useState([]);
+
+  const [token,setToken] = useState(null);
+
+  const [result,setResult] = useState([]);
+  const [dataIsLoaded,setDataIsLoaded] = useState(false);
+
   return(
     <>
     <BrowserRouter>
-      <Navbar />
+      <Navbar 
+        token={token}
+      />
 
       <Routes>
           <Route path="/" element = {<HomePage />} />
-          <Route path="/result" element = {<ResultPage />} />
-          <Route path="/result/:id" element={<ResultDetailsPage />} />
-          <Route path="/login" element = {<Login />} />
+
+          <Route path="/result" 
+                 element = {<ResultPage
+                            history={history}
+                            setHistory={setHistory} 
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                            savedforlater = {savedforlater}
+                            setSavedForLater = {setSavedForLater}
+                            result = {result}
+                            setResult = {setResult}
+                            />} 
+                
+          />
+
+          <Route path="/result/:id" element={<ResultDetailsPage result = {result}/>} />
+
+          <Route path="/login" element = {<Login token={token} setToken={setToken}/>} />
+
           <Route path="/signup" element = {<Signup />} />
-          <Route path="/profile" element = {<Profile />} />                                       
+
+          <Route path="/profile" 
+                 element = {<Profile
+                            history={history} 
+                            setHistory={setHistory}
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                            savedforlater = {savedforlater}
+                            setSavedForLater = {setSavedForLater}
+                            />} 
+            />                                       
       </Routes>
     </BrowserRouter>
     </>

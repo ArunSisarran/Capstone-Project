@@ -1,31 +1,37 @@
-import React from 'react'
-import {useState} from 'react'
+import React,  {useState} from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
-import '../pages/Login-SignupForm.css'
+import '../css/Login-SignupForm.css'
 import '../components/Navbar'
-import {Link} from 'react-router-dom'
-import {useNavigate} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom'
+import {useForm} from 'react-hook-form'
 
-function Login(){
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+function Login({token,setToken}){
 
-    const handleEmailChange = (e) => setEmail(e.target.value);
-    const handlePasswordChange = (e) => setPassword(e.target.value);
+    const {register, handleSubmit,formState: {errors},}
+     = useForm()
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        if(!email.trim() || !password){
-            alert("please enter your email and password");
-            return;
-        }
+    //calling api from frontend for login
+    const onSubmit = async(loginData) => {
+        const response = await fetch (
+            "http://127.0.0.1:8000/auth/login",
+            {
+            method : "POST",
+            headers:{
+                "Content-Type":"application/json",
+            },
+            body: JSON.stringify(loginData),
+        });
 
-        console.log(email,password);
-    }
+    const data = await response.json();
+
+    console.log(response.status);
+    console.log(Boolean(data.access_token));
+
+    setToken(data.access_token)
+    };
 
 
 
@@ -35,28 +41,33 @@ function Login(){
 
             <h1>Login</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="inputs">
                     <input 
                         type = "email" 
-                        placeholder="Email Address" 
-                        value = {email} 
-                        onChange={handleEmailChange} 
-                        required
+                        placeholder="you@example.com"
+                        {...register("email",{
+                        required:"Email is required",
+                        pattern:{value:/^\S+@\S+\.\S+$/, message:"Invalid email!Please re-enter!"},
+                        })}
                     />
                     <EmailIcon className="icons" />
+                    <p>{errors.email?.message}</p>
                 </div>
 
                 <div className="inputs">
                     <input 
                         type = "password" 
-                        placeholder="Password"
-                        value = {password}
-                        onChange={handlePasswordChange}
-                        required
+                        placeholder="Password"                          
+                        {...register("password",{
+                            required:"Password is required",
+                            minLength:{value: 8, message:"Must be 8 characters"},
+                            pattern:{message:"Invalid password.Please re-enter!"},
+                        })}
                     />
                     <LockIcon className="icons" />
+                    <p>{errors.password?.message}</p>
                 </div>
 
 
