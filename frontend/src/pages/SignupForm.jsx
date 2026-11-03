@@ -37,8 +37,6 @@ function Signup(){
 
                 <form 
                     onSubmit={handleSubmit(onSubmit)}
-                    
-                    
                 >
 
                     <div className="inputs">
@@ -67,8 +65,7 @@ function Signup(){
                         />
                         <LockIcon className="icons" />
                         <p>{errors.password?.message}</p>
-                    </div>
-                    
+                    </div>   
 
 
                     <div className="submit-container">

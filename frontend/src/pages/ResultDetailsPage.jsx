@@ -1,6 +1,5 @@
 import React from 'react'
 import {useParams} from 'react-router-dom'
-import {mockData} from '../mock/mockdata.js'
 import '../css/ResultDetailsPage.css'
 import Divider from '@mui/material/Divider';
 
@@ -43,7 +42,7 @@ function ResultDetailsPage({result}){
                     </ul>
                 </div>
                 <p>Instructions:</p>
-              {/*  <p>{recipeContent.instructions}</p>*/}
+                <p>{recipeContent.instructions}</p>
             </div> 
 
         </div>

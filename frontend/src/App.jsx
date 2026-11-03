@@ -8,17 +8,18 @@ import Signup from './pages/SignupForm'
 import Login from './pages/LoginForm'
 import Profile from './pages/Profile'
 import Navbar from './components/Navbar'
+import FavoritePage from './components/FavoritePage'
+import SavedForLaterPage from './components/SavedForLaterPage' 
 
 function App() {
-  ///Uses Prop; Profile Page and ResultCard both needs store state
+  ///Uses Prop to store states
   const [history, setHistory] = useState([]);
   const [favorites,setFavorites] = useState([]);
   const [savedforlater, setSavedForLater] = useState([]);
 
-  const [token,setToken] = useState(null);
-
   const [result,setResult] = useState([]);
-  const [dataIsLoaded,setDataIsLoaded] = useState(false);
+
+  const [token,setToken] = useState(null);
 
   return(
     <>
@@ -46,7 +47,10 @@ function App() {
 
           <Route path="/result/:id" element={<ResultDetailsPage result = {result}/>} />
 
-          <Route path="/login" element = {<Login token={token} setToken={setToken}/>} />
+          <Route path="/login" element = {<Login 
+                                            token={token} 
+                                            setToken={setToken}/
+                                          >} />
 
           <Route path="/signup" element = {<Signup />} />
 
@@ -58,8 +62,35 @@ function App() {
                             setFavorites={setFavorites}
                             savedforlater = {savedforlater}
                             setSavedForLater = {setSavedForLater}
+                            token = {token}
+                            setToken = {setToken}
                             />} 
-            />                                       
+            />     
+
+          <Route path = "/favorite"
+                 element = {<FavoritePage 
+                            history={history} 
+                            setHistory={setHistory}
+                            favorites = {favorites} 
+                            setFavorites = {setFavorites} 
+                            savedforlater = {savedforlater} 
+                            setSavedForLater = {setSavedForLater}
+                            token={token} 
+                            setToken={setToken}
+                            />} 
+            />
+
+            <Route path = "/savedforlater" 
+                  element ={<SavedForLaterPage 
+                            favorites = {favorites} 
+                            setFavorites = {setFavorites} 
+                            savedforlater = {savedforlater} 
+                            setSavedForLater = {setSavedForLater} 
+                            token={token} 
+                            setToken={setToken}
+                            />}  
+              />
+
       </Routes>
     </BrowserRouter>
     </>

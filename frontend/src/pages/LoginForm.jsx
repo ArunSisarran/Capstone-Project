@@ -25,12 +25,12 @@ function Login({token,setToken}){
             body: JSON.stringify(loginData),
         });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    console.log(response.status);
-    console.log(Boolean(data.access_token));
+        console.log(response.status);
+        console.log(Boolean(data.access_token));
 
-    setToken(data.access_token)
+        setToken(data.access_token)
     };
 
 
@@ -71,9 +71,9 @@ function Login({token,setToken}){
                 </div>
 
 
-                <div className="remember">
+            {/*   <div className="remember">
                     <label><input type="checkbox" />Remember me</label>
-                </div>
+                </div>? */}
 
                 <div className="submit-container">
                     <button type="submit">Login</button>

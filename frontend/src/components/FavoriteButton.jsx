@@ -6,13 +6,16 @@ import Favorite from '@mui/icons-material/Favorite';
 function FavoriteButton({recipe,favorites,setFavorites}){
     const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
 
+        //use for checkedbox
        const  isFavorite = favorites.some((favorite) => favorite.id === recipe.id);
-                const newFavorites = {
-                id:recipe.id,
-                title:recipe.title,
-                viewedAt:new Date(). toISOString(),
-            };
-    const handleFavorites = () =>{
+       
+        const newFavorites = {
+            id:recipe.id,
+            title:recipe.title,
+            cookingTime:recipe.prep_time_minutes,
+            viewedAt:new Date(). toISOString(),
+        };
+        const handleFavorites = () =>{
          favorites = JSON.parse(localStorage.getItem("clickFavorites") || "[]");
 
          const checked = favorites.some((item) => item.id === recipe.id);
@@ -20,10 +23,10 @@ function FavoriteButton({recipe,favorites,setFavorites}){
         const addNewFavorites = checked
             ? favorites.filter((item) => item.id != recipe.id)
         
-        :[
+            :[
             newFavorites,
             ...favorites
-        ];
+            ];
         localStorage.setItem("clickFavorites", JSON.stringify(addNewFavorites));
 
         //console.log("Favorite id:", addNewFavorites);
@@ -32,17 +35,15 @@ function FavoriteButton({recipe,favorites,setFavorites}){
     };
     return (
         <>
-                <Checkbox 
-                    {...label} 
-                    icon={<FavoriteBorder sx={{color:"rgb(89,45,59)", 
-                                                '&:hover':{color:"rgb(89,45,59)"}}}/>} 
-                    checkedIcon={<Favorite  color="error"/>}
-                    checked = {isFavorite} 
-                    onChange={handleFavorites} 
-          
-                />
-
-    </>
+            <Checkbox 
+                {...label} 
+                icon={<FavoriteBorder sx={{color:"rgb(89,45,59)", 
+                                            '&:hover':{color:"rgb(89,45,59)"}}}/>} 
+                checkedIcon={<Favorite  color="error"/>}
+                checked = {isFavorite} 
+                onChange={handleFavorites}        
+            />
+        </>
     );
 }
 

@@ -6,16 +6,11 @@ import { GiCook } from "react-icons/gi"
 function Navbar({token}){
     const navigate = useNavigate();
 
-
+    //log out
     const handleLogout = () => {
-
         localStorage.removeItem("token");
-
-        console.log("log out work!")
-
-
-        
-        navigate("/")
+        console.log("log out button work!")
+        navigate("/login")
     }
 
     return (
@@ -34,6 +29,7 @@ function Navbar({token}){
                 {token ? (
                     <>
                     <p>Hello!</p>
+                    <Link to="/profile" className="links">Profile  </Link>
                     <button onClick= {handleLogout}>Log out</button>
                     </>
                 ):(
