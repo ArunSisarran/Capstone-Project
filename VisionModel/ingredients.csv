@@ -1,0 +1,109 @@
+name,category,type,yolo_class
+Apple,Produce,Discrete,Apple
+Banana,Produce,Discrete,Banana
+Orange,Produce,Discrete,Orange
+Lemon,Produce,Discrete,Lemon
+Lime,Produce,Discrete,Lime
+Avocado,Produce,Discrete,Avocado
+Tomato,Produce,Discrete,Tomato
+Onion,Produce,Discrete,Onion
+Garlic (bulb),Produce,Discrete,Garlic
+Potato,Produce,Discrete,Potato
+Sweet Potato,Produce,Discrete,Sweet Potato
+Carrot,Produce,Discrete,Carrot
+Bell Pepper,Produce,Discrete,Bell Pepper
+Jalapeño,Produce,Discrete,Chili
+Cucumber,Produce,Discrete,Cucumber
+Zucchini,Produce,Discrete,Zucchini
+Eggplant,Produce,Discrete,Eggplant
+Broccoli (head),Produce,Discrete,Broccoli
+Cauliflower (head),Produce,Discrete,Cauliflower
+Corn (ear),Produce,Discrete,Corn
+Mushroom,Produce,Discrete,Mushroom
+Lettuce (head),Produce,Discrete,Lettuce
+Cabbage (head),Produce,Discrete,Cabbage
+Pear,Produce,Discrete,Pear
+Peach,Produce,Discrete,Peach
+Plum,Produce,Discrete,
+Kiwi,Produce,Discrete,Kiwi
+Mango,Produce,Discrete,Mango
+Celery (stalk),Produce,Discrete,Celery
+Asparagus (spear),Produce,Discrete,Asparagus
+Beet,Produce,Discrete,Beet
+Radish,Produce,Discrete,Radish
+Squash (butternut/acorn),Produce,Discrete,Squash
+Spinach (bagged/loose),Produce,Bulk,Spinach
+Kale,Produce,Bulk,
+Green Beans,Produce,Bulk,Green Beans
+Peas,Produce,Bulk,Peas
+Shredded Carrots,Produce,Bulk,
+Cherry Tomatoes,Produce,Bulk,Tomato
+Berries (strawberries/blueberries),Produce,Bulk,Berries
+Fresh Basil,Produce,Bulk,Herbs
+Fresh Cilantro/Parsley,Produce,Bulk,Herbs
+Egg,Protein,Discrete,Egg
+Chicken Breast,Protein,Discrete,Chicken
+Chicken Thigh,Protein,Discrete,Chicken
+Chicken Drumstick,Protein,Discrete,Chicken
+Sausage/Hot Dog Link,Protein,Discrete,Sausage
+Bacon Slice,Protein,Discrete,
+Shrimp,Protein,Discrete,Shrimp
+Salmon Fillet,Protein,Discrete,Fish
+Steak,Protein,Discrete,Meat
+Pork Chop,Protein,Discrete,Meat
+Ground Beef,Protein,Bulk,Meat
+Ground Turkey,Protein,Bulk,
+Tofu Block,Protein,Bulk,Tofu
+"Deli Meat (sliced, stacked)",Protein,Bulk,Ham
+Canned Tuna,Protein,Bulk,
+Canned Beans,Protein,Bulk,Beans
+Milk (carton/jug),Dairy,Discrete,Milk
+Butter (stick/block),Dairy,Discrete,Butter
+Egg Carton,Dairy,Discrete,
+Cheese Block,Dairy,Discrete,Cheese
+Shredded Cheese,Dairy,Bulk,Cheese
+Sliced Cheese,Dairy,Discrete,Cheese
+Yogurt (cup),Dairy,Discrete,Yogurt
+Sour Cream,Dairy,Bulk,Cream
+Cream Cheese,Dairy,Bulk,
+Heavy Cream,Dairy,Bulk,Cream
+Cottage Cheese,Dairy,Bulk,
+Parmesan (grated),Dairy,Bulk,Cheese
+String Cheese,Dairy,Discrete,Cheese
+Half & Half,Dairy,Bulk,Cream
+Rice,Grains / Starches,Bulk,Rice
+Pasta (dry),Grains / Starches,Bulk,Pasta
+Flour,Grains / Starches,Bulk,Flour
+Oats,Grains / Starches,Bulk,
+Bread (loaf),Grains / Starches,Bulk,Bread
+Tortillas (stack),Grains / Starches,Bulk,
+Cereal,Grains / Starches,Bulk,
+Quinoa,Grains / Starches,Bulk,
+Couscous,Grains / Starches,Bulk,
+Bread Crumbs,Grains / Starches,Bulk,
+Canned Tomatoes,Canned / Jarred / Packaged,Discrete,
+Canned Corn,Canned / Jarred / Packaged,Discrete,
+Canned Soup,Canned / Jarred / Packaged,Discrete,
+Jar of Pasta Sauce,Canned / Jarred / Packaged,Discrete,Sauce
+Jar of Salsa,Canned / Jarred / Packaged,Discrete,Sauce
+Jar of Peanut Butter,Canned / Jarred / Packaged,Discrete,
+Jar of Jam,Canned / Jarred / Packaged,Discrete,
+Ketchup Bottle,Canned / Jarred / Packaged,Discrete,Sauce
+Mustard Bottle,Canned / Jarred / Packaged,Discrete,Sauce
+Mayo Jar,Canned / Jarred / Packaged,Discrete,Sauce
+Soy Sauce,Condiments / Sauces,Bulk,Sauce
+Olive Oil,Condiments / Sauces,Bulk,
+Vegetable Oil,Condiments / Sauces,Bulk,
+Vinegar,Condiments / Sauces,Bulk,
+Hot Sauce,Condiments / Sauces,Bulk,Sauce
+BBQ Sauce,Condiments / Sauces,Bulk,Sauce
+Honey,Condiments / Sauces,Bulk,
+Maple Syrup,Condiments / Sauces,Bulk,
+Sugar,Baking / Pantry,Bulk,Sugar
+Brown Sugar,Baking / Pantry,Bulk,Sugar
+Baking Powder,Baking / Pantry,Bulk,
+Baking Soda,Baking / Pantry,Bulk,
+Salt,Baking / Pantry,Bulk,
+Black Pepper,Baking / Pantry,Bulk,
+Vanilla Extract,Baking / Pantry,Bulk,
+Chocolate Chips,Baking / Pantry,Bulk,Chocolate
