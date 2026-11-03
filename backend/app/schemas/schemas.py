@@ -2,7 +2,7 @@ from datetime import datetime
 import uuid
 from typing import Optional, List
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 class UserCreate(BaseModel):
   email: EmailStr
@@ -48,13 +48,22 @@ class RecipeCreate(BaseModel):
    dietary_tag_ids: List[int] = []
 
 class RecipeUpdate(BaseModel):
-    title: Optional[str] = None
-    instructions: Optional[str] = None
+    title: Optional[str] = Field(default=None, min_length=1)
+    instructions: Optional[str] = Field(default=None, min_length=1)
     prep_time_minutes: Optional[int] = None
     image_url: Optional[str] = None
     source_url: Optional[str] = None
     ingredient_ids: Optional[List[int]] = None
     dietary_tag_ids: Optional[List[int]] = None
+
+    @field_validator("title", "instructions", "ingredient_ids", "dietary_tag_ids")
+    @classmethod
+    def reject_explicit_null(cls, value):
+        # Leaving a field out means "keep it". Sending null would try to blank a column
+        # the database requires, which used to crash with a 500 instead of a clear 422.
+        if value is None:
+            raise ValueError("cannot be null; leave the field out to keep its current value")
+        return value
 
 
 class RecipeOut(BaseModel):
