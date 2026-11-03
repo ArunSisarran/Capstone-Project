@@ -6,17 +6,17 @@ from sqlalchemy import case, func
 
 from app.core.database import get_db
 from app.models.models import Recipe, Ingredient, DietaryTag, User, recipe_ingredients
-from app.schemas.schemas import RecipeCreate, RecipeOut, RecipeUpdate, RecipeMatchOut, IngredientOut
+from app.schemas.schemas import DbId, RecipeCreate, RecipeOut, RecipeUpdate, RecipeMatchOut, IngredientOut
 from app.core.security import get_current_user
 
 router = APIRouter(prefix="/recipes", tags=["recipes"])
 
 @router.get("", response_model=List[RecipeOut])
 def list_recipes(
-  skip: int = 0,
-  limit: int = 20,
-  ingredient_id: Optional[int] = None,
-  dietary_tag_id: Optional[int] = None,
+    skip: int = Query(0, ge=0),
+  limit: int = Query(20, ge=1, le=100),
+  ingredient_id: Optional[DbId] = None,
+  dietary_tag_id: Optional[DbId] = None,
   db: Session = Depends(get_db)
 ):
   query = db.query(Recipe).options(
@@ -29,15 +29,15 @@ def list_recipes(
   if dietary_tag_id is not None:
     query = query.filter(Recipe.dietary_tags.any(DietaryTag.id == dietary_tag_id))
 
-  recipes = query.offset(skip).limit(limit).all()
+  recipes = query.order_by(Recipe.id).offset(skip).limit(limit).all()
   return recipes
 
 @router.get("/match", response_model=List[RecipeMatchOut])
 def match_recipes(
-    ingredient_ids: List[int] = Query(...),
-    dietary_tag_ids: List[int] = Query(default=[]),
-    skip: int = 0,
-    limit: int = 20,
+        ingredient_ids: List[DbId] = Query(..., min_length=1, max_length=50),
+    dietary_tag_ids: List[DbId] = Query(default=[], max_length=20),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
 ):
     user_ids = set(ingredient_ids)
