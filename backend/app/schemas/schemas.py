@@ -1,8 +1,12 @@
 from datetime import datetime
 import uuid
-from typing import Optional, List
+from typing import Annotated, Optional, List
 
-from pydantic import BaseModel, EmailStr, Field, field_validator
+
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
+
+# A database id: a positive whole number that fits the database's 32-bit integer column.
+DbId = Annotated[int, Field(gt=0, lt=2**31)]
 
 class UserCreate(BaseModel):
   email: EmailStr
@@ -39,22 +43,26 @@ class DietaryTagOut(BaseModel):
       from_attributes = True
 
 class RecipeCreate(BaseModel):
-   title: str
-   instructions: str
-   prep_time_minutes: Optional[int] = None
-   image_url: Optional[str] = None
-   source_url: Optional[str] = None
-   ingredient_ids: List[int] = []
-   dietary_tag_ids: List[int] = []
+    model_config = ConfigDict(str_strip_whitespace=True)   # "   " must not count as a title
+
+    title: str = Field(min_length=1, max_length=200)
+    instructions: str = Field(min_length=1, max_length=20000)
+    prep_time_minutes: Optional[int] = Field(default=None, ge=0, le=10000)
+    image_url: Optional[str] = Field(default=None, max_length=2000)
+    source_url: Optional[str] = Field(default=None, max_length=2000)
+    ingredient_ids: List[DbId] = Field(default=[], max_length=100)
+    dietary_tag_ids: List[DbId] = Field(default=[], max_length=20)
 
 class RecipeUpdate(BaseModel):
-    title: Optional[str] = Field(default=None, min_length=1)
-    instructions: Optional[str] = Field(default=None, min_length=1)
-    prep_time_minutes: Optional[int] = None
-    image_url: Optional[str] = None
-    source_url: Optional[str] = None
-    ingredient_ids: Optional[List[int]] = None
-    dietary_tag_ids: Optional[List[int]] = None
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    title: Optional[str] = Field(default=None, min_length=1, max_length=200)
+    instructions: Optional[str] = Field(default=None, min_length=1, max_length=20000)
+    prep_time_minutes: Optional[int] = Field(default=None, ge=0, le=10000)
+    image_url: Optional[str] = Field(default=None, max_length=2000)
+    source_url: Optional[str] = Field(default=None, max_length=2000)
+    ingredient_ids: Optional[List[DbId]] = Field(default=None, max_length=100)
+    dietary_tag_ids: Optional[List[DbId]] = Field(default=None, max_length=20)
 
     @field_validator("title", "instructions", "ingredient_ids", "dietary_tag_ids")
     @classmethod
@@ -80,7 +88,7 @@ class RecipeOut(BaseModel):
         from_attributes = True  
 
 class SavedRecipeCreate(BaseModel):
-   recipe_id: int
+   recipe_id: DbId
 
 class SavedRecipeOut(BaseModel):
    id: int
