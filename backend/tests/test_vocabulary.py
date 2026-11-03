@@ -44,6 +44,38 @@ def test_every_canonical_class_resolves_to_itself():
     ("Eggplant", "Eggplant"),            # not Egg
     ("red pepper", "Bell Pepper"),
     ("Crème Fraîche", "Cream"),
+    # aliases added after the first real TheMealDB report (some are typos in the source data)
+    ("tinned tomatos", "Tomato"),
+    ("Challots", "Onion"),
+    ("egg plants", "Eggplant"),
+    ("melted butter", "Butter"),
+    ("flaked almonds", "Nuts"),
+    ("raw king prawns", "Shrimp"),
+    ("coriander leaves", "Herbs"),
+    ("clear honey", "Honey"),
+    ("sirloin steak", "Meat"),
+    ("paella rice", "Rice"),
+    # round 2, from the full 790-recipe report
+    ("sesame seed oil", "Oil"),
+    ("Scotch Bonnet", "Chili"),
+    ("muscovado sugar", "Sugar"),
+    ("cheddar cheese", "Cheese"),
+    ("ground pork", "Meat"),
+    ("marjoram", "Herbs"),
+    # round 3
+    ("lamb leg", "Meat"),
+    ("Pistachio", "Nuts"),
+    ("strong white bread flour", "Flour"),
+    ("ground nut oil", "Oil"),
+    ("vanilla sugar", "Sugar"),
+    ("dried white beans", "Beans"),
+    ("salt cod", "Fish"),
+    # round 4
+    ("minced garlic", "Garlic"),
+    ("russet potato", "Potato"),
+    ("crusty bread", "Bread"),
+    ("dark brown soft sugar", "Sugar"),
+    ("lemongrass stalks", "Herbs"),
 ])
 def test_resolve_maps_to_expected_class(raw, canonical):
     assert resolve(raw).canonical == canonical
@@ -53,7 +85,22 @@ def test_plain_pepper_is_the_black_pepper_staple():
     assert resolve("pepper").is_staple
 
 
-@pytest.mark.parametrize("raw", ["turkey", "molasses", "clove", "", "   "])
+@pytest.mark.parametrize("raw", [
+    "cinnamon stick", "caraway seed", "corn flour", "almond extract",
+    "ground nutmeg", "sherry vinegar", "dry white wine", "thai red curry paste",
+    "golden syrup", "sesame seed", "ground cardomom", "dried mint", "starch",
+])
+def test_newly_added_staples_are_staples(raw):
+    assert resolve(raw).is_staple
+
+
+@pytest.mark.parametrize("raw", ["puff pastry", "condensed milk", "fennel", "rice noodles", "dulce de leche"])
+def test_deliberately_unsupported_ingredients_stay_unknown(raw):
+    # pastry/condensed milk are key ingredients, not invisible pantry staples
+    assert resolve(raw) is None
+
+
+@pytest.mark.parametrize("raw", ["turkey", "quinoa", "clove", "", "   "])
 def test_unknown_names_return_none(raw):
     assert resolve(raw) is None
 
@@ -105,7 +152,6 @@ def test_worcestershire_sauce_blocks_vegetarian():
     assert "vegetarian" not in analyze_recipe(["lettuce", "worcestershire sauce"]).tags
 
 
-
 def test_generic_sauce_blocks_every_tag():
     result = analyze_recipe(["pasta", "sauce", "onion"])
     assert result.accepted and result.tags == []
@@ -119,4 +165,20 @@ def test_unknown_ingredient_rejects_the_recipe():
 
 
 def test_recipe_of_only_staples_is_rejected():
-    assert not analyze_recipe(["water", "pepper", "salt"]).accepted    
+    assert not analyze_recipe(["water", "pepper", "salt"]).accepted
+
+
+def test_curry_paste_and_wine_block_vegetarian_but_not_dairy_free():
+    # both may hide animal products (shrimp paste, fining agents), so 'unsure'
+    for ingredient in ("thai red curry paste", "dry white wine"):
+        assert analyze_recipe(["onion", ingredient]).tags == ["dairy-free"]
+
+
+def test_syrups_do_not_block_any_tag():
+    assert analyze_recipe(["flour", "golden syrup"]).tags == ["vegetarian", "vegan", "dairy-free"]
+
+
+def test_liquid_vegetable_stock_is_vegan_but_stock_cubes_are_not_assumed_to_be():
+    # found while auditing the vegan list: cubes/powders can contain milk or whey
+    assert analyze_recipe(["carrot", "vegetable stock"]).tags == ["vegetarian", "vegan", "dairy-free"]
+    assert analyze_recipe(["carrot", "vegetable stock cube"]).tags == ["vegetarian"]
