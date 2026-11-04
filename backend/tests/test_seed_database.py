@@ -170,14 +170,25 @@ def test_running_the_seed_twice_inserts_nothing_the_second_time(session):
     assert len(session.scalars(select(User)).all()) == 1
 
 
-def test_two_recipes_with_the_same_source_url_in_one_run_insert_only_one(session):
+def test_different_recipes_that_share_a_source_page_are_both_inserted(session):
+    # TheMealDB often credits one web page for several recipes; they are still different recipes
     items = accepted_items(
-        make_meal(1, "First", ("Carrots", "1"), source="https://same.example/page"),
-        make_meal(2, "Second", ("Onion", "1"), source="https://same.example/page"),
+        make_meal(1, "Mango chow", ("Mango", "1"), source="https://same.example/page"),
+        make_meal(2, "Mango salsa", ("Mango", "2"), source="https://same.example/page"),
     )
     result = seed(session, items)
-    assert result.inserted == 1 and result.skipped_duplicate == ["Second"]
+    session.commit()
+    assert result.inserted == 2 and result.skipped_duplicate == []
+    assert seed(session, items).inserted == 0          # and a second run still finds both
 
+
+def test_the_same_recipe_twice_in_one_run_is_inserted_once(session):
+    items = accepted_items(
+        make_meal(1, "Mango chow", ("Mango", "1"), source="https://same.example/page"),
+        make_meal(2, "Mango chow", ("Mango", "1"), source="https://same.example/page"),
+    )
+    result = seed(session, items)
+    assert result.inserted == 1 and result.skipped_duplicate == ["Mango chow"]
 
 def test_plan_inserts_does_not_write_anything(session):
     plan = plan_inserts(session, accepted_items(make_meal(1, "Veg", ("Carrots", "1"))))

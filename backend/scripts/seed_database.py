@@ -78,18 +78,19 @@ class Plan:
 
 
 def plan_inserts(session: Session, items: list[dict]) -> Plan:
-    """READ-ONLY: which of the accepted recipes would be new?"""
-    in_database = {url for url in session.scalars(select(Recipe.source_url)) if url}
-    in_this_run: set[str] = set()
+
+    in_database = {(url, title) for url, title in session.execute(select(Recipe.source_url, Recipe.title))}
+    in_this_run: set[tuple[str, str]] = set()
     plan = Plan()
     for item in items:
-        url = build_source_url(item["meal"])
-        if url in in_database:
+        meal = item["meal"]
+        key = (build_source_url(meal), meal["strMeal"])
+        if key in in_database:
             plan.skipped_existing += 1
-        elif url in in_this_run:
-            plan.skipped_duplicate.append(item["meal"].get("strMeal", url))
+        elif key in in_this_run:
+            plan.skipped_duplicate.append(meal["strMeal"])
         else:
-            in_this_run.add(url)
+            in_this_run.add(key)
             plan.to_insert.append(item)
     return plan
 
