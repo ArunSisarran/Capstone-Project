@@ -163,6 +163,12 @@ def canonical_names(records: Iterable[Record]) -> list[str]:
         if not record.is_staple and not record.ignore_for_matching
     })
 
+def all_canonical_names() -> list[str]:
+    return sorted({
+        record.canonical.lower()
+        for record in load_table().values()
+        if not record.is_staple and not record.ignore_for_matching
+    })
 
 def analyze_recipe(raw_names: Iterable[str]) -> RecipeAnalysis:
     """Run a whole recipe's ingredient names through the vocabulary.

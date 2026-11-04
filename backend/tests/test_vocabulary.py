@@ -4,7 +4,7 @@ import csv
 import pytest
 
 from app.services.vocabulary import (
-    VOCAB_FILE, analyze_recipe, canonical_names, derive_tags, load_table, normalize, resolve,
+    VOCAB_FILE, analyze_recipe, all_canonical_names, canonical_names, derive_tags, load_table, normalize, resolve,
 )
 
 
@@ -182,3 +182,11 @@ def test_liquid_vegetable_stock_is_vegan_but_stock_cubes_are_not_assumed_to_be()
     # found while auditing the vegan list: cubes/powders can contain milk or whey
     assert analyze_recipe(["carrot", "vegetable stock"]).tags == ["vegetarian", "vegan", "dairy-free"]
     assert analyze_recipe(["carrot", "vegetable stock cube"]).tags == ["vegetarian"]
+
+def test_all_canonical_names_are_the_detectable_classes_only():
+    names = all_canonical_names()
+    assert "bell pepper" in names and "dragon fruit" in names
+    assert "salt" not in names and "oil" not in names        # ignored for matching
+    assert not any(name in names for name in ("black pepper", "water", "spices"))  # staples
+    assert names == sorted(set(names)) and all(name == name.lower() for name in names)
+    assert len(names) >= 80
