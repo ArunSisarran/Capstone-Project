@@ -1,12 +1,14 @@
 from datetime import datetime
 import uuid
-from typing import Annotated, Optional, List
+from typing import Annotated, Literal, Optional, List
 
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 # A database id: a positive whole number that fits the database's 32-bit integer column.
 DbId = Annotated[int, Field(gt=0, lt=2**31)]
+# The two ways a user can mark a recipe
+SavedKind = Literal["favorite", "saved"]
 
 class UserCreate(BaseModel):
   email: EmailStr
