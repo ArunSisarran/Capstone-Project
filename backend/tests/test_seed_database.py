@@ -17,7 +17,7 @@ from app.core.database import Base
 from app.core.security import verify_password
 from app.models.models import DietaryTag, Recipe, Ingredient, User
 from app.services.vocabulary import all_canonical_names
-from scripts.import_themealdb import summarize
+from scripts.import_themealdb import Summary, commit_to_database, summarize
 from scripts.seed_database import (
     FALLBACK_SOURCE_URL, SEED_EMAIL, build_instructions, build_source_url,
     get_or_create_ingredients, get_or_create_seed_user, get_or_create_tags,
@@ -26,11 +26,18 @@ from scripts.seed_database import (
 
 
 @pytest.fixture()
-def session():
+def factory():
+    """Makes sessions on one shared in-memory database (a new, empty one per test)."""
     engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
     Base.metadata.create_all(engine)
-    db = sessionmaker(bind=engine)()
+    return sessionmaker(bind=engine, autoflush=False)
+
+
+@pytest.fixture()
+def session(factory):
+    db = factory()
     yield db
+    db.close()
     db.close()
 def test_source_url_prefers_the_recipes_own_page_else_the_fallback():
     assert build_source_url({"idMeal": "1", "strSource": " https://x.com/r "}) == "https://x.com/r"
@@ -176,3 +183,62 @@ def test_plan_inserts_does_not_write_anything(session):
     plan = plan_inserts(session, accepted_items(make_meal(1, "Veg", ("Carrots", "1"))))
     assert len(plan.to_insert) == 1
     assert session.scalars(select(Recipe)).all() == [] and session.scalars(select(User)).all() == []
+
+# ---------- the --commit flow
+@pytest.fixture()
+def patched_database(factory, monkeypatch):
+    """Point the script at the in-memory database instead of the real one."""
+    monkeypatch.setattr("app.core.database.SessionLocal", factory)
+    return factory
+
+
+def test_commit_writes_recipes_when_confirmed(patched_database, monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda _prompt: "yes")
+    summary = summarize([make_meal(1, "Veg", ("Carrots", "1")), make_meal(2, "Toast", ("Bread", "1"))])
+    commit_to_database(summary, failed_letters=[], assume_yes=False)
+    with patched_database() as check:
+        assert len(check.scalars(select(Recipe)).all()) == 2
+
+
+def test_commit_writes_nothing_when_the_answer_is_not_yes(patched_database, monkeypatch):
+    monkeypatch.setattr("builtins.input", lambda _prompt: "no")
+    commit_to_database(summarize([make_meal(1, "Veg", ("Carrots", "1"))]), failed_letters=[], assume_yes=False)
+    with patched_database() as check:
+        assert check.scalars(select(Recipe)).all() == [] and check.scalars(select(User)).all() == []
+
+
+def test_commit_refuses_when_a_letter_failed_to_download(patched_database):
+    summary = summarize([make_meal(1, "Veg", ("Carrots", "1"))])
+    with pytest.raises(SystemExit, match="incomplete"):
+        commit_to_database(summary, failed_letters=["c"], assume_yes=True)
+    with patched_database() as check:
+        assert check.scalars(select(Recipe)).all() == []
+
+
+def test_commit_refuses_when_the_safety_scan_finds_a_problem(patched_database):
+    from app.services.vocabulary import RecipeAnalysis
+    wrong = {"meal": make_meal(1, "Bad Tag", ("Milk", "1 cup")), "pairs": [("Milk", "1 cup")],
+             "analysis": RecipeAnalysis(True, [], ["dairy-free"], ["milk"])}   # milk is NOT dairy-free
+    with pytest.raises(SystemExit, match="safety scan"):
+        commit_to_database(Summary(total=1, accepted=[wrong]), failed_letters=[], assume_yes=True)
+    with patched_database() as check:
+        assert check.scalars(select(Recipe)).all() == []
+
+
+def test_commit_twice_inserts_nothing_new(patched_database):
+    summary = summarize([make_meal(1, "Veg", ("Carrots", "1"))])
+    commit_to_database(summary, [], assume_yes=True)
+    commit_to_database(summary, [], assume_yes=True)
+    with patched_database() as check:
+        assert len(check.scalars(select(Recipe)).all()) == 1
+
+
+def test_a_failure_midway_rolls_everything_back(patched_database, monkeypatch):
+    def explode(*args, **kwargs):
+        raise RuntimeError("simulated database failure")
+    monkeypatch.setattr("scripts.seed_database.get_or_create_tags", explode)
+    summary = summarize([make_meal(1, "Veg", ("Carrots", "1"))])
+    with pytest.raises(RuntimeError):
+        commit_to_database(summary, [], assume_yes=True)
+    with patched_database() as check:
+        assert check.scalars(select(User)).all() == [] and check.scalars(select(Recipe)).all() == []

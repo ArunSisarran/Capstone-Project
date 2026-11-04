@@ -12,6 +12,15 @@ Run from backend/ with the venv active:
     python -m scripts.import_themealdb --top 50 --samples 20
     python -m scripts.import_themealdb --tag vegan      # list EVERY accepted vegan recipe to audit
 
+    To WRITE the accepted recipes to the database in DATABASE_URL (it asks first):
+
+    python -m scripts.import_themealdb --commit
+
+--commit refuses to run if any letter failed to download or if the safety scan
+found a problem. It prints which database it will write to (never the
+password) and waits for you to type "yes". Running it twice is safe: recipes
+whose source_url already exists are skipped. The database is SHARED, so tell
+your teammates before you run it.
 Downloads are cached in scripts/cache/ (gitignored), so re-running after you
 edit the CSVs does not hit the API again.
 
@@ -247,7 +256,51 @@ def print_report(summary: Summary, top: int, samples: int, tag: str | None = Non
     for item in random.Random(42).sample(summary.accepted, min(samples, passed)):
         print_recipe(item)
 
+# ------------------------------------------------------------------- commit
+def commit_to_database(summary: Summary, failed_letters: list[str], assume_yes: bool,
+                       seed_email: str | None = None) -> None:
+    """Write the accepted recipes to the database in DATABASE_URL, after safety checks."""
+    if failed_letters:
+        raise SystemExit("Refusing to commit: these letters failed to download, so the data is "
+                         f"incomplete ({', '.join(failed_letters)}). Run again first.")
+    suspects = scan_accepted(summary)
+    if suspects:
+        raise SystemExit(f"Refusing to commit: the safety scan flagged {len(suspects)} recipe(s). "
+                         "Fix the CSV flags first (see the 'Safety scan' section above).")
 
+    # Imported here, not at the top, so the dry run and the tests never need a database.
+    from sqlalchemy.engine import make_url
+    from app.core import database
+    from app.core.config import settings
+    from scripts.seed_database import SEED_EMAIL, plan_inserts, seed
+
+    url = make_url(settings.database_url)
+    target = f"{url.host or '(local file)'}/{url.database or ''}"
+    session = database.SessionLocal()
+    try:
+        plan = plan_inserts(session, summary.accepted)
+        print("\n" + "=" * 64)
+        print(f"COMMIT to database: {target}")
+        print(f"  new recipes to insert:      {len(plan.to_insert)}")
+        print(f"  already in the database:    {plan.skipped_existing}")
+        print(f"  duplicate source_url (skip): {len(plan.skipped_duplicate)}")
+        print("  also ensures: the seed user, 3 dietary tags, and one ingredient row per detectable class")
+        print("=" * 64)
+        if not assume_yes and input('Type "yes" to write these to the database: ').strip().lower() != "yes":
+            print("Cancelled. Nothing was written.")
+            return
+        result = seed(session, summary.accepted, seed_email or SEED_EMAIL)
+        session.commit()
+        print(f"\nDone. inserted {result.inserted} recipes, skipped {result.skipped_existing} existing, "
+              f"created {result.ingredients_created} ingredients and {result.tags_created} tags"
+              f"{', created the seed user' if result.user_created else ''}.")
+        for title in result.skipped_duplicate:
+            print(f"  skipped (same source_url as another recipe): {title}")
+    except Exception:
+        session.rollback()          # all-or-nothing: a failure leaves the database untouched
+        raise
+    finally:
+        session.close()
 # --------------------------------------------------------------------- main
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
@@ -258,6 +311,10 @@ def main() -> None:
     parser.add_argument("--samples", type=int, default=10, help="accepted recipes to print")
     parser.add_argument("--tag", choices=["vegetarian", "vegan", "dairy-free"],
                         help="print EVERY accepted recipe with this tag, to audit it by hand")
+    parser.add_argument("--commit", action="store_true",
+                        help="WRITE the accepted recipes to the database in DATABASE_URL (asks first)")
+    parser.add_argument("--yes", action="store_true", help="with --commit: do not ask for confirmation")
+    parser.add_argument("--seed-email", default=None, help="email of the account that owns imported recipes")
     parser.add_argument("--dry-run", action="store_true",
                         help="accepted for clarity; this version never writes to the database")
     args = parser.parse_args()
@@ -272,11 +329,14 @@ def main() -> None:
             meals.extend(batch)
             print(f"  letter {letter}: {len(batch)} meals")
 
-    print_report(summarize(meals), top=args.top, samples=args.samples, tag=args.tag)
+    summary = summarize(meals)
+    print_report(summary, top=args.top, samples=args.samples, tag=args.tag)
     if failed:
         print(f"\n! These letters failed to download and are NOT in the numbers: {', '.join(failed)}")
         print("  Check your internet connection and run again.")
 
+        if args.commit:
+            commit_to_database(summary, failed, assume_yes=args.yes, seed_email=args.seed_email)    
 
 if __name__ == "__main__":
     main()
