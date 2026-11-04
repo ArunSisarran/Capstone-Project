@@ -1,0 +1,11 @@
+# editors
+.vscode/
+.idea/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# raw TheMealDB downloads used by the seed import
+backend/scripts/cache/
