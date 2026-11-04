@@ -1,14 +1,9 @@
 """
-model.py - yolo11s as a plain nn.Module: inspect it, do surgery on it, train it
-with your own loop.
+model.py - yolo11s as a plain nn.Module: inspect it, do surgery on it, train it with your own loop.
 
-Ultralytics' YOLO(...).train() is a wrapper. Underneath, `yolo11s.pt` is a
-pickled `DetectionModel` - an `nn.Sequential` of 24 blocks. Everything below
-touches that directly, so every knob is visible instead of hidden in a config.
-
-    python model.py inspect      # module tree, params, head shape
-    python model.py selfcheck    # asserts the head surgery is correct
-    python model.py surgery      # write a re-headed checkpoint, no training
+    python model.py inspect
+    python model.py selfcheck
+    python model.py surgery --data datasets/X/data.yaml
     python model.py train --data datasets/X/data.yaml --out runs/X --epochs 30
 """
 
@@ -32,24 +27,17 @@ from ultralytics.utils.loss import v8DetectionLoss
 from ultralytics.utils.torch_utils import ModelEMA
 
 HERE = Path(__file__).parent
-BACKBONE_END = 10  # yolo11 yaml: layers 0-10 are backbone, 11-23 are head/neck
+BACKBONE_END = 10
 
 
-# --------------------------------------------------------------------------
-# loading
-# --------------------------------------------------------------------------
 def load(path="weights/yolo11s.pt"):
-    """The checkpoint is a dict; ckpt['model'] is a live nn.Module, not a state_dict."""
     ckpt = torch.load(HERE / path, map_location="cpu", weights_only=False)
-    model = ckpt["model"].float()  # ships as fp16
+    model = ckpt["model"].float()
     for p in model.parameters():
-        p.requires_grad_(True)  # ships frozen
+        p.requires_grad_(True)  # the checkpoint ships frozen
     return model
 
 
-# --------------------------------------------------------------------------
-# inspect
-# --------------------------------------------------------------------------
 def cmd_inspect(args):
     model = load(args.weights)
     print(f"{type(model).__name__}: {len(model.model)} blocks, "
@@ -72,34 +60,24 @@ def cmd_inspect(args):
     print("Everything else is class-agnostic feature extraction -> reusable.")
 
 
-# --------------------------------------------------------------------------
-# surgery: replace the 80-class head, warm-starting the classes COCO already knows
-# --------------------------------------------------------------------------
 def normalize(name):
-    """Matching key for class names: 'Hot-Dog!' -> 'hot dog'."""
     s = name.strip().lower()
     s = re.sub(r"[_\-]+", " ", s)
     s = re.sub(r"[^\w\s&]", "", s)
     return re.sub(r"\s+", " ", s).strip()
 
 
-COCO_ALIASES = {  # coco name -> your canonical name, where normalize() won't match
+COCO_ALIASES = {
     "hot dog": "Sausage/Hot Dog Link",
     "broccoli": "Broccoli (head)",
 }
 
 
 def reshape_head(model, names, warm_start=True, verbose=True):
-    """Swap Detect's per-scale class convs from 80 -> len(names) outputs.
-
-    The box branch (cv2) is untouched: box regression doesn't know about classes,
-    so it transfers for free. Only cv3's last 1x1 conv is class-shaped.
-    """
     h = model.model[-1]
     old_names = model.names if isinstance(model.names, dict) else dict(enumerate(model.names))
     nc = len(names)
 
-    # which new class index inherits which old COCO row
     transfer = {}
     if warm_start:
         old_by_norm = {normalize(v): k for k, v in old_names.items()}
@@ -116,12 +94,11 @@ def reshape_head(model, names, warm_start=True, verbose=True):
         old = h.cv3[i][2]
         new = nn.Conv2d(old.in_channels, nc, 1).to(old.weight.device)
 
-        # focal-style prior: start every class predicting ~few objects per image,
-        # so the first steps aren't dominated by the background BCE term.
+        # bias prior of ~5 objects per image, so background BCE doesn't swamp the first steps
         nn.init.normal_(new.weight, std=0.01)
         new.bias.data.fill_(math.log(5 / nc / (640 / h.stride[i].item()) ** 2))
 
-        for j, k in transfer.items():  # copy the COCO rows we can keep
+        for j, k in transfer.items():
             new.weight.data[j] = old.weight.data[k]
             new.bias.data[j] = old.bias.data[k]
 
@@ -148,17 +125,10 @@ def cmd_surgery(args):
     print(f"saved {args.out}")
 
 
-# --------------------------------------------------------------------------
-# training loop
-# --------------------------------------------------------------------------
 def param_groups(model, decay):
-    """YOLO's split: weight decay on conv/linear weights only, never on BN or bias.
-
-    Decaying a BatchNorm scale pulls it toward 0 and quietly kills the channel.
-    """
     g_decay, g_nodecay = [], []
     for m in model.modules():
-        if isinstance(m, nn.modules.batchnorm._BatchNorm):
+        if isinstance(m, nn.modules.batchnorm._BatchNorm):  # decaying a BN scale toward 0 kills the channel
             g_nodecay += [p for p in (m.weight, m.bias) if p is not None]
         else:
             if getattr(m, "bias", None) is not None and isinstance(m.bias, nn.Parameter):
@@ -170,8 +140,6 @@ def param_groups(model, decay):
 
 
 def freeze_backbone(model, freeze):
-    """Layers 0..freeze stop receiving gradients. BN running stats still update
-    unless you also .eval() them - that's the classic transfer-learning gotcha."""
     n = 0
     for name, p in model.named_parameters():
         idx = name.split(".")[1]
@@ -182,7 +150,6 @@ def freeze_backbone(model, freeze):
 
 
 def to_device(batch, device):
-    # channels_last: NHWC lets AMP use tensor cores better (~+15% img/s on the 3060)
     batch["img"] = (batch["img"].to(device, non_blocking=True).float() / 255).contiguous(
         memory_format=torch.channels_last)
     for k in ("cls", "bboxes", "batch_idx"):
@@ -223,23 +190,21 @@ def cmd_train(args):
         opt = torch.optim.SGD(groups, lr=args.lr0, momentum=0.937, nesterov=True)
     else:
         opt = torch.optim.AdamW(groups, lr=args.lr0, betas=(0.937, 0.999))
-    # 0.1 is an SGD number. On AdamW a hot bias lr diverges within ~40 steps
-    # (val loss 8 -> 283 here), because Adam already normalizes by grad scale.
+    # a 0.1 warmup bias lr is for SGD only: on AdamW it diverged within ~40 steps
     warmup_bias_lr = args.warmup_bias_lr if args.warmup_bias_lr is not None else (
         0.1 if args.optimizer == "sgd" else args.lr0)
-    # linear decay lr0 -> lr0*lrf, same shape ultralytics uses by default
     sched = torch.optim.lr_scheduler.LambdaLR(
         opt, lambda e: (1 - e / args.epochs) * (1 - args.lrf) + args.lrf)
     scaler = torch.amp.GradScaler("cuda", enabled=device.type == "cuda")
     ema = ModelEMA(model)
-    ema.ema.criterion = crit  # validator calls model.loss(); don't let it build its own
+    ema.ema.criterion = crit  # the validator calls model.loss(); don't let it build its own
 
     nb = len(train_dl)
-    accumulate = max(1, round(args.nbs / args.batch))  # simulate batch=64
-    nw = max(3 * nb, 100)  # warmup iterations
+    accumulate = max(1, round(args.nbs / args.batch))
+    nw = max(3 * nb, 100)
     best = -1.0
     last_opt = -1
-    log = out / "results.csv"  # one row per epoch, restarted each run (like last.pt/best.pt)
+    log = out / "results.csv"
     with open(log, "w", newline="") as f:
         csv.writer(f).writerow(["epoch", "train_box", "train_cls", "train_dfl", "val_loss",
                                 "precision", "recall", "map50", "map50_95", "lr", "elapsed_s"])
@@ -247,8 +212,6 @@ def cmd_train(args):
 
     for epoch in range(args.epochs):
         if args.close_mosaic and epoch == max(0, args.epochs - args.close_mosaic):
-            # Mosaic tiles 4 shrunk images into one; finish on whole, real-scale
-            # photos, which is what the app sends (same as ultralytics' trainer).
             print("closing mosaic")
             train_ds.mosaic = False
             train_ds.close_mosaic(hyp=cfg)
@@ -258,8 +221,7 @@ def cmd_train(args):
         for i, batch in enumerate(train_dl):
             ni = i + nb * epoch
             if ni <= nw:
-                # Warmup: biases/BN start hot (0.1) and cool down, weights start at 0
-                # and ramp up. Skipping this on a fresh head blows up in ~20 steps.
+                # warmup: a fresh head blows up within ~20 steps without it
                 a = min(1.0, ni / nw)
                 target = sched.get_last_lr()[0]
                 for j, g in enumerate(opt.param_groups):
@@ -269,9 +231,9 @@ def cmd_train(args):
 
             batch = to_device(batch, device)
             with torch.amp.autocast("cuda", enabled=device.type == "cuda"):
-                preds = model(batch["img"])       # dict: boxes, scores, feats (raw, no DFL)
-                loss, items = crit(preds, batch)  # 3-vector (box, cls, dfl), already * batch
-            scaler.scale(loss.sum()).backward()   # .sum() -> the scalar autograd needs
+                preds = model(batch["img"])
+                loss, items = crit(preds, batch)
+            scaler.scale(loss.sum()).backward()
 
             if ni - last_opt >= accumulate:
                 scaler.unscale_(opt)
@@ -290,11 +252,10 @@ def cmd_train(args):
             steps = i + 1
             if args.max_steps and steps >= args.max_steps:
                 break
-        lr = opt.param_groups[0]["lr"]  # the lr this epoch ended on, before the scheduler moves it
+        lr = opt.param_groups[0]["lr"]
         sched.step()
 
-        # Ultralytics' own validator in trainer mode: mAP and val loss in one pass.
-        # The namespace is the handful of trainer attributes it reads.
+        # the namespace stands in for the trainer attributes the validator reads
         m = validator(trainer=SimpleNamespace(
             device=device, data=data, amp=device.type == "cuda", loss_items=items, ema=ema,
             stopper=SimpleNamespace(possible_stop=False), epoch=epoch, epochs=args.epochs, world_size=1,
@@ -307,7 +268,7 @@ def cmd_train(args):
             csv.writer(f).writerow([epoch, round(b, 4), round(c, 4), round(d, 4), round(vl, 4), p_, r_, m50, m5095,
                                     f"{lr:.3e}", round(time.time() - t0)])
         save(ema.ema, cfg, out / "last.pt")
-        if m50 > best:  # mAP50 is what an inventory app cares about, not val loss
+        if m50 > best:
             best = m50
             save(ema.ema, cfg, out / "best.pt")
             print(f"  new best mAP50 {best:.4f}")
@@ -322,9 +283,6 @@ def save(model, cfg, path):
     torch.save({"model": m, "train_args": vars(cfg), "epoch": -1}, path)
 
 
-# --------------------------------------------------------------------------
-# selfcheck
-# --------------------------------------------------------------------------
 def cmd_selfcheck(args):
     model = load(args.weights)
     old = model.model[-1]
@@ -347,13 +305,12 @@ def cmd_selfcheck(args):
     x = torch.rand(1, 3, 320, 320)
     model.eval()
     y, raw = model(x)
-    # eval mode already applied DFL: 4 xywh + nc, not 4*reg_max + nc
     assert y.shape[1] == 4 + 5, f"decoded forward gives {y.shape}"
     assert raw["scores"].shape[1] == 5, f"raw scores {raw['scores'].shape}"
     assert raw["boxes"].shape[1] == 4 * h.reg_max, f"raw boxes {raw['boxes'].shape}"
 
     model.train()
-    out = model(x)  # train mode returns only the raw dict
+    out = model(x)
     assert out["scores"].shape[1] == 5 and len(out["feats"]) == 3, "train-mode shape"
 
     n = freeze_backbone(model, BACKBONE_END)

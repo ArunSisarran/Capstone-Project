@@ -88,7 +88,7 @@ Ingredients detection,8,Egg,fix,1035
 Ingredients detection,24,Shrimp,fix,1018
 Ingredients detection,4,Chicken,fix,865
 Ingredients detection,Roboflow is an end-to-end computer vision platform that helps you,Meat,fix,819
-Ingredients detection,pitaya,Dragon Fruit,auto,812
+Ingredients detection,pitaya,,drop,812
 Ingredients detection,small_pepper,Chili,auto,783
 Ingredients detection,15,Milk,fix,728
 Ingredients detection,pineapple,Pineapple,auto,726
@@ -96,21 +96,21 @@ Ingredients detection,long_pepper,Chili,auto,716
 Ingredients detection,zucchini,Zucchini,auto,686
 Ingredients detection,7,Cucumber,fix,675
 Ingredients detection,beet,Beet,auto,664
-Ingredients detection,annona,Custard Apple,auto,648
-Ingredients detection,palm fruit,Palm Fruit,auto,592
+Ingredients detection,annona,,drop,648
+Ingredients detection,palm fruit,,drop,592
 Ingredients detection,28,Tomato,fix,591
 Ingredients detection,3,Carrot,fix,588
 Ingredients detection,14,Lime,fix,571
 Ingredients detection,- use active learning to improve your dataset over time,Spring Onion,fix,567
 Ingredients detection,coriander,Herbs,auto,561
-Ingredients detection,guava,Guava,auto,546
+Ingredients detection,guava,,drop,546
 Ingredients detection,1,Meat,fix,520
 Ingredients detection,9,Fish,fix,520
 Ingredients detection,18,Onion,fix,513
 Ingredients detection,11,Ginger,fix,489
 Ingredients detection,17,Pasta,fix,448
 Ingredients detection,23,Potato,fix,446
-Ingredients detection,papaya,Papaya,auto,445
+Ingredients detection,papaya,,drop,445
 Ingredients detection,2,Cabbage,fix,440
 Ingredients detection,29,,drop,426
 Ingredients detection,orange,Orange,auto,421
@@ -212,7 +212,7 @@ LVIS_Fruits_And_Vegetables,artichoke,Artichoke,auto,293
 LVIS_Fruits_And_Vegetables,coconut/cocoanut,Coconut,auto,273
 LVIS_Fruits_And_Vegetables,bean curd/tofu,Tofu,auto,236
 LVIS_Fruits_And_Vegetables,melon,Melon,auto,211
-LVIS_Fruits_And_Vegetables,papaya,Papaya,auto,206
+LVIS_Fruits_And_Vegetables,papaya,,drop,206
 LVIS_Fruits_And_Vegetables,cantaloup/cantaloupe,Melon,auto,193
 LVIS_Fruits_And_Vegetables,fig/fig fruit,Fig,auto,169
 LVIS_Fruits_And_Vegetables,sweet potato,Sweet Potato,auto,148
