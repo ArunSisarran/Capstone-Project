@@ -92,6 +92,7 @@ def match_recipes(
         item = RecipeMatchOut.model_validate(recipe)
         item.matched_count = int(row.matched)
         item.total_ingredients = int(row.total)
+        item.match_score = round(item.matched_count / item.total_ingredients, 3)
         item.missing_ingredients = [
             IngredientOut.model_validate(i)
             for i in recipe.ingredients
