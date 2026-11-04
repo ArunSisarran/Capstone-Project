@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Table, Text, Float
+from sqlalchemy import CheckConstraint, UniqueConstraint, Column, Integer, String, DateTime, ForeignKey, Table, Text, Float
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import relationship
 
@@ -72,11 +72,18 @@ class Recipe(Base):
 
 
 class SavedRecipe(Base):
+    """A user's mark on a recipe: kind is 'favorite' (the heart) or 'saved' (saved for later).
+    A recipe can carry both marks, but each at most once per user."""
     __tablename__ = "saved_recipes"
+    __table_args__ = (
+        UniqueConstraint("user_id", "recipe_id", "kind", name="uq_saved_user_recipe_kind"),
+        CheckConstraint("kind IN ('favorite', 'saved')", name="ck_saved_kind"),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(PG_UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     recipe_id = Column(Integer, ForeignKey("recipes.id"), nullable=False)
+    kind = Column(String(16), nullable=False, server_default="saved")
     saved_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", back_populates="saved_recipes")
