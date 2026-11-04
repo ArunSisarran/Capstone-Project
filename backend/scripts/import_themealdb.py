@@ -334,9 +334,7 @@ def main() -> None:
     if failed:
         print(f"\n! These letters failed to download and are NOT in the numbers: {', '.join(failed)}")
         print("  Check your internet connection and run again.")
-
-        if args.commit:
-            commit_to_database(summary, failed, assume_yes=args.yes, seed_email=args.seed_email)    
-
+    if args.commit:
+        commit_to_database(summary, failed, assume_yes=args.yes, seed_email=args.seed_email)
 if __name__ == "__main__":
     main()
