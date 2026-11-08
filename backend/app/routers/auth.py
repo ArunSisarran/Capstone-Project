@@ -1,11 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
 from app.core.database import get_db
-from app.core.security import hash_password, verify_password, create_access_token
+from app.core.security import hash_password, verify_password, create_access_token, create_password_reset_token
 from app.models.models import User
-from app.schemas.schemas import UserCreate, UserOut, Token, LoginRequest
-
+from app.schemas.schemas import UserCreate, UserOut, Token, LoginRequest, ForgotPasswordRequest
+from app.services.email import allow_reset_email, reset_email_body, send_email
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/signup", response_model=UserOut, status_code=status.HTTP_201_CREATED)
@@ -28,3 +30,8 @@ def login(credentials: LoginRequest, db: Session = Depends(get_db)):
 
     token = create_access_token(subject=str(user.id))
     return Token(access_token=token)
+
+@router.post("/forgot-password")
+def forgot_password(
+    request: Forgo
+)
