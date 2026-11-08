@@ -50,3 +50,13 @@ def forgot_password(
         link = f"{settings.frontend_url.rstrip('/')}/reset-password?token={create_password_reset_token(user)}"
         background_tasks.add_task(send_email, user.email, "Reset your password", reset_email_body(link))
     return {"detail": "If that email is registered, a reset link has been sent."}
+
+@router.post("/reset-password", status_code=status.HTTP_204_NO_CONTENT)
+def reset_password(request: ResetPasswordRequest, db: Session = Depends(get_db)):
+    """Set a new password using the token from the email. A token works once."""
+    user = user_from_password_reset_token(request.token, db)
+    if user is None:
+        raise HTTPException(status_code=400, detail="This reset link is invalid or has expired.")
+    user.hashed_password = hash_password(request.new_password)
+    db.commit()
+    return None

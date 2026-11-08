@@ -12,6 +12,12 @@ class Settings(BaseSettings):
 
     email_backend: str = "console"
 
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 597
+    smtp_username: str = ""
+    smtp_password: str = ""
+    mail_from: str = ""
+
     class Config:
         env_file = Path(__file__).resolve().parent.parent.parent / ".env"
 

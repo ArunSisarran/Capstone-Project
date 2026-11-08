@@ -113,10 +113,10 @@ class UserUpdate(BaseModel):
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr
 
-
 class ResetPasswordRequest(BaseModel):
     token: str = Field(min_length=1, max_length=2000)
-    new_password: str = Field(min_length=12, max_length=72)    # bcrypt only uses the first 72 bytes
+    new_password: str = Field(min_length=12, max_length=72) 
+
 class PasswordChange(BaseModel): 
    current_password: str
    new_password: str = Field(min_length=12)
