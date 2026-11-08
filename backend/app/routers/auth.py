@@ -4,10 +4,16 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.database import get_db
-from app.core.security import hash_password, verify_password, create_access_token, create_password_reset_token
+from app.core.security import (
+    create_access_token, create_password_reset_token, hash_password, user_from_password_reset_token,
+    verify_password,
+)
 from app.models.models import User
-from app.schemas.schemas import UserCreate, UserOut, Token, LoginRequest, ForgotPasswordRequest
+from app.schemas.schemas import (
+    ForgotPasswordRequest, LoginRequest, ResetPasswordRequest, Token, UserCreate, UserOut,
+)
 from app.services.email import allow_reset_email, reset_email_body, send_email
+
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/signup", response_model=UserOut, status_code=status.HTTP_201_CREATED)
@@ -33,5 +39,14 @@ def login(credentials: LoginRequest, db: Session = Depends(get_db)):
 
 @router.post("/forgot-password")
 def forgot_password(
-    request: Forgo
-)
+    request: ForgotPasswordRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
+    """Email a password-reset link. The answer is ALWAYS the same, whether or not the address has an
+    account, so this cannot be used to find out who is registered."""
+    user = db.query(User).filter(func.lower(User.email) == request.email.lower()).first()
+    if user and allow_reset_email(user.email):
+        link = f"{settings.frontend_url.rstrip('/')}/reset-password?token={create_password_reset_token(user)}"
+        background_tasks.add_task(send_email, user.email, "Reset your password", reset_email_body(link))
+    return {"detail": "If that email is registered, a reset link has been sent."}
