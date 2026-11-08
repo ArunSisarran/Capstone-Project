@@ -1,3 +1,5 @@
+import hashlib
+import hmac
 import uuid
 from datetime import datetime, timedelta, timezone
 from jose import jwt
@@ -55,4 +57,40 @@ def get_current_user(
     if user is None:
         raise credentials_exception
 
+    return user
+
+PASSWORD_RESET_PURPOSE = "password-reset"
+
+def _password_fingerprint(hashed_password: str) -> str:
+    """Short, one way scramble of the user's CURRENT password hash. When the password changes,
+    the fingerpoint changes, so any reset link made before the change stops working."""
+    return hashlib.sha256(hashed_password.encode()).hexdigest()[:16]
+
+def create_password_reset_token(user: User) -> str:
+    expire = datetime.now(timezone.utc) + timedelta(minutes=settings.password_reset_expire_minutes)
+    note = {
+        "uid": str(user.id),
+        "purpose": PASSWORD_RESET_PURPOSE,
+        "fp": _password_fingerprint(user.hashed_password),
+        "exp": expire,
+    }
+    return jwt.encode(note, settings.secret_key, algorithm=settings.algorithm)  
+
+def user_from_password_reset_token(token: str, db: Session) -> User | None:
+    """The user this reset token belongs to, or None if the token is not valid."""
+    try:
+        note = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+    except jwt.JWTError:                                           # forged, damaged or expired
+        return None
+    if note.get("purpose") != PASSWORD_RESET_PURPOSE:              # e.g. a login token
+        return None
+    try:
+        user_id = uuid.UUID(note.get("uid"))
+    except (ValueError, TypeError, AttributeError):
+        return None
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        return None
+    if not hmac.compare_digest(str(note.get("fp")), _password_fingerprint(user.hashed_password)):
+        return None                                                # the password changed: link already used
     return user
