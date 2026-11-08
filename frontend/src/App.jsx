@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import Navbar from './components/Navbar'
 import FavoritePage from './components/FavoritePage'
 import SavedForLaterPage from './components/SavedForLaterPage' 
+import ChangePassword from './pages/ChangePasswordPage'
 
 function App() {
   ///Uses Prop to store states
@@ -24,9 +25,7 @@ function App() {
   return(
     <>
     <BrowserRouter>
-      <Navbar 
-        token={token}
-      />
+      <Navbar/>
 
       <Routes>
           <Route path="/" element = {<HomePage />} />
@@ -81,7 +80,9 @@ function App() {
             />
 
             <Route path = "/savedforlater" 
-                  element ={<SavedForLaterPage 
+                  element ={<SavedForLaterPage
+                            history={history} 
+                            setHistory={setHistory} 
                             favorites = {favorites} 
                             setFavorites = {setFavorites} 
                             savedforlater = {savedforlater} 
@@ -90,6 +91,10 @@ function App() {
                             setToken={setToken}
                             />}  
               />
+
+              <Route path = "/changepassword"
+                element = {<ChangePassword token= {token} setToken = {setToken} />}
+                />
 
       </Routes>
     </BrowserRouter>

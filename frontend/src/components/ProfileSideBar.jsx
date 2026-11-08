@@ -41,6 +41,10 @@ function ProfileSideBar({token,setToken}){
         getUser();
     },[]);
 
+    const handleChangePassword = () =>{
+        navigate("/changepassword")
+    }
+
 
 
     return (
@@ -64,9 +68,16 @@ function ProfileSideBar({token,setToken}){
 
                
                     <div className="profile-content">
-                        <h3>Email:{user.email}</h3>
+                    {
+                        user.email ? (
+                        <h3>{user.email}</h3>
+                        ):(
+                            <h3>Email</h3>
+                        )
+                    }
+                        
                         <span className="change-password">
-                        <button>Change Password</button>
+                        <button onClick = {handleChangePassword}>Change Password</button>
                         </span>
                     </div>
 

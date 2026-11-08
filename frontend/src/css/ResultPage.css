@@ -89,6 +89,13 @@
     width: 100%;
     color: rgb(89, 59, 45);
     font-family: 'Chakra Petch';
+
+    
+    cursor:pointer;
+    transition: all 0.25s ease;
 }
 
+.result button:active{
+    transform: scale(0.95);
+}
 

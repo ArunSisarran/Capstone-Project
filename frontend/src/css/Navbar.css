@@ -1,3 +1,4 @@
+
 .navbar{
     display: flex;
     align-items: center;
@@ -25,6 +26,8 @@
     color: rgb(89,54,45);
     text-decoration: none;
     font-size: larger;
+
+    transition: color 0.2s ease;
 }
 
 .links span{
@@ -35,9 +38,44 @@
 }
 
 .links:hover{
-    color: white;
+     text-decoration: underline;
+}
+
+.links:active{
+    transform: scale(0.95);
 }
 
 .login-signup{
     margin-left: auto;
+}
+
+.after-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.after-login p {
+    font-size: larger;
+    color: rgb(89,54,45);
+}
+
+.after-login button{
+    background: transparent;
+    border: none;
+
+    font-size: medium;
+    color: rgb(89,54,45);
+
+    cursor:pointer;
+    transition: all 0.25s ease;
+}
+
+.after-login button:hover{
+    text-decoration: underline;
+}
+
+.after-login button:active{
+     transform: scale(0.95);
 }

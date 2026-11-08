@@ -7,16 +7,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack'
 import FavoriteButton from './FavoriteButton'
 import SavedForLaterButton from './SavedForLaterButton'
 
 function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforlater,setSavedForLater}){
 
-  ///  console.log(recipe)
     const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
-    
-   //const  isFavorite = favorites.some((f) => f.id === recipe.id);
-   //const isSaved = savedforlater.some((s) => s.id === recipe.id);
 
 
     const navigate = useNavigate();
@@ -55,7 +52,7 @@ function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforl
                 component="img"
                 alt={recipe.title}
                 height="200"
-                image= {recipe.imageUrl}
+                image= {recipe.image_url}
             />
 
             <CardContent>
@@ -65,14 +62,29 @@ function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforl
 
                 <Divider sx={{backgroundColor:"black"}} />
 
-                <Typography component="div" variant="body2" sx={{ color: "rgb(89,45,59)", mt:1, ml:2 }}>
-                Cooking Time: {(recipe.prep_time_minutes||recipe.cookingTime)}
+                <Typography component="div" variant="body2" sx={{ color: "rgb(89,45,59)", mt:1, ml:2 }}>      
+                {/*if could not find the prep time in new object, then it would not shown below info for favorite and saved for late page  */}
+                {
+                    recipe.prep_time_minutes &&(
+                        <>
+                Cooking Time: {(recipe.prep_time_minutes||[])}
+                               
 
-                <br></br>
-                Dietary-tag: {(recipe.dietary_tags||[]).map((dietaryTag)=>(
-                   <div key={dietaryTag.id}> {dietaryTag.name} </div>
-                ))}
-                <br></br>
+
+                {
+                    recipe.dietary_tags.length === 0 ? (
+                        <div>Dietary-tag: None</div>
+                    ):(
+                        <> 
+                        <Stack direction = "row" spacing = {1}> 
+                        <div>Dietary-tag:</div> 
+                        {(recipe.dietary_tags).map((dietaryTag)=>(
+                        <div key={dietaryTag.id}> {dietaryTag.name} </div>
+                        ))}
+                        </Stack>
+                        </>
+                    )
+                }
                 Ingredients:
                 <ul style={{marginLeft:"20px"}}>
                     {(recipe.ingredients||[]).map((ingredient)=>(
@@ -80,7 +92,13 @@ function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforl
                     ))}
                    
                 </ul>
-                </Typography>
+                 </>
+
+                    )
+                }
+
+            </Typography>
+
             </CardContent>
 
             <CardActions>

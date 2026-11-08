@@ -22,12 +22,13 @@ function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater
                 <div className="favorites">
                     <h1>Favorite Recipes</h1>
                     <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />
+                    <div className = "card-section">
                     {favorites.length === 0 ?(
                         <p>Empty History</p>
                     ):(       
                   favorites.map((recipe)=>(
-                    <Grid container spacing = {3} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
-                        <Grid recipe size={4} key={recipe.id}>
+                    <Grid container spacing = {0} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
+                        <Grid recipe size={20} key={recipe.id}>
                                 <RecipeCard 
                                     recipe={recipe} 
                                     history = {history}
@@ -39,8 +40,10 @@ function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater
                                 />
                         </Grid>
                     </Grid>
+                   
                         ))
                     )}
+                     </div>
             </div>
                 <Divider 
                     orientation="vertical" 

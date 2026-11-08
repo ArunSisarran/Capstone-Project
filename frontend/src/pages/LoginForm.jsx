@@ -6,17 +6,20 @@ import '../css/Login-SignupForm.css'
 import '../components/Navbar'
 import {Link,useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
+import {base_url} from '../api/api.js'
+import {useAuth} from '../context/AuthContext'
 
 function Login({token,setToken}){
 
     const {register, handleSubmit,formState: {errors},}
      = useForm()
 
+    const {login} = useAuth();
 
     //calling api from frontend for login
     const onSubmit = async(loginData) => {
         const response = await fetch (
-            "http://127.0.0.1:8000/auth/login",
+            `${base_url}/auth/login`,
             {
             method : "POST",
             headers:{
@@ -27,10 +30,12 @@ function Login({token,setToken}){
 
         const data = await response.json();
 
-        console.log(response.status);
-        console.log(Boolean(data.access_token));
+        if(!response.ok){
+            throw new Error("Login failed!");
+            
+        }
 
-        setToken(data.access_token)
+        login(data.user,data.access_token)
     };
 
 
@@ -69,11 +74,6 @@ function Login({token,setToken}){
                     <LockIcon className="icons" />
                     <p>{errors.password?.message}</p>
                 </div>
-
-
-            {/*   <div className="remember">
-                    <label><input type="checkbox" />Remember me</label>
-                </div>? */}
 
                 <div className="submit-container">
                     <button type="submit">Login</button>

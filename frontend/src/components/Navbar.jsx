@@ -2,16 +2,10 @@ import React from 'react'
 import '../css/Navbar.css'
 import {Link,useNavigate} from 'react-router-dom'
 import { GiCook } from "react-icons/gi"
+import {useAuth} from '../context/AuthContext'
 
-function Navbar({token}){
-    const navigate = useNavigate();
-
-    //log out
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        console.log("log out button work!")
-        navigate("/login")
-    }
+function Navbar(){
+    const {user, isLoggedIn, logout} = useAuth();
 
     return (
         <>
@@ -26,12 +20,12 @@ function Navbar({token}){
                 </Link>
             </div>
             <div className="login-signup">
-                {token ? (
-                    <>
-                    <p>Hello!</p>
-                    <Link to="/profile" className="links">Profile  </Link>
-                    <button onClick= {handleLogout}>Log out</button>
-                    </>
+                {isLoggedIn ? (
+                    <div className = "after-login">
+                    <p>Welcome!</p>
+                    <Link to="/profile" className="links">My Profile  </Link>
+                    <button onClick= {logout}>Log out</button>
+                    </div>
                 ):(
                     <>
                 <Link to="/profile" className="links">Profile  </Link>

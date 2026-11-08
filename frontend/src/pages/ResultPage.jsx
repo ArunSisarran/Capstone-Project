@@ -149,7 +149,7 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
                  <div className="ingredients-tags">
                 
                 <p>Ingredients Tags:  </p>
-                <Stack direction="row" spacing={1}>
+         {/*      <Stack direction="row" spacing={1}>
                 {ingredientsTag.map((ingredient) => (
                 <Chip 
                     label={ingredient.name} 
@@ -161,7 +161,7 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
                 
                 />
                         ))}
-                </Stack>
+                </Stack>*/}  
             </div>   
 
             <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />

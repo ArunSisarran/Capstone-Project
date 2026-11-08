@@ -12,7 +12,7 @@ function FavoriteButton({recipe,favorites,setFavorites}){
         const newFavorites = {
             id:recipe.id,
             title:recipe.title,
-            cookingTime:recipe.prep_time_minutes,
+            image_url:recipe.image_url,
             viewedAt:new Date(). toISOString(),
         };
         const handleFavorites = () =>{
