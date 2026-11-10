@@ -1,0 +1,89 @@
+
+.navbar{
+    display: flex;
+    align-items: center;
+    gap:20px;
+    background-color: rgb(243, 227, 210);
+    padding: 20px;
+    border-radius: 1px solid brown;
+}
+
+.cook-icon{
+    color: rgb(89,54,45);
+}
+
+.cook-icon:hover{
+    color: white;
+}
+
+.logo-icon{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.links{
+    color: rgb(89,54,45);
+    text-decoration: none;
+    font-size: larger;
+
+    transition: color 0.2s ease;
+}
+
+.links span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.account-links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 7px;
+}
+
+.links:hover{
+     text-decoration: underline;
+}
+
+.links:active{
+    transform: scale(0.95);
+}
+
+.login-signup{
+    margin-left: auto;
+}
+
+.after-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.after-login p {
+    font-size: larger;
+    color: rgb(89,54,45);
+}
+
+.after-login button{
+    background: transparent;
+    border: none;
+
+    font-size: medium;
+    color: rgb(89,54,45);
+
+    cursor:pointer;
+    transition: all 0.25s ease;
+}
+
+.after-login button:hover{
+    text-decoration: underline;
+}
+
+.after-login button:active{
+     transform: scale(0.95);
+}
