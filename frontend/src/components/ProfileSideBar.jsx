@@ -12,7 +12,7 @@ function ProfileSideBar(){
     const {user, isLoggedIn,loading} = useAuth();
 
 
-    if (loading) return null;
+     if (loading) return <p>Loading...</p>;
 
     //navigate to other pages
     const handleHistoryPage = () => {

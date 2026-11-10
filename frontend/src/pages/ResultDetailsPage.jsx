@@ -1,14 +1,26 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import '../css/ResultDetailsPage.css'
 import Divider from '@mui/material/Divider';
+import {base_url} from '../api/api.js'
 
 function ResultDetailsPage({result}){
     const {id} = useParams();
     
-    const recipeContent = result.find(
-        (recipeContent) => recipeContent.id === Number(id)
-    );
+    const [recipeContent, setRecipeContent] = useState(null);
+
+    useEffect(()=>{
+        if(!id) return;
+
+        fetch(`${base_url}/recipes/${id}`)
+            .then(res => res.json())
+            .then(data => setRecipeContent(data))
+            .catch(error => console.error("Failed to get recipe content!", error))
+    },[id])
+
+    if(!recipeContent){
+        return <div>Loading Recipe Content!</div>
+    }
 
     return(
 

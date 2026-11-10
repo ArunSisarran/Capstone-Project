@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
+import {base_url} from '../api/api.js'
 
 function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,setSavedForLater,result,setResult}) {
         // use for render api
@@ -27,15 +28,13 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
 
     //Get the list of recipes, list of dietray-tag, and the list of ingredients JSON data from api
     useEffect(()=>{
-        fetch("http://127.0.0.1:8000/recipes?skip=0&limit=20")
+        fetch(`${base_url}/recipes?skip=0&limit=20`)
         .then((res)=>res.json())
-        .then((json) => {
-            setResult(json);
-        });
+        .then((json) => {setResult(json);});
     },[result])
 
         useEffect(()=>{
-        fetch("http://127.0.0.1:8000/dietary-tags")
+        fetch(`${base_url}/dietary-tags`)
         .then((res)=>res.json())
         .then((json) => {
             setDietaryTag(json);
@@ -77,6 +76,8 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
         return matchedAllergyFood && matchedDietaryTag
         
     });
+
+        //mobile design
 
         const [showFilter, setShowFilter] = useState(false);
 
