@@ -1,0 +1,109 @@
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import '../css/HomePage.css'
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import AddIcon from '@mui/icons-material/Add';
+
+function HomePage(){
+
+    const [preview, setPreview] = useState(null);
+
+    //create a local url for preview
+    const handleFileChange = (e) =>{
+        const file = e.target.files[0];
+        if (file){
+            const url = URL.createObjectURL(file);
+            setPreview(url);
+        }
+    };
+
+    const navigate = useNavigate();
+
+    const handleResult = () =>{
+        navigate("/result")
+        };
+
+    return(
+   
+        <div className="homepage">
+
+            <div className="header">
+                <h1>Recipe Recommender</h1>
+            </div>
+
+            <h2>Don't Know What to Cook? We've Got You!</h2>
+            <h3>Simply snap a photo of your ingredients and discover delicious recipes youe can make!</h3>
+
+            {/*simple camera & upload a picture*/}  
+            <div className="capture-upload">
+                <div className = "snap-photo">
+                <input id = "file-upload" type ="file" accept="image/*" onChange = {handleFileChange}/>
+                <label htmlFor="file-upload" className="capture">
+                    <CameraAltIcon sx={{fontSize:70 ,
+                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            borderRadius:'5px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                            backdropFilter: 'blur(3px)',
+
+                            '&:hover': {
+                            color: '#fff',
+                            backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                            borderColor: 'rgba(255, 255, 255, 0.6)',
+                            },
+                            
+                            '&:active':{
+                                transform: 'scale(0.95)',
+                            }
+                    
+                    }} />
+                 </label>
+                <label htmlFor="file-upload" className="choose-file">
+                     <AddIcon sx={{fontSize:70,
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            border: '1px solid rgba(255, 255, 255, 0.3)',
+                            borderRadius:'5px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                            backdropFilter: 'blur(3px)',
+
+                            '&:hover': {
+                            color: '#fff',
+                            backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                            borderColor: 'rgba(255, 255, 255, 0.6)',
+                            },
+
+                            '&:active':{
+                                transform: 'scale(0.95)',
+                            }
+
+                     }}/>
+                 </label>
+                     </div>
+
+                  <sub>Snap your ingredients</sub>
+
+                <div className = "preview-section">          
+                {preview && (
+                    <>
+                    <h3>Image Preview: </h3>
+                    <img
+                        src={preview}
+                        alt="Preview"
+                        style={{maxWidth : '200px'}} 
+                    />
+                    </>
+                )}
+                </div>
+            </div>
+
+        
+            {/*submit*/} 
+            <div className="submit-button">
+                <button className="button-icon" onClick={handleResult}>Generate Recipe</button>
+            </div>
+
+
+        </div>
+    );
+}
+
+export default HomePage;
