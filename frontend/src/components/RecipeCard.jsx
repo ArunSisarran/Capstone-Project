@@ -64,11 +64,9 @@ function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforl
 
                 <Typography component="div" variant="body2" sx={{ color: "rgb(89,45,59)", mt:1, ml:2 }}>      
                 {/*if could not find the prep time in new object, then it would not shown below info for favorite and saved for late page  */}
-                {
-                    recipe.prep_time_minutes &&(
-                        <>
+
                 Cooking Time: {(recipe.prep_time_minutes||[])}
-                               
+                      
 
 
                 {
@@ -84,7 +82,7 @@ function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforl
                         </Stack>
                         </>
                     )
-                }
+}
                 Ingredients:
                 <ul style={{marginLeft:"20px"}}>
                     {(recipe.ingredients||[]).map((ingredient)=>(
@@ -92,10 +90,10 @@ function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforl
                     ))}
                    
                 </ul>
-                 </>
+                
 
-                    )
-                }
+                    
+                
 
             </Typography>
 

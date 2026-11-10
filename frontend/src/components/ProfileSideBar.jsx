@@ -3,10 +3,16 @@ import '../css/Profile.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useNavigate} from 'react-router-dom';
 import Divider from '@mui/material/Divider';
+import {useAuth} from '../context/AuthContext'
 
 
-function ProfileSideBar({token,setToken}){
+function ProfileSideBar(){
     const navigate = useNavigate();
+
+    const {user, isLoggedIn,loading} = useAuth();
+
+
+    if (loading) return null;
 
     //navigate to other pages
     const handleHistoryPage = () => {
@@ -20,26 +26,7 @@ function ProfileSideBar({token,setToken}){
     const handleSavedForLaterPage = () =>{
         navigate("/savedforlater")
     };
-
-    const [user,setUser] = useState([]);
-       
-    //calling api for get user email address
-    useEffect (()=>{
-        const getUser = async () =>{
-            const response = await fetch("http://127.0.0.1:8000/users/me",{
-                headers:{
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            if(!response.ok){
-                throw new Error("Failed!")
-            }
-            const data = await response.json();
-            setUser(data);
-        };
-
-        getUser();
-    },[]);
+    
 
     const handleChangePassword = () =>{
         navigate("/changepassword")
@@ -68,13 +55,15 @@ function ProfileSideBar({token,setToken}){
 
                
                     <div className="profile-content">
-                    {
-                        user.email ? (
-                        <h3>{user.email}</h3>
-                        ):(
-                            <h3>Email</h3>
-                        )
-                    }
+                    
+                        {
+                            isLoggedIn ? (
+                                <h3>{user?.email}</h3>
+                            ):(
+                                <h3>Please Login</h3>
+                            )
+                        }
+                    
                         
                         <span className="change-password">
                         <button onClick = {handleChangePassword}>Change Password</button>

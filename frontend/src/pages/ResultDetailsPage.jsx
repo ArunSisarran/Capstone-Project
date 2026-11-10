@@ -27,15 +27,18 @@ function ResultDetailsPage({result}){
             
             <div className="recipe-content">
                 <p>Cooking Time: {recipeContent.prep_time_minutes}</p>
-                <p>Cuisine:{recipeContent.cuisine}</p>
-               <p>Dietary-tag:
+                <div className="dietary-tag">
+                        Dietary-tag:
+                <ul style={{marginLeft:"7%"}}>
+                
                 {recipeContent.dietary_tags.map((dietaryTag)=>(
-                    <p key={dietaryTag.id}>{dietaryTag.name}</p>
+                    <li key={dietaryTag.id}>{dietaryTag.name}</li>
                ))}
-               </p>
+                </ul>
+               </div>
                 <div className="ingredient-lists">
                     Ingredient:
-                    <ul style={{marginLeft:"10%"}}>
+                    <ul style={{marginLeft:"7%"}}>
                         {recipeContent.ingredients.map((ingredient)=>(
                             <li key={ingredient.id}>{ingredient.name}</li>
                         ))}

@@ -5,7 +5,9 @@ import { GiCook } from "react-icons/gi"
 import {useAuth} from '../context/AuthContext'
 
 function Navbar(){
-    const {user, isLoggedIn, logout} = useAuth();
+    const {user, loading, logout,isLoggedIn} = useAuth();
+
+    if(loading) return null;
 
     return (
         <>
@@ -23,15 +25,15 @@ function Navbar(){
                 {isLoggedIn ? (
                     <div className = "after-login">
                     <p>Welcome!</p>
-                    <Link to="/profile" className="links">My Profile  </Link>
+                    <Link to="/profile" className="links">Account  </Link>
                     <button onClick= {logout}>Log out</button>
                     </div>
                 ):(
-                    <>
-                <Link to="/profile" className="links">Profile  </Link>
-                <Link to="/login" className="links">Login/</Link>
+                    <div className= "account-links">
+                <Link to="/login" className="links">Login</Link>
                 <Link to="/signup" className="links">Sign Up</Link>
-                </>
+                <Link to="/profile" className="links">Account </Link>
+                </div>
                 )}
             </div>
         </nav>

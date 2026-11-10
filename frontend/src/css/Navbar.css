@@ -37,6 +37,14 @@
     gap: 5px;
 }
 
+.account-links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 7px;
+}
+
 .links:hover{
      text-decoration: underline;
 }

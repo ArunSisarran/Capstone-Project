@@ -8,10 +8,15 @@ import '../css/Login-SignupForm.css'
 import {useForm, Form} from 'react-hook-form'
 
 function Signup(){
-    const {register, handleSubmit,formState: {errors},}
+    const {register, handleSubmit, reset,formState: {errors},}
      = useForm()
 
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState("");
+
     const onSubmit = async(registerData) => {
+
+    try{
         const response = await fetch (
             "http://127.0.0.1:8000/auth/signup",
             {
@@ -21,11 +26,22 @@ function Signup(){
             },
             body: JSON.stringify(registerData),
         });
-
     const data = await response.json();
 
     console.log("Status:", response.status);
     console.log(data);
+
+        if(!response.ok){
+            throw new Error("Registration failed!");
+        }
+
+        reset();
+
+        setSuccess(true);
+    }catch (error){
+        setError(error.message);
+    }
+
     };
 
     return(
@@ -66,6 +82,10 @@ function Signup(){
                         <LockIcon className="icons" />
                         <p>{errors.password?.message}</p>
                     </div>   
+
+                    {success && (
+                        <p style={{color:"green"}}> Registration successful!</p>
+                    )}
 
 
                     <div className="submit-container">

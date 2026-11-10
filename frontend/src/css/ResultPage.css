@@ -99,3 +99,27 @@
     transform: scale(0.95);
 }
 
+.mobile-filter-button{
+    display: none;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px){
+    .result-section{
+        display: block;
+    }
+
+    .filter-control{
+        display: none;
+    }
+
+    .card{
+        width: 100%;
+    }
+
+    .mobile-filter-button{
+        display: block;
+
+    }
+}

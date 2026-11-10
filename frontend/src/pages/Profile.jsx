@@ -10,7 +10,7 @@ import ProfileSideBar from '../components/ProfileSideBar'
 import FavoritePage from '../components/FavoritePage'
 import SavedForLaterPage from '../components/SavedForLaterPage' 
 
-function Profile({history,setHistory,favorites,setFavorites,savedforlater,setSavedForLater,token,setToken}){
+function Profile({history,setHistory,favorites,setFavorites,savedforlater,setSavedForLater}){
 
  const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
 
@@ -45,7 +45,7 @@ function Profile({history,setHistory,favorites,setFavorites,savedforlater,setSav
                     
                 </div> 
                     <Divider orientation="vertical" flexItem sx={{backgroundColor:"rgb(89,54,45)"}} />    
-                    <ProfileSideBar token={token} setToken={setToken} />
+                    <ProfileSideBar />
             </div>
         </div>
     );

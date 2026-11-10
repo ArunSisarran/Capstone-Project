@@ -31,10 +31,12 @@ function HomePage(){
                 <h1>Recipe Recommender</h1>
             </div>
 
-            <h3>[Description]</h3>
+            <h2>Don't Know What to Cook? We've Got You!</h2>
+            <h3>Simply snap a photo of your ingredients and discover delicious recipes youe can make!</h3>
 
             {/*simple camera & upload a picture*/}  
             <div className="capture-upload">
+                <div className = "snap-photo">
                 <input id = "file-upload" type ="file" accept="image/*" onChange = {handleFileChange}/>
                 <label htmlFor="file-upload" className="capture">
                     <CameraAltIcon sx={{fontSize:70 ,
@@ -47,6 +49,10 @@ function HomePage(){
                             color: '#fff',
                             backgroundColor: 'rgba(255, 255, 255, 0.18)',
                             borderColor: 'rgba(255, 255, 255, 0.6)',
+                            },
+                            
+                            '&:active':{
+                                transform: 'scale(0.95)',
                             }
                     
                     }} />
@@ -63,12 +69,19 @@ function HomePage(){
                             color: '#fff',
                             backgroundColor: 'rgba(255, 255, 255, 0.18)',
                             borderColor: 'rgba(255, 255, 255, 0.6)',
+                            },
+
+                            '&:active':{
+                                transform: 'scale(0.95)',
                             }
 
                      }}/>
                  </label>
+                     </div>
 
-                                
+                  <sub>Snap your ingredients</sub>
+
+                <div className = "preview-section">          
                 {preview && (
                     <>
                     <h3>Image Preview: </h3>
@@ -79,10 +92,10 @@ function HomePage(){
                     />
                     </>
                 )}
+                </div>
             </div>
 
-            <sub>Take or Upload a picture of your ingredients</sub>
-
+        
             {/*submit*/} 
             <div className="submit-button">
                 <button className="button-icon" onClick={handleResult}>Generate Recipe</button>

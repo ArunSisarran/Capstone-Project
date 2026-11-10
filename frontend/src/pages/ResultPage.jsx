@@ -20,24 +20,9 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
     const [keyword, setKeyword] = useState("");//not for keyword yet
     const [allergyFood, setAllergyFood] = useState("none");
 
-    //keep it for temp; not sure for cuisine preference
-    const [cuisinePreference, setCuisinePreference] = useState("none");
-    const handleCuisinePreference = (e) => setCuisinePreference(e.target.value);
-
-    //when the user is choosing
-    const[filters, setFilters]= useState({AllergyFood:"None",DietaryTag:"None"});
-
-    //after the user finished, and click apply
-    const [appliedFilters, setAppliedFilters] =  useState({AllergyFood:"None",DietaryTag:"None"});
- 
-
     const handleClick = () => {
         console.info('You clicked the Chip.');
     };
-
-
-    //render ingredients from api
-    const [ingredientsTag,setIngredientsTag] = useState([])
 
 
     //Get the list of recipes, list of dietray-tag, and the list of ingredients JSON data from api
@@ -57,14 +42,6 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
         });
     },[dietaryTag])
 
-    useEffect(()=>{
-        fetch("http://127.0.0.1:8000/ingredients")
-        .then((res)=>res.json())
-        .then((json)=>{
-            setIngredientsTag(json);
-        });
-    },[ingredientsTag])
-
     const handleApplyFilter = () =>{
         console.log("before apply:", appliedFilters)
         console.log("after apply:",filters)
@@ -72,23 +49,36 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
         setAppliedFilters({...filters});
     };
 
+
+    //when the user is choosing
+    const[filters, setFilters]= useState({AllergyFood:[],DietaryTag:[]});
+
+    //after the user finished, and click apply
+    const [appliedFilters, setAppliedFilters] =  useState({AllergyFood:[],DietaryTag:[]});
+ 
     const handleResetFilter = ()=>{
-        setFilters({AllergyFood:"None",DietaryTag:"None"});
-        setAppliedFilters({AllergyFood:"None",DietaryTag:"None"});
+        setFilters({AllergyFood:[],DietaryTag:[]});
+        setAppliedFilters({AllergyFood:[],DietaryTag:[]});
     }
+
+
 
      const filteredControl = result.filter((recipe) => {
        const matchedAllergyFood =
-        appliedFilters.AllergyFood === "None" ||
+        appliedFilters.AllergyFood.length === 0 ||
         !recipe.ingredients.some((ingredient)=>(ingredient.name === appliedFilters.AllergyFood))
 
         const matchedDietaryTag = 
-        appliedFilters.DietaryTag === "None" ||
+        appliedFilters.DietaryTag.length === 0||
         recipe.dietary_tags.some((dietaryTag)=>(dietaryTag.name === appliedFilters.DietaryTag))
+
+        
 
         return matchedAllergyFood && matchedDietaryTag
         
     });
+
+        const [showFilter, setShowFilter] = useState(false);
 
     return(
         <>
@@ -123,21 +113,9 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
 
                                 }
 
-                            <TextField />
                             </FormGroup>
                         </div> 
-
-                        <div className="cuisine-category"> Cuisine Preference:
-                            <FormGroup>
-                            <FormControlLabel control={<Checkbox defaultChecked sx={{minHeight:0,height:'10px' }} />} label="none" />
-                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="American" />
-                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="Italian" />
-                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="Mexican" />
-                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px'}}/>} label="Chinese" />
-                            <FormControlLabel control={<Checkbox sx={{minHeight:0,height:'10px' }}/>} label="other"/>
-                            <TextField />
-                            </FormGroup>
-                        </div>                       
+                     
                         <button className="filter-button" onClick = {handleApplyFilter}>Apply filter </button>                       
                         <button className="filter-button" onClick = {handleResetFilter}>Reset filter </button>     
         
@@ -146,7 +124,11 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
                 {/*Card-Section*/}
                 <div className="card">  
                 
+        
+                
                  <div className="ingredients-tags">
+                
+                <button className = "mobile-filter-button" onClick={()=>setShowFilter(true)}> Filter </button>
                 
                 <p>Ingredients Tags:  </p>
          {/*      <Stack direction="row" spacing={1}>
@@ -166,9 +148,9 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
 
             <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />
 
-                    <Grid container spacing = {3} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
+                    <Grid container spacing = {2} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
                         {filteredControl.map((recipe) => (
-                            <Grid recipe size={4} key={recipe.id}>
+                            <Grid recipe size={{xs:12,sm:6,md:4}} key={recipe.id}>
                                 <RecipeCard 
                                     recipe={recipe} 
                                     history = {history}

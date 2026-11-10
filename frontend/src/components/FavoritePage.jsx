@@ -5,16 +5,42 @@ import {Link} from 'react-router-dom'
 import FavoriteButton from '../components/FavoriteButton'
 import SavedForLaterButton from '../components/SavedForLaterButton'
 import ProfileSideBar from '../components/ProfileSideBar'
-import RecipeCard from '../components/RecipeCard'
+import FavoriteRecipeCard from '../components/FavoriteRecipeCard'
 import Grid from '@mui/material/Grid';
+import {base_url} from '../api/api.js'
 
-
-function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater,setSavedForLater,token, setToken}){
+function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater,setSavedForLater}){
 
     useEffect(() =>{
-    const saved = JSON.parse(localStorage.getItem("clickFavorites"))
-    setFavorites(saved);
-    },[]);
+        const getFavoritesCards = async () =>{
+            try{
+                const savedToken = localStorage.getItem("token");
+
+                const response = await fetch(
+                    `${base_url}/saved-recipes?kind=favorite&skip=0&limit=20`,
+                    {
+                        method:"GET",
+                        headers:{
+                            Authorization:`Bearer ${savedToken}`,
+                            "Content-Type": "application/json"
+                        }
+                    }
+                )
+
+                if (!response.ok){
+                    throw new Error ("Failed to save favorite!");
+                }
+
+               const data = await response.json()
+                console.log("API DATA", data)
+               setFavorites(data);
+            }catch (error){
+                console.log(error.message);
+            }
+        };
+
+        getFavoritesCards();
+},[]);
 
     return (
          <div className = "profile-page">
@@ -24,13 +50,13 @@ function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater
                     <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />
                     <div className = "card-section">
                     {favorites.length === 0 ?(
-                        <p>Empty History</p>
-                    ):(       
-                  favorites.map((recipe)=>(
-                    <Grid container spacing = {0} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
-                        <Grid recipe size={20} key={recipe.id}>
-                                <RecipeCard 
-                                    recipe={recipe} 
+                        <p>Empty Favorites</p>
+                    ):(    
+                                        <Grid container spacing = {2} sx ={{p:2, width:"100%", boxSizing:"border-box"}}>   
+                 {favorites.map((recipe)=>(
+                        <Grid recipe size={{xs:12,sm:6,md:4}} key={recipe.recipe_id}>
+                                <FavoriteRecipeCard 
+                                    recipe={recipe.recipe} 
                                     history = {history}
                                     setHistory = {setHistory}
                                     favorites = {favorites} 
@@ -39,10 +65,11 @@ function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater
                                     setSavedForLater = {setSavedForLater}
                                 />
                         </Grid>
-                    </Grid>
                    
-                        ))
+                        ))}
+                           </Grid>
                     )}
+                                     
                      </div>
             </div>
                 <Divider 
@@ -51,8 +78,6 @@ function FavoritePage({history, setHistory, favorites,setFavorites,savedforlater
                     sx={{backgroundColor:"rgb(89,54,45)"}} 
                 /> 
                 <ProfileSideBar 
-                    token={token} 
-                    setToken={setToken}
                 />
         </div>
     </div>

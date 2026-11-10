@@ -12,6 +12,8 @@ import FavoritePage from './components/FavoritePage'
 import SavedForLaterPage from './components/SavedForLaterPage' 
 import ChangePassword from './pages/ChangePasswordPage'
 
+import ProtectedRoute from './components/ProtectedRoute'
+
 function App() {
   ///Uses Prop to store states
   const [history, setHistory] = useState([]);
@@ -20,7 +22,7 @@ function App() {
 
   const [result,setResult] = useState([]);
 
-  const [token,setToken] = useState(null);
+//sconst [token,setToken] = useState(null);
 
   return(
     <>
@@ -46,10 +48,7 @@ function App() {
 
           <Route path="/result/:id" element={<ResultDetailsPage result = {result}/>} />
 
-          <Route path="/login" element = {<Login 
-                                            token={token} 
-                                            setToken={setToken}/
-                                          >} />
+          <Route path="/login" element = {<Login />} />
 
           <Route path="/signup" element = {<Signup />} />
 
@@ -61,10 +60,13 @@ function App() {
                             setFavorites={setFavorites}
                             savedforlater = {savedforlater}
                             setSavedForLater = {setSavedForLater}
-                            token = {token}
-                            setToken = {setToken}
                             />} 
-            />     
+            />
+
+
+          {/*Wrap protected routes */} 
+                  
+          <Route element = {<ProtectedRoute />}>
 
           <Route path = "/favorite"
                  element = {<FavoritePage 
@@ -74,8 +76,6 @@ function App() {
                             setFavorites = {setFavorites} 
                             savedforlater = {savedforlater} 
                             setSavedForLater = {setSavedForLater}
-                            token={token} 
-                            setToken={setToken}
                             />} 
             />
 
@@ -87,14 +87,14 @@ function App() {
                             setFavorites = {setFavorites} 
                             savedforlater = {savedforlater} 
                             setSavedForLater = {setSavedForLater} 
-                            token={token} 
-                            setToken={setToken}
                             />}  
               />
 
               <Route path = "/changepassword"
-                element = {<ChangePassword token= {token} setToken = {setToken} />}
+                element = {<ChangePassword />}
                 />
+
+                </Route>
 
       </Routes>
     </BrowserRouter>
