@@ -11,7 +11,6 @@ import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-import {base_url} from '../api/api.js'
 
 function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,setSavedForLater,result,setResult}) {
         // use for render api
@@ -46,10 +45,6 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
             setResult(json);
         });
     },[scanItems])
-        fetch(`${base_url}/recipes?skip=0&limit=20`)
-        .then((res)=>res.json())
-        .then((json) => {setResult(json);});
-    },[result])
 
         useEffect(()=>{
         fetch(`${base_url}/dietary-tags`)
