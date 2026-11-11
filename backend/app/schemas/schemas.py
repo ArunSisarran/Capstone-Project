@@ -126,3 +126,12 @@ class RecipeMatchOut(RecipeOut):
    match_score: float = 0.0
    total_ingredients: int = 0
    missing_ingredients: List[IngredientOut] = []
+
+class ScanItem(BaseModel):  # one detected ingredient -Arun
+   name: str
+   count: int
+   ingredient_id: Optional[int]  # None if no Ingredient row matches -Arun
+
+class ScanOut(BaseModel):  # POST /scan response -Arun
+   items: List[ScanItem]
+   vlm: Optional[str] = None

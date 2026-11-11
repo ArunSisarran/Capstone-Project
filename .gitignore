@@ -9,3 +9,6 @@ __pycache__/
 
 # raw TheMealDB downloads used by the seed import
 backend/scripts/cache/
+# local demo -Arun
+venv/
+backend/demo.db

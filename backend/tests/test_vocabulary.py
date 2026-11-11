@@ -190,3 +190,20 @@ def test_all_canonical_names_are_the_detectable_classes_only():
     assert not any(name in names for name in ("black pepper", "water", "spices"))  # staples
     assert names == sorted(set(names)) and all(name == name.lower() for name in names)
     assert len(names) >= 80
+
+# ---------- detector names (VisionModel/ingredients.csv) -Arun
+DETECTOR_FILE = VOCAB_FILE.parents[3] / "VisionModel" / "ingredients.csv"
+# detector names with no vocabulary match yet -Arun
+UNMATCHED_DETECTOR_NAMES = {
+    "Kale", "Ground Turkey", "Oats", "Cereal", "Quinoa", "Couscous", "Canned Soup",
+    "Jar of Salsa", "Jar of Jam", "Ketchup Bottle", "Mustard Bottle", "Mayo Jar",
+}
+
+
+@pytest.mark.skipif(not DETECTOR_FILE.exists(), reason="VisionModel folder not checked out")
+def test_every_detector_name_resolves_or_is_listed_as_unmatched():
+    with open(DETECTOR_FILE, newline="", encoding="utf-8") as handle:
+        names = {row["name"] for row in csv.DictReader(handle)}
+    unresolved = {name for name in names if resolve(name) is None}
+    # on failure: add the new name as an alias or to UNMATCHED_DETECTOR_NAMES -Arun
+    assert unresolved == UNMATCHED_DETECTOR_NAMES

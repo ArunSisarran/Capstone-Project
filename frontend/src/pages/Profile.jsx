@@ -15,7 +15,7 @@ function Profile({history,setHistory,favorites,setFavorites,savedforlater,setSav
  const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
 
     useEffect(() =>{
-    const viewed = JSON.parse(localStorage.getItem("clickHistory"))
+    const viewed = JSON.parse(localStorage.getItem("clickHistory") || "[]") //empty list if nothing viewed yet -Arun
     setHistory(viewed);
     },[]);
 

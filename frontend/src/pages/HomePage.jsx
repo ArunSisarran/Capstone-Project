@@ -3,10 +3,14 @@ import {useNavigate} from 'react-router-dom';
 import '../css/HomePage.css'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import AddIcon from '@mui/icons-material/Add';
+import {base_url} from '../api/api.js'
 
 function HomePage(){
 
     const [preview, setPreview] = useState(null);
+    const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     //create a local url for preview
     const handleFileChange = (e) =>{
@@ -14,14 +18,38 @@ function HomePage(){
         if (file){
             const url = URL.createObjectURL(file);
             setPreview(url);
+            setFile(file);
+            setError("");
         }
     };
 
     const navigate = useNavigate();
 
-    const handleResult = () =>{
-        navigate("/result")
-        };
+    //uploads the photo to /scan and opens the results -Arun
+    const handleResult = async () =>{
+        if (!file){
+            setError("Choose a photo first.");
+            return;
+        }
+        setLoading(true);
+        setError("");
+        try{
+            const response = await fetch(`${base_url}/scan`, {
+                method: "POST",
+                headers: {"Content-Type": file.type || "application/octet-stream"},
+                body: file,
+            });
+            const data = await response.json();
+            if (!response.ok){
+                throw new Error(data.detail || "Could not read the photo.");
+            }
+            navigate("/result", {state: {items: data.items}});
+        }catch(err){
+            setError(err.message);
+        }finally{
+            setLoading(false);
+        }
+    };
 
     return(
    
@@ -98,7 +126,10 @@ function HomePage(){
         
             {/*submit*/} 
             <div className="submit-button">
-                <button className="button-icon" onClick={handleResult}>Generate Recipe</button>
+                <button className="button-icon" onClick={handleResult} disabled={loading}>
+                    {loading ? "Finding ingredients..." : "Generate Recipe"}
+                </button>
+                {error && <p role="alert">{error}</p>}
             </div>
 
 
