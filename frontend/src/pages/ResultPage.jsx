@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useLocation} from 'react-router-dom'
+import {base_url} from '../api/api.js'
 import RecipeCard from '../components/RecipeCard'
 import '../css/ResultPage.css'
 import Grid from '@mui/material/Grid';
@@ -26,8 +27,25 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
     };
 
 
-    //Get the list of recipes, list of dietray-tag, and the list of ingredients JSON data from api
+    //scan results from HomePage, undefined when browsing -Arun
+    const scanItems = useLocation().state?.items;
+
+    //matched recipes for the scan, or all recipes when browsing -Arun
     useEffect(()=>{
+        const ids = [...new Set((scanItems || []).map((item) => item.ingredient_id).filter(Boolean))];
+        if (scanItems && ids.length === 0){
+            setResult([]);
+            return;
+        }
+        const url = scanItems
+            ? `${base_url}/recipes/match?` + ids.map((id) => `ingredient_ids=${id}`).join("&")
+            : `${base_url}/recipes?skip=0&limit=20`;
+        fetch(url)
+        .then((res)=> res.ok ? res.json() : [])
+        .then((json) => {
+            setResult(json);
+        });
+    },[scanItems])
         fetch(`${base_url}/recipes?skip=0&limit=20`)
         .then((res)=>res.json())
         .then((json) => {setResult(json);});
@@ -39,7 +57,7 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
         .then((json) => {
             setDietaryTag(json);
         });
-    },[dietaryTag])
+    },[])
 
     const handleApplyFilter = () =>{
         console.log("before apply:", appliedFilters)
@@ -132,22 +150,27 @@ function ResultPage({history,setHistory,favorites,setFavorites,savedforlater,set
                 <button className = "mobile-filter-button" onClick={()=>setShowFilter(true)}> Filter </button>
                 
                 <p>Ingredients Tags:  </p>
-         {/*      <Stack direction="row" spacing={1}>
-                {ingredientsTag.map((ingredient) => (
-                <Chip 
-                    label={ingredient.name} 
-                    key ={ingredient.id} 
-                    variant="outlined" 
-                    onClick={handleClick} 
+                <Stack direction="row" spacing={1} useFlexGap sx={{flexWrap:'wrap'}}>
+                {(scanItems || []).map((item) => (
+                <Chip
+                    label={item.count > 1 ? `${item.name} ×${item.count}` : item.name}
+                    key ={item.name}
+                    variant="outlined"
+                    title={item.ingredient_id ? "" : "No recipes use this ingredient yet"}
 
-                    sx = {{color:'rgb(89,54,45)', border: '1px solid rgb(89,54,45)'}}
-                
+                    //faded when no recipe uses this ingredient -Arun
+                    sx = {{color:'rgb(89,54,45)', border: '1px solid rgb(89,54,45)', opacity: item.ingredient_id ? 1 : 0.5}}
+
                 />
                         ))}
-                </Stack>*/}  
-            </div>   
+                </Stack>
+            </div>
 
             <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />
+
+                    {scanItems && result.length === 0 && (
+                        <p style={{padding:'24px'}}>No recipes match these ingredients yet. Try another photo.</p>
+                    )}
 
                     <Grid container spacing = {2} sx ={{p:3, width:"100%", boxSizing:"border-box"}}>
                         {filteredControl.map((recipe) => (
