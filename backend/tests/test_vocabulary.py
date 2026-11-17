@@ -100,7 +100,7 @@ def test_deliberately_unsupported_ingredients_stay_unknown(raw):
     assert resolve(raw) is None
 
 
-@pytest.mark.parametrize("raw", ["turkey", "quinoa", "clove", "", "   "])
+@pytest.mark.parametrize("raw", ["turkey", "rhubarb", "clove", "", "   "])
 def test_unknown_names_return_none(raw):
     assert resolve(raw) is None
 
@@ -193,10 +193,9 @@ def test_all_canonical_names_are_the_detectable_classes_only():
 
 # ---------- detector names (VisionModel/ingredients.csv) -Arun
 DETECTOR_FILE = VOCAB_FILE.parents[3] / "VisionModel" / "ingredients.csv"
-# detector names with no vocabulary match yet -Arun
+# detector names left unmapped on purpose (turkey: Meat row excludes it; cereal/soup: ambiguous dietary flags, no recipes use them) -Arun
 UNMATCHED_DETECTOR_NAMES = {
-    "Kale", "Ground Turkey", "Oats", "Cereal", "Quinoa", "Couscous", "Canned Soup",
-    "Jar of Salsa", "Jar of Jam", "Ketchup Bottle", "Mustard Bottle", "Mayo Jar",
+    "Ground Turkey", "Cereal", "Canned Soup",
 }
 
 

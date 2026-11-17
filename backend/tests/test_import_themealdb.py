@@ -40,12 +40,12 @@ def test_summarize_counts_accepted_and_rejected():
 def test_unlocks_only_counts_recipes_blocked_by_a_single_name():
     meals = [
         make_meal(1, "A", ("Turkey", "1"), ("Onion", "1")),                    # only turkey blocks
-        make_meal(2, "B", ("Turkey", "1"), ("Quinoa", "1"), ("Onion", "1")),   # turkey AND quinoa
+        make_meal(2, "B", ("Turkey", "1"), ("Rhubarb", "1"), ("Onion", "1")),   # turkey AND rhubarb
     ]
     summary = summarize(meals)
     assert summary.blocks["turkey"] == 2
     assert summary.unlocks["turkey"] == 1     # adding turkey rescues A, not B
-    assert summary.unlocks["quinoa"] == 0
+    assert summary.unlocks["rhubarb"] == 0
 
 
 def test_duplicate_meal_ids_are_counted_once():
@@ -66,8 +66,8 @@ def test_tag_counts_include_recipes_with_no_tags():
 def test_unknown_per_recipe_buckets_rejected_recipes():
     meals = [
         make_meal(1, "A", ("Turkey", "1"), ("Onion", "1")),                    # 1 unknown
-        make_meal(2, "B", ("Turkey", "1"), ("Quinoa", "1"), ("Onion", "1")),   # 2 unknown
-        make_meal(3, "C", ("Turkey", "1"), ("Quinoa", "1"), ("Tapioca", "1"), ("Fennel", "1")),  # 4 -> bucket 3
+        make_meal(2, "B", ("Turkey", "1"), ("Rhubarb", "1"), ("Onion", "1")),   # 2 unknown
+        make_meal(3, "C", ("Turkey", "1"), ("Rhubarb", "1"), ("Tapioca", "1"), ("Fennel", "1")),  # 4 -> bucket 3
     ]
     summary = summarize(meals)
     assert summary.unknown_per_recipe[1] == 1

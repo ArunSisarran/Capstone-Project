@@ -85,3 +85,7 @@ Chocolate,chocolate;dark chocolate;milk chocolate;white chocolate;chocolate chip
 Nuts,nuts;almonds;ground almonds;walnuts;cashews;cashew nuts;pecans;hazelnuts;pistachios;peanuts;pine nuts;pine kernels;peanut butter;mixed nuts;chopped nuts;flaked almonds;sliced almonds;slivered almonds;almond flakes;pecan nuts;pecan halves;chopped walnuts;walnut pieces;pistachio;shelled pistachios;hazelnut;almond;macadamia nuts;brazil nuts;jar of peanut butter,yes,yes,yes,,"peanut butter lives here, not under Butter"
 Sauce,tomato paste;tomato puree;tomato purée;tomato sauce;passata,yes,yes,yes,,tomato-based only. CSV maps tomato paste to Sauce
 Sauce,sauce;pasta sauce;pizza sauce;bbq sauce;barbecue sauce;hot sauce;sweet chilli sauce;sweet chili sauce;hotsauce;hot pepper sauce;tabasco;tabasco sauce;sriracha;jar of pasta sauce,unsure,unsure,unsure,,"generic sauce could hide fish, dairy or meat, so it blocks every tag"
+Kale,kale;curly kale;baby kale;cavolo nero,yes,yes,yes,,
+Oats,oats;oat;rolled oats;porridge oats;oatmeal,yes,yes,yes,,
+Quinoa,quinoa;white quinoa;red quinoa,yes,yes,yes,,
+Couscous,couscous;cous cous;pearl couscous;israeli couscous,yes,yes,yes,,
