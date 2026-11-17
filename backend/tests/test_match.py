@@ -1,5 +1,5 @@
 """What GET /recipes/match says about each result. """
-from app.models.models import Ingredient, Recipe, User
+from app.models.models import DietaryTag, Ingredient, Recipe, User
 
 
 def build_kitchen(db):
@@ -139,3 +139,67 @@ def test_skip_and_limit_page_through_results_without_repeats(client, db):
     second = [r["title"] for r in client.get(f"/recipes/match?{query}&skip=2&limit=2").json()]
     assert first + second == everything
     assert len(everything) == 3
+
+
+def tag_recipes(db, assignments):
+    """assignments: {"vegetarian": ["Scramble", "Toast"], ...}. Returns {tag name: tag id}."""
+    tag_ids = {}
+    for tag_name, titles in assignments.items():
+        tag = DietaryTag(name=tag_name)
+        tag.recipes = db.query(Recipe).filter(Recipe.title.in_(titles)).all()
+        db.add(tag)
+        db.flush()
+        tag_ids[tag_name] = tag.id
+    db.commit()
+    return tag_ids
+
+
+def titles_for(client, ids, tag_ids=(), names=("egg", "milk", "butter", "ham")):
+    query = "&".join(f"ingredient_ids={ids[name]}" for name in names)
+    query += "".join(f"&dietary_tag_ids={tag_id}" for tag_id in tag_ids)
+    response = client.get(f"/recipes/match?{query}")
+    assert response.status_code == 200
+    return [r["title"] for r in response.json()]
+
+
+def tagged_kitchen(db):
+    """vegetarian: Scramble, Toast. gluten-free: Scramble, Omelette. Only Scramble has both."""
+    ids = build_kitchen(db)
+    tags = tag_recipes(db, {"vegetarian": ["Scramble", "Toast"],
+                            "gluten-free": ["Scramble", "Omelette"]})
+    return ids, tags
+
+
+def test_without_a_tag_filter_every_matching_recipe_is_returned(client, db):
+    ids, _ = tagged_kitchen(db)
+    assert sorted(titles_for(client, ids)) == ["Omelette", "Scramble", "Toast"]
+
+
+def test_one_tag_returns_only_recipes_that_carry_it(client, db):
+    ids, tags = tagged_kitchen(db)
+    assert sorted(titles_for(client, ids, [tags["vegetarian"]])) == ["Scramble", "Toast"]
+
+
+def test_two_tags_means_both_not_either(client, db):
+    ids, tags = tagged_kitchen(db)
+    result = titles_for(client, ids, [tags["vegetarian"], tags["gluten-free"]])
+    assert result == ["Scramble"]   # Toast is only vegetarian, Omelette only gluten-free
+
+
+def test_unknown_tag_id_returns_an_empty_list(client, db):
+    ids, _ = tagged_kitchen(db)
+    assert titles_for(client, ids, [9999]) == []
+
+
+def test_tag_filter_keeps_the_ranking(client, db):
+    ids, tags = tagged_kitchen(db)
+    # Omelette (0.75) is filtered out; Scramble then Toast, same order as unfiltered
+    result = titles_for(client, ids, [tags["vegetarian"]], names=("egg", "milk", "butter"))
+    assert result == ["Scramble", "Toast"]
+
+
+def test_repeating_a_tag_id_changes_nothing(client, db):
+    ids, tags = tagged_kitchen(db)
+    once = titles_for(client, ids, [tags["vegetarian"]])
+    twice = titles_for(client, ids, [tags["vegetarian"], tags["vegetarian"]])
+    assert once == twice
