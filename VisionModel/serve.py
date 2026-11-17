@@ -229,23 +229,23 @@ def check(model, version, ing):
     d = lambda n, c: {"name": n, "class_id": 0, "confidence": c, "box": [0, 0, 1, 1]}
     dets = [d("Apple", .9), d("Apple", .8), d("Sauce", .7), d("Sauce", .5), d("Tomato", .9),
             d("Egg", .3), d("Garlic", .3), d("Pineapple", .6)]
-    vlm = [{"name": "Apple", "count": 3}, {"name": "Ketchup Bottle", "count": 1}, {"name": "Mustard Bottle", "count": 1},
+    vlm = [{"name": "Apple", "count": 3}, {"name": "Ketchup", "count": 1}, {"name": "Mustard", "count": 1},
            {"name": "Egg", "count": 6}, {"name": "Canned Soup", "count": 2}, {"name": "Rice", "count": 4},
            {"name": "Cherry Tomatoes", "count": 10}, {"name": "Unicorn", "count": 1}, {"name": "Canned Soup", "count": 1}]
     items, sugg = merge(dets, vlm, ing)
     got = {i["name"]: (i["count"], i["source"]) for i in items}
     assert got == {"Apple": (2, "both"),
-                   "Ketchup Bottle": (1, "both"), "Mustard Bottle": (1, "both"),
+                   "Ketchup": (1, "both"), "Mustard": (1, "both"),
                    "Egg": (6, "both"),
                    "Canned Soup": (3, "vlm"),
                    "Rice": (1, "vlm"), "Cherry Tomatoes": (1, "both"),
                    "Pineapple": (1, "model")}, got
-    assert sugg == ["Garlic (bulb)"], sugg
+    assert sugg == ["Garlic"], sugg
     assert next(i for i in items if i["name"] == "Canned Soup")["max_confidence"] is None
     items, sugg = merge(dets, None, ing)
     assert {i["name"]: i["source"] for i in items} == {"Apple": "model", "Sauce": "model", "Tomato": "model",
                                                        "Pineapple": "model"}, items
-    assert sugg == ["Egg", "Garlic (bulb)"], sugg
+    assert sugg == ["Egg", "Garlic"], sugg
     print("merge ok")
 
     _vlm_calls.clear()
@@ -254,7 +254,7 @@ def check(model, version, ing):
     print("rate limit ok")
 
     path = sorted(glob.glob("datasets/merged-v3/test/images/fridge-object-v3__*"))[0]
-    for ask, want in ((None, "off"), (lambda im: [{"name": "Ketchup Bottle", "count": 2}], "fake"),
+    for ask, want in ((None, "off"), (lambda im: [{"name": "Ketchup", "count": 2}], "fake"),
                       (lambda im: 1 / 0, "unavailable")):
         out = detect(model, version, Image.open(path), ing, ask, "fake")
         json.dumps(out)
