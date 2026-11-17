@@ -7,14 +7,16 @@ class Settings(BaseSettings):
     secret_key: str
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 60 * 24
-    frontend_url: str = 'https://localhost:5173'
+    frontend_url: str = 'http://localhost:5173'
     vision_url: str = 'http://localhost:8001'  # serve.py address -Arun
+    cors_origins: str = 'http://localhost:5173,http://localhost:3000'   # comma-separated
+    scan_rate_limit: str = '5/minute'
     password_reset_expire_minutes: int = 30
 
     email_backend: str = "console"
 
     smtp_host: str = "smtp.gmail.com"
-    smtp_port: int = 597
+    smtp_port: int = 587
     smtp_username: str = ""
     smtp_password: str = ""
     mail_from: str = ""

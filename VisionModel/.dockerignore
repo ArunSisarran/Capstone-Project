@@ -1,0 +1,9 @@
+.env
+__pycache__
+datasets
+demo pics
+weights
+runs/*
+!runs/merged-v2
+runs/merged-v2/*
+!runs/merged-v2/best.pt

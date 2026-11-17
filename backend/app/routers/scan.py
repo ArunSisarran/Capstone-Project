@@ -1,3 +1,4 @@
+from app.core.config import settings
 import json
 import urllib.error
 import urllib.request
@@ -10,6 +11,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.database import get_db
+from app.core.limiter import limiter
 from app.models.models import Ingredient
 from app.schemas.schemas import ScanOut
 from app.services.vocabulary import resolve
@@ -42,6 +44,7 @@ def canonical_name(detected: str) -> Optional[str]:
 
 
 @router.post("", response_model=ScanOut)
+@limiter.limit(lambda: settings.scan_rate_limit)
 async def scan(request: Request, db: Session = Depends(get_db)):
     """Takes raw photo bytes and returns the detected ingredients with their ids. -Arun"""
     image = b""
@@ -54,15 +57,25 @@ async def scan(request: Request, db: Session = Depends(get_db)):
 
     result = await run_in_threadpool(call_vision, image)
 
-    canonical = {item["name"]: canonical_name(item["name"]) for item in result["items"]}
+    suggested_names = result.get("suggestions", [])
+    item_names = [item["name"] for item in result["items"]]
+    canonical = {name: canonical_name(name) for name in item_names + suggested_names}
     wanted = [name for name in canonical.values() if name]
     rows = db.query(Ingredient).filter(func.lower(Ingredient.name).in_(wanted)).all()
     ids = {row.name.lower(): row.id for row in rows}
 
-    return ScanOut(
-        vlm=result.get("vlm"),
-        items=[
-            {"name": item["name"], "count": item["count"], "ingredient_id": ids.get(canonical[item["name"]])}
-            for item in result["items"]
-        ],
-    )
+    items = [
+        {"name": item["name"], "count": item["count"], "ingredient_id": ids.get(canonical[item["name"]])}
+        for item in result["items"]
+    ]
+
+    # "Did you also have...?": only names that map to an Ingredient row, once each, never repeating an item
+    seen = {item["ingredient_id"] for item in items if item["ingredient_id"]}
+    suggestions = []
+    for name in suggested_names:
+        ingredient_id = ids.get(canonical[name])
+        if ingredient_id and ingredient_id not in seen:
+            seen.add(ingredient_id)
+            suggestions.append({"name": name, "ingredient_id": ingredient_id})
+
+    return ScanOut(vlm=result.get("vlm"), items=items, suggestions=suggestions)
