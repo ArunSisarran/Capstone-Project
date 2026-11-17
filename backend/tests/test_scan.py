@@ -18,11 +18,38 @@ def test_scan_maps_detected_names_to_ingredient_ids(client, db, monkeypatch):
     response = client.post("/scan", content=b"fake image bytes")
 
     assert response.status_code == 200
-    assert response.json() == {"vlm": "gemini", "items": [
+    assert response.json() == {"vlm": "gemini", "suggestions": [], "items": [
         {"name": "Apple", "count": 3, "ingredient_id": apple_id},
         {"name": "Kale", "count": 1, "ingredient_id": None},
         {"name": "Salt", "count": 1, "ingredient_id": None},
     ]}
+
+
+def test_scan_returns_only_usable_suggestions_once_each(client, db, monkeypatch):
+    db.add_all([Ingredient(name="apple"), Ingredient(name="milk")])
+    db.commit()
+    ids = {row.name: row.id for row in db.query(Ingredient).all()}
+
+    # Milk maps to a row; Kale has none and Salt is ignored; Apple is already detected; the second Milk is a repeat
+    monkeypatch.setattr(scan, "call_vision", lambda image: {"vlm": "gemini", "items": [
+        {"name": "Apple", "count": 1},
+    ], "suggestions": ["Milk", "Kale", "Salt", "Apple", "Milk"]})
+    response = client.post("/scan", content=b"fake image bytes")
+
+    assert response.status_code == 200
+    assert response.json()["suggestions"] == [{"name": "Milk", "ingredient_id": ids["milk"]}]
+
+
+def test_scan_is_rate_limited_per_client(client, monkeypatch):
+    monkeypatch.setattr(scan, "call_vision", lambda image: {"vlm": "off", "items": []})
+
+    # the limit is 5 per minute: the first five get through, the sixth is blocked
+    for _ in range(5):
+        assert client.post("/scan", content=b"fake image bytes").status_code == 200
+    blocked = client.post("/scan", content=b"fake image bytes")
+
+    assert blocked.status_code == 429
+    assert "detail" in blocked.json()
 
 
 def test_scan_rejects_an_empty_body(client):

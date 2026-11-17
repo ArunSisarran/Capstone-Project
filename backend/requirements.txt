@@ -36,3 +36,7 @@ uvicorn==0.53.0
 uvloop==0.22.1; sys_platform != "win32"
 watchfiles==1.2.0
 websockets==17.1
+Deprecated==3.0.1
+limits==5.8.0
+slowapi==0.1.10
+wrapt==2.5.2

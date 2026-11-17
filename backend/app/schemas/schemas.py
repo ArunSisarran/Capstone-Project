@@ -132,6 +132,12 @@ class ScanItem(BaseModel):  # one detected ingredient -Arun
    count: int
    ingredient_id: Optional[int]  # None if no Ingredient row matches -Arun
 
+
+class ScanSuggestion(BaseModel):
+   name: str 
+   ingredient_id: int
+
 class ScanOut(BaseModel):  # POST /scan response -Arun
    items: List[ScanItem]
+   suggestions: List[ScanSuggestion] = []
    vlm: Optional[str] = None

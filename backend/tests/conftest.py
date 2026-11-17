@@ -16,6 +16,7 @@ from sqlalchemy.pool import StaticPool
 from starlette.testclient import TestClient
 
 from app.core.database import Base, get_db
+from app.core.limiter import limiter
 from app.main import app
 
 
@@ -50,3 +51,9 @@ def client(engine):
     with TestClient(app) as test_client:
         yield test_client
     app.dependency_overrides.clear()
+
+
+@pytest.fixture(autouse=True)
+def reset_rate_limit():
+    """Rate limit counts live in memory for the whole test run; start every test from zero."""
+    limiter.reset()

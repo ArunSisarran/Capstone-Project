@@ -1,0 +1,30 @@
+services:
+  vision:
+    build: ./VisionModel
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    env_file: ./backend/.env
+    environment:
+      VISION_URL: http://vision:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      vision:
+        condition: service_healthy
+    restart: unless-stopped

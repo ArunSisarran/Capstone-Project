@@ -8,10 +8,10 @@ raising agents,baking powder;baking soda;bicarbonate of soda;bicarb;yeast;dried 
 thickeners,cornflour;cornstarch;corn starch;arrowroot;potato starch;corn flour;starch;potato flour;tapioca starch,yes,yes,yes,'corn flour' means cornflour (UK) or fine cornmeal (US); both are plant-based
 vanilla,vanilla;vanilla extract;vanilla essence;vanilla pod;vanilla bean,yes,yes,yes,
 cocoa,cocoa;cocoa powder;unsweetened cocoa,yes,yes,yes,
-mustard,mustard;dijon mustard;english mustard;wholegrain mustard;mustard powder,yes,yes,yes,
-ketchup,ketchup;tomato ketchup,yes,yes,yes,
+mustard,mustard;dijon mustard;english mustard;wholegrain mustard;mustard powder;mustard bottle,yes,yes,yes,
+ketchup,ketchup;tomato ketchup;ketchup bottle,yes,yes,yes,
 soy sauce,soy sauce;light soy sauce;dark soy sauce;tamari;soya sauce,yes,yes,yes,
-mayonnaise,mayonnaise;mayo,yes,no,yes,contains egg
+mayonnaise,mayonnaise;mayo;mayo jar,yes,no,yes,contains egg
 vegetable stock,vegetable stock;vegetable broth;veg stock,yes,yes,yes,
 stock (unspecified),stock;stock cube;stock cubes;bouillon;bouillon cube;broth;stock powder,unsure,unsure,unsure,could be meat-based
 meat stock,chicken stock;chicken broth;chicken stock cube;beef stock;beef broth;beef stock cube;lamb stock;fish stock;fish stock cube,no,no,yes,
@@ -25,3 +25,5 @@ extracts,almond extract;lemon extract;orange extract;peppermint extract;vanilla 
 curry pastes,thai red curry paste;thai green curry paste;red curry paste;green curry paste;curry paste;massaman paste;harissa paste;harissa,unsure,unsure,yes,"many curry pastes contain shrimp paste, so vegetarian/vegan stay unsure"
 syrups,golden syrup;maple syrup;agave syrup;agave nectar;treacle;black treacle;molasses;corn syrup,yes,yes,yes,"judgment call: treated as pantry sweeteners, like sugar"
 vegetable stock cubes,veg stock cube;vegetable bouillon;vegetable bouillon cube;vegetable stock cube;vegetable stock cubes;vegetable stock powder,yes,unsure,unsure,cubes and powders sometimes contain milk or whey
+salsa,salsa;jar of salsa;tomato salsa;salsa verde,yes,yes,yes,
+jam,jam;jar of jam;strawberry jam;raspberry jam;apricot jam,yes,yes,yes,

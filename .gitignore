@@ -12,3 +12,6 @@ backend/scripts/cache/
 # local demo -Arun
 venv/
 backend/demo.db
+
+# secrets read by docker-compose.yml
+.env
