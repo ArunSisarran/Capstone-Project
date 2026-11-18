@@ -1,17 +1,21 @@
 import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorderRounded';
+import Favorite from '@mui/icons-material/FavoriteRounded';
+import {useNavigate} from 'react-router-dom';
 import {base_url} from '../api/api.js'
 
 function FavoriteButton({recipe,favorites,setFavorites}){
-    const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
+    const navigate = useNavigate();
 
         //use for checkedbox
     const  isFavorite = favorites.some((favorite)=>favorite.recipe_id === recipe.id)
+    const label = { slotProps: { input: { 'aria-label': isFavorite ? 'Remove from favorites' : 'Add to favorites' } } };
             
         const handleFavorites = async (kind,recipe_id,checked) => {
 
             const savedToken = localStorage.getItem("token");
+            // logged out: go to login instead of a silent 401 -Arun
+            if (!savedToken){ navigate("/login"); return; }
 
             try{
                 let response;
@@ -67,9 +71,8 @@ function FavoriteButton({recipe,favorites,setFavorites}){
         <>
             <Checkbox 
                 {...label} 
-                icon={<FavoriteBorder sx={{color:"rgb(89,45,59)", 
-                                            '&:hover':{color:"rgb(89,45,59)"}}}/>} 
-                checkedIcon={<Favorite sx={{color:"rgb(89,45,59)"}} />}
+                icon={<FavoriteBorder sx={{color:"app.primary"}}/>}
+                checkedIcon={<Favorite sx={{color:"app.primary"}} />}
                 checked = {isFavorite} 
                 onChange={(e)=>{
                     handleFavorites("favorite",recipe.id,e.target.checked);

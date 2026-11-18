@@ -1,108 +1,79 @@
-import React from 'react'
 import {useState} from 'react'
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
 import {Link, useNavigate} from 'react-router-dom'
+import {useForm} from 'react-hook-form'
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import PasswordField from '../components/PasswordField'
+import {useAuth} from '../context/AuthContext'
+import {base_url} from '../api/api.js'
+import {errorText, logInWith, SERVER_DOWN} from '../utils/auth.js'
 import '../css/Login-SignupForm.css'
-import {useForm, Form} from 'react-hook-form'
 
 function Signup(){
-    const {register, handleSubmit, reset,formState: {errors},}
-     = useForm()
-
-    const [success, setSuccess] = useState(false);
+    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm();
+    const {login} = useAuth();
+    const navigate = useNavigate();
     const [error, setError] = useState("");
 
-    const onSubmit = async(registerData) => {
+    const field = (name, rules) => {
+        const {ref, ...rest} = register(name, rules);
+        return {...rest, inputRef: ref, error: Boolean(errors[name]), helperText: errors[name]?.message};
+    };
 
-    try{
-        const response = await fetch (
-            "http://127.0.0.1:8000/auth/signup",
-            {
-            method : "POST",
-            headers:{
-                "Content-Type":"application/json",
-            },
-            body: JSON.stringify(registerData),
-        });
-    const data = await response.json();
-
-    console.log("Status:", response.status);
-    console.log(data);
-
-        if(!response.ok){
-            throw new Error("Registration failed!");
+    const onSubmit = async ({email, password}) => {
+        setError("");
+        try{
+            const response = await fetch(`${base_url}/auth/signup`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({email, password}),
+            });
+            if (!response.ok){
+                throw new Error(errorText(await response.json().catch(() => null), "Couldn't create your account. Try again."));
+            }
+            const {token, user} = await logInWith(email, password);
+            login(user, token);
+            navigate("/");
+        }catch(err){
+            setError(err instanceof TypeError ? SERVER_DOWN : err.message);
         }
-
-        reset();
-
-        setSuccess(true);
-    }catch (error){
-        setError(error.message);
-    }
-
     };
 
     return(
-        <>
-        <div className="page">
-            <div className="container">
+        <main className="auth-page">
+            <div className="auth-card">
+                <header className="auth-card__head">
+                    <Typography variant="h1">Create an account</Typography>
+                    <Typography color="text.secondary">Save recipes you love and find them again on any device.</Typography>
+                </header>
 
-                <h1>Sign Up</h1>
-
-                <form 
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-
-                    <div className="inputs">
-                        <input 
-                            type = "email" 
-                            placeholder="you@example.com"
-                            {...register("email",{
-                            required:"Email is required",
-                            pattern:{value:/^\S+@\S+\.\S+$/, message:"Invalid email!Please re-enter!"},
-                            })}
-                        />
-                        <EmailIcon className="icons" />
-
-                        <p>{errors.email?.message}</p>
-                    </div>
-
-                    <div className="inputs">
-                        <input 
-                            type = "password" 
-                            placeholder="Password"                          
-                            {...register("password",{
-                                required:"Password is required",
-                                minLength:{value: 8, message:"Must be 8 characters"},
-                                pattern:{message:"Invalid password. Please re-enter"},
-                            })}
-                        />
-                        <LockIcon className="icons" />
-                        <p>{errors.password?.message}</p>
-                    </div>   
-
-                    {success && (
-                        <p style={{color:"green"}}> Registration successful!</p>
-                    )}
-
-
-                    <div className="submit-container">
-                        <button type ="submit" className="submit">Sign Up</button>
-                    </div>
-
-                    <div className="login-register">
-                        <p>Have account already? {""}
-                            <Link to="/login">Login</Link>
-                        </p>
-                    </div>
-
+                <form className="auth-form" noValidate onSubmit={handleSubmit(onSubmit)}>
+                    <TextField label="Email" type="email" autoComplete="email" fullWidth
+                        {...field("email", {
+                            required: "Enter your email",
+                            pattern: {value: /^\S+@\S+\.\S+$/, message: "Enter a valid email, like you@example.com"},
+                        })}/>
+                    {/* backend requires 12+ characters -Arun */}
+                    <PasswordField label="Password" autoComplete="new-password"
+                        {...field("password", {
+                            required: "Choose a password",
+                            minLength: {value: 12, message: "Use at least 12 characters"},
+                        })}
+                        helperText={errors.password?.message || "At least 12 characters"}/>
+                    {error && <Alert severity="error" role="alert">{error}</Alert>}
+                    <Button type="submit" size="large" fullWidth disabled={isSubmitting}
+                            endIcon={isSubmitting ? <CircularProgress size={18} color="inherit"/> : null}>
+                        Create account
+                    </Button>
                 </form>
+
+                <p className="auth-card__alt">Already have an account? <Link to="/login">Log in</Link></p>
             </div>
-        </div>
-        </>
+        </main>
     );
-} 
+}
 
 export default Signup;

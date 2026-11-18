@@ -1,111 +1,74 @@
-import React,  {useState} from 'react'
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
-import '../css/Login-SignupForm.css'
-import '../components/Navbar'
-import {Link,useNavigate} from 'react-router-dom'
+import {useState} from 'react'
+import {Link} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import PasswordField from '../components/PasswordField'
 import {base_url} from '../api/api.js'
+import {errorText, SERVER_DOWN} from '../utils/auth.js'
+import '../css/Login-SignupForm.css'
 
 function ChangePassword(){
-
-    const {register, handleSubmit,reset,formState:{errors}}
-     = useForm();
-
-    
-    const [success, setSuccess] = useState(false);
+    const {register, handleSubmit, reset, formState: {errors, isSubmitting}} = useForm();
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
 
-    //calling api from frontend for login
-    const onSubmit = async(passwordData) => {
-
-    console.log("Form Data:",passwordData);
-
-    const savedToken = localStorage.getItem("token")
-
-    try{
-
-        const response = await fetch (
-            `${base_url}/users/me/password`,
-            {
-            method : "PUT",
-            headers:{
-                "Content-Type":"application/json",
-                Authorization: `Bearer ${savedToken}`,
-            },
-            body: JSON.stringify(passwordData),
-        });  
-
-        const data = await response.json();
-
-        console.log("Status:", response.status);
-        console.log("Backend Error:", data);
-
-        if(!response.ok){
-            throw new Error("Failed to change password");
-        }
-
-      reset();
-      setSuccess(true);
-
-    } catch (error){
-         setError(error.message);
-    }
-
-    
+    const field = (name, rules) => {
+        const {ref, ...rest} = register(name, rules);
+        return {...rest, inputRef: ref, error: Boolean(errors[name]), helperText: errors[name]?.message};
     };
 
-
+    // backend replies 204 with no body -Arun
+    const onSubmit = async ({current_password, new_password}) => {
+        setError("");
+        setSuccess(false);
+        try{
+            const response = await fetch(`${base_url}/users/me/password`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}`},
+                body: JSON.stringify({current_password, new_password}),
+            });
+            if (!response.ok){
+                throw new Error(errorText(await response.json().catch(() => null), "Couldn't update your password. Try again."));
+            }
+            reset();
+            setSuccess(true);
+        }catch(err){
+            setError(err instanceof TypeError ? SERVER_DOWN : err.message);
+        }
+    };
 
     return(
-    <div className="page">
-        <div className="container">
+        <main className="auth-page">
+            <div className="auth-card">
+                <header className="auth-card__head">
+                    <Typography variant="h1">Change password</Typography>
+                    <Typography color="text.secondary">Enter your current password, then choose a new one.</Typography>
+                </header>
 
-            <h1>Change Password</h1>
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-
-                <div className="inputs">
-                    <input 
-                        type = "password" 
-                        placeholder="Enter Current Password"
-                        {...register("currentPassword",{
-                        required:"Current Password is required",
+                <form className="auth-form" noValidate onSubmit={handleSubmit(onSubmit)}>
+                    <PasswordField label="Current password" autoComplete="current-password"
+                        {...field("current_password", {required: "Enter your current password"})}/>
+                    <PasswordField label="New password" autoComplete="new-password"
+                        {...field("new_password", {
+                            required: "Choose a new password",
+                            minLength: {value: 12, message: "Use at least 12 characters"},
                         })}
-                    />
-                    <EmailIcon className="icons" />
-                    <p>{errors.password?.message}</p>
-                </div>
+                        helperText={errors.new_password?.message || "At least 12 characters"}/>
+                    {error && <Alert severity="error" role="alert">{error}</Alert>}
+                    {success && <Alert severity="success">Your password has been updated.</Alert>}
+                    <Button type="submit" size="large" fullWidth disabled={isSubmitting}
+                            endIcon={isSubmitting ? <CircularProgress size={18} color="inherit"/> : null}>
+                        Update password
+                    </Button>
+                </form>
 
-                <div className="inputs">
-                    <input 
-                        type = "password" 
-                        placeholder="Enter New Password"                          
-                        {...register("newPassword",{
-                            required:"Password is required",
-                            minLength:{value: 8, message:"Must be 8 characters"},
-                            pattern:{message:"Invalid password.Please re-enter!"},
-                        })}
-                    />
-                    <LockIcon className="icons" />
-                    <p>{errors.password?.message}</p>
-                </div>
-
-
-                {success && (
-                    <p style={{color:"green"}}> Login successful!</p>
-                )}
-
-                <div className="submit-container">
-                    <button type="submit">Update Password</button>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
+                <p className="auth-card__alt"><Link to="/profile">Back to your account</Link></p>
+            </div>
+        </main>
     );
-} 
+}
 
 export default ChangePassword;

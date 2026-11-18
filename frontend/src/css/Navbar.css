@@ -1,89 +1,124 @@
-
-.navbar{
-    display: flex;
+.topbar{
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap:20px;
-    background-color: rgb(243, 227, 210);
-    padding: 20px;
-    border-radius: 1px solid brown;
+    gap: 16px;
+    min-height: 64px;
+    padding-inline: clamp(16px, 4vw, 32px);
+    background-color: color-mix(in srgb, var(--mui-palette-app-surface) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--mui-palette-app-line);
 }
 
-.cook-icon{
-    color: rgb(89,54,45);
-}
-
-.cook-icon:hover{
-    color: white;
-}
-
-.logo-icon{
-    display: flex;
+.brand{
+    justify-self: start;
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
-}
-
-.links{
-    color: rgb(89,54,45);
+    gap: 10px;
+    min-height: 44px;
+    color: var(--mui-palette-app-ink);
     text-decoration: none;
-    font-size: larger;
-
-    transition: color 0.2s ease;
 }
 
-.links span{
+.brand__mark{
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background-color: var(--mui-palette-app-primary);
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+.brand__name{
+    font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.topnav{
+    display: flex;
+    gap: 4px;
+}
+
+.topnav__link{
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding-inline: 16px;
+    border-radius: 999px;
+    color: var(--mui-palette-app-muted);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 150ms ease-out, background-color 150ms ease-out;
+}
+
+.topnav__link:hover{ color: var(--mui-palette-app-ink); background-color: var(--mui-palette-app-surfaceAlt); }
+
+.topnav__link.active{
+    color: var(--mui-palette-app-primary);
+    background-color: var(--mui-palette-app-primarySoft);
+}
+
+.account{
+    justify-self: end;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
+    gap: 8px;
+    white-space: nowrap;
 }
 
-.account-links{
-    display: flex;
+.account__login{
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
-    padding: 7px;
+    min-height: 44px;
+    padding-inline: 12px;
+    color: var(--mui-palette-app-ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 999px;
 }
 
-.links:hover{
-     text-decoration: underline;
+.account__login:hover{ background-color: var(--mui-palette-app-surfaceAlt); }
+
+.bottomnav{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1100;
+    background-color: var(--mui-palette-app-surface);
 }
 
-.links:active{
-    transform: scale(0.95);
+.bottomnav svg{
+    box-sizing: content-box;
+    padding: 4px 18px;
+    border-radius: 999px;
+    transition: background-color 150ms ease-out;
 }
 
-.login-signup{
-    margin-left: auto;
+.bottomnav .Mui-selected svg{ background-color: var(--mui-palette-app-primarySoft); }
+
+@media (max-width: 599px){
+    .topbar{ grid-template-columns: 1fr auto; min-height: 56px; }
+    .topnav, .account__signup, .account__menu-button{ display: none !important; }
+    /* keeps content clear of the fixed bottom bar -Arun */
+    body{ padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
 }
 
-.after-login{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:10px;
+@media (min-width: 600px){
+    .bottomnav{ display: none; }
 }
 
-.after-login p {
-    font-size: larger;
-    color: rgb(89,54,45);
-}
-
-.after-login button{
-    background: transparent;
-    border: none;
-
-    font-size: medium;
-    color: rgb(89,54,45);
-
-    cursor:pointer;
-    transition: all 0.25s ease;
-}
-
-.after-login button:hover{
-    text-decoration: underline;
-}
-
-.after-login button:active{
-     transform: scale(0.95);
+@media (min-width: 600px) and (max-width: 819px){
+    .brand__name{ display: none; }
+    .topnav__link{ padding-inline: 12px; }
 }

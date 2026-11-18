@@ -1,118 +1,65 @@
-import React,  {useState} from 'react'
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
-import '../css/Login-SignupForm.css'
-import '../components/Navbar'
-import {Link,useNavigate} from 'react-router-dom'
+import {useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
-import {base_url} from '../api/api.js'
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+import PasswordField from '../components/PasswordField'
 import {useAuth} from '../context/AuthContext'
+import {logInWith, SERVER_DOWN} from '../utils/auth.js'
+import '../css/Login-SignupForm.css'
 
 function Login(){
-
-    const {register, handleSubmit,reset,formState: {errors},}
-     = useForm()
-
+    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm();
     const {login} = useAuth();
-
     const navigate = useNavigate();
-
-    
-    const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
 
-    //calling api from frontend for login
-    const onSubmit = async(loginData) => {
-
-    try {
-        const response = await fetch (
-            `${base_url}/auth/login`,
-            {
-            method : "POST",
-            headers:{
-                "Content-Type":"application/json",
-            },
-            body: JSON.stringify(loginData),
-        });
-
-        const data = await response.json();
-
-        if(!response.ok){
-            throw new Error("Login failed!");
-            
-        }
-
-        setSuccess(true);
-        login(data.user,data.access_token);
-        navigate("/");
-        
-        reset();
-    } catch (error){
-         setError(error.message);
-    }
-        
+    const field = (name, rules) => {
+        const {ref, ...rest} = register(name, rules);
+        return {...rest, inputRef: ref, error: Boolean(errors[name]), helperText: errors[name]?.message};
     };
 
-
+    const onSubmit = async ({email, password}) => {
+        setError("");
+        try{
+            const {token, user} = await logInWith(email, password);
+            login(user, token);
+            navigate("/");
+        }catch(err){
+            setError(err instanceof TypeError ? SERVER_DOWN : err.message);
+        }
+    };
 
     return(
-    <div className="page">
-        <div className="container">
+        <main className="auth-page">
+            <div className="auth-card">
+                <header className="auth-card__head">
+                    <Typography variant="h1">Log in</Typography>
+                    <Typography color="text.secondary">Welcome back. Your saved recipes are waiting.</Typography>
+                </header>
 
-            <h1>Login</h1>
+                <form className="auth-form" noValidate onSubmit={handleSubmit(onSubmit)}>
+                    <TextField label="Email" type="email" autoComplete="email" fullWidth
+                        {...field("email", {
+                            required: "Enter your email",
+                            pattern: {value: /^\S+@\S+\.\S+$/, message: "Enter a valid email, like you@example.com"},
+                        })}/>
+                    <PasswordField label="Password" autoComplete="current-password"
+                        {...field("password", {required: "Enter your password"})}/>
+                    {error && <Alert severity="error" role="alert">{error}</Alert>}
+                    <Button type="submit" size="large" fullWidth disabled={isSubmitting}
+                            endIcon={isSubmitting ? <CircularProgress size={18} color="inherit"/> : null}>
+                        Log in
+                    </Button>
+                </form>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-
-                <div className="inputs">
-                    <input 
-                        type = "email" 
-                        placeholder="you@example.com"
-                        {...register("email",{
-                        required:"Email is required",
-                        pattern:{value:/^\S+@\S+\.\S+$/, message:"Invalid email!Please re-enter!"},
-                        })}
-                    />
-                    <EmailIcon className="icons" />
-                    <p>{errors.email?.message}</p>
-                </div>
-
-                <div className="inputs">
-                    <input 
-                        type = "password" 
-                        placeholder="Password"                          
-                        {...register("password",{
-                            required:"Password is required",
-                            minLength:{value: 8, message:"Must be 8 characters"},
-                            pattern:{message:"Invalid password.Please re-enter!"},
-                        })}
-                    />
-                    <LockIcon className="icons" />
-                    <p>{errors.password?.message}</p>
-                </div>
-
-
-                {success && (
-                    <p style={{color:"green"}}> Login successful!</p>
-                )}
-
-                <div className="submit-container">
-                    <button type="submit">Login</button>
-                </div>
-
-                <div className="login-register">
-                    <p>Don't have an account? {""}
-                        <Link to="/signup">Sign Up</Link>
-                    </p>
-                    <br></br>
-                    <a href="#"> Forget Password </a>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
+                <p className="auth-card__alt">New here? <Link to="/signup">Create an account</Link></p>
+            </div>
+        </main>
     );
-} 
+}
 
 export default Login;

@@ -1,0 +1,36 @@
+.ingredient-tag{
+    --tag-main: var(--mui-palette-app-primary);
+    --tag-soft: var(--mui-palette-app-primarySoft);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background-color: var(--tag-soft);
+    color: var(--tag-main);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.ingredient-tag__count{
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.85;
+}
+
+.ingredient-tag.cat-produce{ --tag-main: var(--mui-palette-cat-produce-main); --tag-soft: var(--mui-palette-cat-produce-soft); }
+.ingredient-tag.cat-dairy{ --tag-main: var(--mui-palette-cat-dairy-main); --tag-soft: var(--mui-palette-cat-dairy-soft); }
+.ingredient-tag.cat-protein{ --tag-main: var(--mui-palette-cat-protein-main); --tag-soft: var(--mui-palette-cat-protein-soft); }
+.ingredient-tag.cat-grains{ --tag-main: var(--mui-palette-cat-grains-main); --tag-soft: var(--mui-palette-cat-grains-soft); }
+.ingredient-tag.cat-canned{ --tag-main: var(--mui-palette-cat-canned-main); --tag-soft: var(--mui-palette-cat-canned-soft); }
+.ingredient-tag.cat-condiments{ --tag-main: var(--mui-palette-cat-condiments-main); --tag-soft: var(--mui-palette-cat-condiments-soft); }
+.ingredient-tag.cat-baking{ --tag-main: var(--mui-palette-cat-baking-main); --tag-soft: var(--mui-palette-cat-baking-soft); }
+
+.ingredient-tag.is-off{
+    background-color: transparent;
+    border: 1.5px dashed var(--mui-palette-app-lineStrong);
+    color: var(--mui-palette-app-muted);
+}
