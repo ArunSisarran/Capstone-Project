@@ -18,7 +18,7 @@ const tabFor = (path) =>
     path === "/" ? "scan"
     : path.startsWith("/result") ? "recipes"
     : path.startsWith("/savedforlater") || path.startsWith("/favorite") ? "saved"
-    : path.startsWith("/profile") || path.startsWith("/changepassword") ? "profile"
+    : path.startsWith("/profile") || path.startsWith("/change") ? "profile"
     : false;
 
 function Navbar(){
@@ -61,6 +61,7 @@ function Navbar(){
                             <MenuItem onClick={() => go("/profile")}>Profile</MenuItem>
                             <MenuItem onClick={() => go("/favorite")}>Favorites</MenuItem>
                             <MenuItem onClick={() => go("/savedforlater")}>Saved for later</MenuItem>
+                            <MenuItem onClick={() => go("/changeemail")}>Change email</MenuItem>
                             <MenuItem onClick={() => go("/changepassword")}>Change password</MenuItem>
                             <Divider/>
                             <MenuItem onClick={handleLogout}>Log out</MenuItem>

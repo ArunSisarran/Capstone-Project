@@ -35,6 +35,8 @@
 
 .account-page__who p{ overflow-wrap: anywhere; }
 
+.account-page__actions{ display: flex; flex-wrap: wrap; gap: 8px; }
+
 .account-page__tabs{ border-bottom: 1px solid var(--mui-palette-app-line); }
 
 .history-list{

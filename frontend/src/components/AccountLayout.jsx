@@ -29,7 +29,10 @@ function AccountLayout({children}){
                 </div>
                 <div className="account-page__actions">
                     {isLoggedIn ? (
-                        <Button variant="outlined" component={Link} to="/changepassword">Change password</Button>
+                        <>
+                            <Button variant="outlined" component={Link} to="/changeemail">Change email</Button>
+                            <Button variant="outlined" component={Link} to="/changepassword">Change password</Button>
+                        </>
                     ) : !loading && (
                         <Button component={Link} to="/login">Log in</Button>
                     )}
