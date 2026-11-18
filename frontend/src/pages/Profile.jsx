@@ -1,53 +1,46 @@
-import React, {useEffect, useState} from 'react'
-import {useNavigate} from 'react-router-dom';
+import {useState} from 'react'
 import {Link} from 'react-router-dom'
-import '../css/Profile.css'
-import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import HistoryRounded from '@mui/icons-material/HistoryRounded';
+import AccountLayout from '../components/AccountLayout'
+import EmptyState from '../components/EmptyState'
 import FavoriteButton from '../components/FavoriteButton'
 import SavedForLaterButton from '../components/SavedForLaterButton'
-import RecipeCard from '../components/RecipeCard'
-import ProfileSideBar from '../components/ProfileSideBar'
-import FavoritePage from '../components/FavoritePage'
-import SavedForLaterPage from '../components/SavedForLaterPage' 
+import {readHistory, recordView} from '../utils/recordView.js'
 
-function Profile({history,setHistory,favorites,setFavorites,savedforlater,setSavedForLater}){
+const dateFormat = new Intl.DateTimeFormat(undefined, {month: "short", day: "numeric"});
 
- const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
+function Profile({favorites, setFavorites, savedforlater, setSavedForLater}){
+    const [history] = useState(readHistory);
 
-    useEffect(() =>{
-    const viewed = JSON.parse(localStorage.getItem("clickHistory") || "[]") //empty list if nothing viewed yet -Arun
-    setHistory(viewed);
-    },[]);
+    if (history.length === 0){
+        return (
+            <AccountLayout>
+                <EmptyState icon={<HistoryRounded fontSize="inherit"/>} title="No recipes viewed yet"
+                            text="Recipes you open show up here, so you can find them again."
+                            action={<Button component={Link} to="/">Scan your fridge</Button>}/>
+            </AccountLayout>
+        );
+    }
 
-    return(
-        <div className = "profile-page">
-            <div className = "track-list">
-                <div className="history">
-                    <h1>Recent History </h1>
-                    <Divider sx={{backgroundColor:"rgb(89,54,45)"}} />
-                    {history.length === 0 ?(
-                        <p>Empty History</p>
-                    ):(
-                  history.map((recipe)=>(
-                        <div className ="history-info" key={recipe.id}>
-                            <span className="time-title">
-                            <p>{new Date(recipe.viewedAt).toLocaleDateString("en-US")}</p>
-                            <Link to={`/result/${recipe.id}`} className="link">{recipe.title} </Link>
-                            </span>
-                            <span className= "info-buttons">
-                            <FavoriteButton recipe={recipe} favorites={favorites} setFavorites={setFavorites}/>
-                            <SavedForLaterButton recipe={recipe} savedforlater={savedforlater} setSavedForLater={setSavedForLater} />
-                            </span>
+    return (
+        <AccountLayout>
+            <ul className="panel history-list">
+                {history.map((recipe) => (
+                    <li key={recipe.id} className="history-list__row">
+                        <div className="history-list__text">
+                            <Link to={`/result/${recipe.id}`} onClick={() => recordView(recipe)}>{recipe.title}</Link>
+                            <Typography variant="meta" component="span">Viewed {dateFormat.format(new Date(recipe.viewedAt))}</Typography>
                         </div>
-                        ))
-                    )}
-
-                    
-                </div> 
-                    <Divider orientation="vertical" flexItem sx={{backgroundColor:"rgb(89,54,45)"}} />    
-                    <ProfileSideBar />
-            </div>
-        </div>
+                        <div className="history-list__actions">
+                            <FavoriteButton recipe={recipe} favorites={favorites} setFavorites={setFavorites}/>
+                            <SavedForLaterButton recipe={recipe} savedforlater={savedforlater} setSavedForLater={setSavedForLater}/>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </AccountLayout>
     );
 }
 

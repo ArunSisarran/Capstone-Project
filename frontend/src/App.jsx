@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import FavoritePage from './components/FavoritePage'
 import SavedForLaterPage from './components/SavedForLaterPage' 
 import ChangePassword from './pages/ChangePasswordPage'
+import ChangeEmail from './pages/ChangeEmailPage'
 
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -92,6 +93,10 @@ function App() {
 
               <Route path = "/changepassword"
                 element = {<ChangePassword />}
+                />
+
+              <Route path = "/changeemail"
+                element = {<ChangeEmail />}
                 />
 
                 </Route>

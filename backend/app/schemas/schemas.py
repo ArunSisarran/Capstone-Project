@@ -109,6 +109,7 @@ class DietaryTagCreate(BaseModel):
 
 class UserUpdate(BaseModel):
    email: Optional[EmailStr] = None
+   current_password: Optional[str] = None  # required when email changes -Arun
 
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr

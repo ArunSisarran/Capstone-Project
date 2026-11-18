@@ -1,16 +1,20 @@
 import Checkbox from '@mui/material/Checkbox';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorderRounded';
+import BookmarkIcon from '@mui/icons-material/BookmarkRounded';
+import {useNavigate} from 'react-router-dom';
 import {base_url} from '../api/api.js'
 
 function FavoriteButton({recipe,savedforlater,setSavedForLater}){
-    const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
+    const navigate = useNavigate();
 
        const isSaved = savedforlater.some((saved) => saved.recipe_id === recipe.id);
+    const label = { slotProps: { input: { 'aria-label': isSaved ? 'Remove from saved' : 'Save for later' } } };
 
        const handleSaved = async (kind,recipe_id,checked) => {
 
             const savedToken = localStorage.getItem("token");
+            // logged out: go to login instead of a silent 401 -Arun
+            if (!savedToken){ navigate("/login"); return; }
 
             try{
                 let response;
@@ -66,8 +70,8 @@ function FavoriteButton({recipe,savedforlater,setSavedForLater}){
         <>
                 <Checkbox
                     {...label}
-                    icon={<BookmarkBorderIcon sx={{color:"rgb(89,45,59)"}} />}
-                    checkedIcon={<BookmarkIcon sx={{color:"rgb(89,45,59)"}}/>}
+                    icon={<BookmarkBorderIcon sx={{color:"app.primary"}} />}
+                    checkedIcon={<BookmarkIcon sx={{color:"app.primary"}}/>}
                     checked = {isSaved}
                     onChange={(e)=>{
                     handleSaved("saved",recipe.id,e.target.checked);

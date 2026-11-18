@@ -1,125 +1,57 @@
-import React, {useState}from 'react'
-import {Link, useNavigate } from "react-router-dom";
+import {Link} from 'react-router-dom';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack'
+import RestaurantRounded from '@mui/icons-material/RestaurantRounded';
 import FavoriteButton from './FavoriteButton'
 import SavedForLaterButton from './SavedForLaterButton'
+import '../css/RecipeCard.css'
+import {recordView} from '../utils/recordView.js'
 
-function RecipeCard({recipe,history,setHistory,favorites,setFavorites, savedforlater,setSavedForLater}){
+const MAX_MISSING_SHOWN = 3;
 
-    const label = { slotProps: { input: { 'aria-label': 'Checkbox demo' } } };
+const titleCase = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-
-    const navigate = useNavigate();
-
-        const newHistory = {
-            id:recipe.id,
-            title:recipe.title,
-            viewedAt:new Date(). toISOString(),
-        };
-    //local storage for adding on history
-    const handleView = () => {
-        history = JSON.parse(localStorage.getItem("clickHistory") || "[]");
-        
-        //add a new history on the top
-        const addNewHistory = [
-            newHistory,
-            ...history.filter(item => item.id !== recipe.id)
-        ].slice(0,10);
-
-        //store on localstorage
-        localStorage.setItem("clickHistory", JSON.stringify(addNewHistory));
-
-
-        console.log("History id:",recipe.id);
-        navigate(`/result/${recipe.id}`);
-    };    
+// match fields only exist on /recipes/match results -Arun
+function RecipeCard({recipe, favorites, setFavorites, savedforlater, setSavedForLater}){
+    const isMatch = typeof recipe.matched_count === "number";
+    const missing = (recipe.missing_ingredients || []).map((i) => i.name);
+    const tags = (recipe.dietary_tags || []).map((t) => titleCase(t.name));
+    const meta = [recipe.prep_time_minutes ? `${recipe.prep_time_minutes} min` : null, ...tags].filter(Boolean);
 
     return (
-        <Card sx={{ width:"100%", 
-                    maxWidth: 345, 
-                    border:"1px solid rgb(89,45,59)", 
-                    boxSizing:"border-box"
-                  }}>
+        <Card className="recipe-card">
+            <div className="recipe-card__media">
+                {recipe.image_url ? (
+                    <img src={recipe.image_url} alt="" loading="lazy"/>
+                ) : (
+                    <span className="recipe-card__placeholder"><RestaurantRounded fontSize="inherit"/></span>
+                )}
+                {isMatch && (
+                    <span className="recipe-card__badge">{recipe.matched_count} of {recipe.total_ingredients}</span>
+                )}
+                <div className="recipe-card__actions">
+                    <FavoriteButton recipe={recipe} favorites={favorites} setFavorites={setFavorites}/>
+                    <SavedForLaterButton recipe={recipe} savedforlater={savedforlater} setSavedForLater={setSavedForLater}/>
+                </div>
+            </div>
 
-            <CardMedia
-                component="img"
-                alt={recipe.title}
-                height="200"
-                image= {recipe.image_url}
-            />
-
-            <CardContent>
-                <Typography gutterBottom variant="h6" component="div" sx={{mb:0.5,textAlign:"center"}}>
-                {recipe.title}
+            <div className="recipe-card__body">
+                {/* title link stretches over the card, see css -Arun */}
+                <Typography variant="h3" component="h3" className="recipe-card__title">
+                    <Link to={`/result/${recipe.id}`} onClick={() => recordView(recipe)}>{recipe.title}</Link>
                 </Typography>
-
-                <Divider sx={{backgroundColor:"black"}} />
-
-                <Typography component="div" variant="body2" sx={{ color: "rgb(89,45,59)", mt:1, ml:2 }}>      
-                {/*if could not find the prep time in new object, then it would not shown below info for favorite and saved for late page  */}
-
-                Cooking Time: {(recipe.prep_time_minutes||[])}
-                      
-
-
-                {
-                    recipe.dietary_tags.length === 0 ? (
-                        <div>Dietary-tag: None</div>
-                    ):(
-                        <> 
-                        <Stack direction = "row" spacing = {1}> 
-                        <div>Dietary-tag:</div> 
-                        {(recipe.dietary_tags).map((dietaryTag)=>(
-                        <div key={dietaryTag.id}> {dietaryTag.name} </div>
-                        ))}
-                        </Stack>
-                        </>
-                    )
-}
-                Ingredients:
-                <ul style={{marginLeft:"20px"}}>
-                    {(recipe.ingredients||[]).map((ingredient)=>(
-                        <li key={ingredient.id}>{ingredient.name}</li>
-                    ))}
-                   
-                </ul>
-                
-
-                    
-                
-
-            </Typography>
-
-            </CardContent>
-
-            <CardActions>
-                {/*FAVORITE AND SAVED FOR LATER LIST ICONS */}
-                <FavoriteButton recipe={recipe} favorites={favorites} setFavorites={setFavorites} />
-                <SavedForLaterButton recipe={recipe} savedforlater={savedforlater} setSavedForLater={setSavedForLater} />
-
-
-                <Button 
-                    size="small" 
-                    //component={Link} to = {`/result/${recipe.id}`}
-                    sx={{
-                        color:"rgb(89,45,59)",
-                        border:"1px solid rgb(89,45,59)",
-                    }}
-                    onClick = {handleView}
-                >
-                        View Full Recipe
-                </Button>
-
-            </CardActions>
+                {meta.length > 0 && <Typography variant="meta" component="p">{meta.join(" · ")}</Typography>}
+                {isMatch && (missing.length === 0 ? (
+                    <p className="recipe-card__status is-have">You have everything</p>
+                ) : (
+                    <p className="recipe-card__status is-miss">
+                        Missing: {missing.slice(0, MAX_MISSING_SHOWN).join(", ")}
+                        {missing.length > MAX_MISSING_SHOWN && ` +${missing.length - MAX_MISSING_SHOWN} more`}
+                    </p>
+                ))}
+            </div>
         </Card>
-    )
+    );
 }
 
 export default RecipeCard;

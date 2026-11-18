@@ -24,6 +24,12 @@ def update_me(
     new_email = update_data.get("email")
 
     if new_email is not None and new_email != current_user.email:
+        # stops a stolen token from changing the email, then resetting the password -Arun
+        if not user_in.current_password or not verify_password(user_in.current_password, current_user.hashed_password):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Current password is incorrect",
+            )
         taken = (
             db.query(User)
             .filter(User.email == new_email, User.id != current_user.id)
